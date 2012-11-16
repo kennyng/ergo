@@ -1,5 +1,16 @@
 *.py[co]
 
+# virtualenv artifacts
+venv
+
+# Django stuff
+*.log
+*.pot
+local_settings.py
+
+#C extensions
+*.so
+
 # Packages
 *.egg
 *.egg-info
