@@ -1,0 +1,62 @@
+.shelf {
+ 	padding: 0px;
+}
+
+.one-shelf {
+	height:110px;
+	width: 100%;
+}
+
+.shelf-row {
+	position: relative;
+	left: 0;
+	top: 0;
+}
+
+.shelf-item0 {
+    position: absolute;
+    top: 23px;
+    left: 10%;
+  	height: 65px;
+  	width: 65px;
+  	border: 1px solid #b7b7b7;
+}
+
+.shelf-item1 {
+    position: absolute;
+    top: 23px;
+    left: 40%;
+  	height: 65px;
+  	width: 65px;
+  	border: 1px solid #b7b7b7;
+}
+
+.shelf-item2 {
+    position: absolute;
+    top: 23px;
+    left: 70%;
+  	height: 65px;
+  	width: 65px;
+  	border: 1px solid #b7b7b7;
+}
+
+.shelf-label0 {
+	position: absolute;
+	top: 8px;
+	left: 9%;
+	font-size: 12px;
+}
+
+.shelf-label1 {
+	position: absolute;
+	top: 8px;
+	left: 39%;
+	font-size: 12px;
+}
+
+.shelf-label2 {
+	position: absolute;
+	top: 8px;
+	left: 69%;
+	font-size: 12px;
+}

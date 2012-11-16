@@ -1,0 +1,17 @@
+iframe { border: none; }
+
+#popupPanel-popup {
+	left: 0 !important;
+	right: auto !important;
+}
+#popupPanel {
+	width: 200px;
+	border: 1px solid #b3b3b3;
+	border-left: none;
+	border-top: none;
+	background: rgba(0,0,0,.3);
+	margin: 41px 0px;
+}
+#popupPanel .ui-btn {
+	margin: 0px 0px;
+}
