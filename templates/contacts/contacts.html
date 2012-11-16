@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ERGO - Contacts</title>
+	<meta charset="utf-8">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+ 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+    
+	<link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+    
+    <style type="text/css">
+         .edit-btn {
+            font-size: 12px;
+            padding: 3px 6px 3px 6px;
+         }
+         .check-icon-on {
+            font-size: 14px;
+            font-family: Helvetica;
+            font-weight: bold;
+            padding-left: 20px;
+            background: transparent url(/static/images/check-on.png) no-repeat center left;
+        }
+        .check-icon-off {
+            font-size: 14px;
+            font-family: Helvetica;
+            font-weight: bold;
+            padding-left: 20px;
+            background: transparent url(/static/images/check-off.png) no-repeat center left;
+        }
+        #alert-btn .ui-btn { 
+            padding: 15px;
+        }
+    </style>
+  </head>
+
+  <body>
+	<div data-role="page" id="contacts">
+    
+        <div data-role="header" data-theme="c" data-position="fixed">
+            <a href="/" data-role="button" data-icon="grid" data-iconpos="notext"></a>
+                <h2>CONTACTS</h2>
+            <a href="/contacts#add-contact" data-role="button" data-icon="add" data-iconpos="notext"></a>
+        </div>    
+        
+  	<div data-role="content">
+        
+        <div id="alert-btn">
+            <a href="#" data-role="button"><span style="font-size: 40px;">ALERT!</span></a>
+            <br />
+        </div>    
+        
+        <div data-role="collapsible-set" data-theme="b" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" >
+	  {% for i in contacts %}
+
+            <div data-role="collapsible">
+	            <h1>{{ i.contact_firstname }} {{ i.contact_lastname }}</h1>
+	                <ul data-role="listview" data-theme="d" data-divider-theme="d">
+						<li data-role="list-divider">
+                            <div>Contact Information<a href="/contacts#add-contact"><div style="float:right;" class="ui-btn-up-c  ui-btn-corner-false edit-btn">EDIT</div></a></div>
+						</li>
+						<li><h5>Relationship: </h5><h3>{{ i.contact_relationship }}</h3></li>
+						<li><h5>E-Mail: </h5><h3>{{ i.contact_email }}</h3></li>
+						<li><h5>Mobile Number: </h5><h3>{{ i.contact_mobile }}</h3></li>
+						<li><h5>Location: </h5><h3>{{ i.contact_city }}, {{ i.contact_state }}</h3></li>
+						<li><h5>Alert Options: </h5>
+						    <div class="ui-grid-b">
+						        <div class="ui-block-a">
+						            <span class="check-icon-on">E-Mail</span>
+						        </div>
+						        <div class="ui-block-b">
+						            <span class="check-icon-on">Text</span>
+						        </div>
+						        <div class="ui-block-c">
+						            <span class="check-icon-off">Facebook</span>
+						        </div>
+						    </div>
+						</li>
+					</ul>
+	        </div>
+	    {% endfor %}
+        </div>
+    </div>
+</div>
+
+    <!-- start ADD CONTACT page -->
+    <div data-role="page" id="add-contact">
+    	<div data-role="header" data-theme="c" data-position="fixed">
+            <a href="/" data-role="button" data-icon="grid" data-iconpos="notext"></a>
+                <h2>Add Contact</h2>
+            <a href="#contacts" data-role="button" data-icon="delete" data-iconpos="left" data-corners="false">Cancel</a>
+        </div>
+
+        <div data-role="content">
+        	 <form method="post" action="#">
+	    	 
+				<ul data-role="listview" data-inset="true">
+					<li data-role="fieldcontain">
+	    	    		<label for="contact_firstname">First Name:</label>
+	        			<input type="text" name="contact_firstname" id="contact_firstname" value=""  />
+					</li>
+
+					<li data-role="fieldcontain">
+	    	    		<label for="contact_lastname">Last Name:</label>
+	        			<input type="text" name="contact_lastname" id="contact_lastname" value=""  />
+					</li>
+
+					<li data-role="fieldcontain">
+	    	    		<label for="contact_relationship">Relationship:</label>
+	        			<input type="text" name="contact_relationship" id="contact_relationship" value=""  />
+					</li>
+
+					<li data-role="fieldcontain">
+	    	    		<label for="contact_email">E-Mail:</label>
+	        			<input type="email" name="contact_email" id="contact_email" value=""  />
+					</li>
+
+					<li data-role="fieldcontain">
+	    	    		<label for="contact_mobile">Mobile Number:</label>
+	        			<input type="tel" name="contact_mobile" id="contact_mobile" value=""  />
+					</li>
+                    
+                    <li data-role="fieldcontain">
+                      <fieldset data-role="controlgroup" data-type="vertical">
+                        <legend>Mobile Carrier:</legend>
+                        <input type="radio" name="mobile_carrier" id="att" value="att" />
+                        <label for="att">AT&T</label>
+
+                        <input type="radio" name="mobile_carrier" id="verizon" value="verizon" />
+                        <label for="verizon">Verizon</label>
+
+                        <input type="radio" name="mobile_carrier" id="tmobile" value="tmobile" />
+                        <label for="tmobile">T-Mobile</label>
+
+                        <input type="radio" name="mobile_carrier" id="sprint" value="sprint" />
+                        <label for="sprint">Sprint</label>
+
+                        <input type="radio" name="mobile_carrier" id="virgin" value="virgin" />
+                        <label for="virgin">Virgin Mobile</label>
+
+                        <input type="radio" name="mobile_carrier" id="other" value="other" />
+                        <label for="other">Other</label>
+                      </fieldset>
+                    </li>
+                      
+					<li data-role="fieldcontain">
+	    	    		<label for="contact_facebook">Facebook Profile Name:</label>
+	        			<input type="tel" name="contact_facebook" id="contact_facebook" value=""  />
+					</li>
+
+					<li data-role="fieldcontain">
+	    	    		<label for="contact_city">City:</label>
+	        			<input type="text" name="contact_city" id="contact_city" value=""  />
+					</li>
+					<li data-role="fieldcontain">
+	    	    		<label for="contact_state">State:</label>
+	        			<input type="text" name="contact_state" id="contact_state" value=""  />
+					</li>
+					<li data-role="fieldcontain">
+	        			<fieldset data-role="controlgroup">
+						<legend>For Emergencies, Alert By:</legend>
+							<input type="checkbox" name="alert_email" id="alert_email" class="custom" />
+							<label for="alert_email">E-Mail</label>
+	
+							<input type="checkbox" name="alert_text" id="alert_text" class="custom" />
+							<label for="alert_text">Text Message</label>
+	
+							<input type="checkbox" name="alert_facebook" id="alert_facebook" class="custom" />
+							<label for="alert_facebook">Facebook </label>
+			    		</fieldset>
+					</li>
+
+					<li><input type="submit" value="ADD CONTACT" /></li>
+				</ul>
+	   	 	</form>
+
+        </div>
+    </div>	<!-- end ADD CONTACT page -->
+    
+  </body>
+</html>
+
+
+

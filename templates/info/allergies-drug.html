@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ERGO</title>       
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/shelf-style.css" />
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+  </head>
+  
+  <body>
+    <div data-role="page" id="drug">
+      	<div data-role="header" data-theme="c" data-position="fixed">
+      		<a href="#popupPanel" data-rel="popup" data-transition="slidedown" data-position-to="window" data-role="button" data-inline="true" data-icon="grid" data-corners="false" data-iconpos="notext">Menu</a>
+        	<h1>Allergies - Drug</h1>
+  	    	<a href="#add-allergy" data-role="button" data-icon="plus" data-iconpos="notext" class="ui-btn-right" data-rel="popup" data-position-to="window" data-inline="true" data-transition="pop">Add</a>
+      	</div>
+        
+      
+		  <div data-role="content" class="shelf">
+		      <!-- include sidebar -->
+          {% include "info/sidebar.html" %}
+		      
+		      <a href="#search-allergies" data-role="button" data-icon="search" data-iconpos="right" data-mini="true">Search Allergies</a>
+
+          {% for shelf in cabinet.fullshelf %}
+  	      <div class="ui-grid-solo">
+            <div class="shelf-row">
+                <div class="shelf-label0">{{ shelf.0.allergy_name }}</div>
+                <a href="#remove-allergy" data-rel="popup" data-position-to="window" data-inline="true" data-transition="pop"><img src="/static/images/allergies/{{ shelf.0.allergy_img }}" class="shelf-item0" /></a>
+                  
+                <div class="shelf-label1">{{ shelf.1.allergy_name }}</div>
+                <a href="#remove-allergy" data-rel="popup" data-position-to="window" data-inline="true" data-transition="pop"><img src="/static/images/allergies/{{ shelf.1.allergy_img }}" class="shelf-item1" /></a>
+
+                <div class="shelf-label2">{{ shelf.2.allergy_name }}</div>
+                <a href="#remove-allergy" data-rel="popup" data-position-to="window" data-inline="true" data-transition="pop"><img src="/static/images/allergies/{{ shelf.2.allergy_img }}" class="shelf-item2" /></a>
+    
+            </div>
+          </div>
+          <div class="ui-grid-solo"><img src="/static/images/shelf.png" class="one-shelf" /></div>
+          {% endfor %}
+
+          {% if overflow == 2 %}
+          <div class="ui-grid-solo">
+            <div class="shelf-row">
+                <div class="shelf-label0">{{ cabinet.overflow.0.0.allergy_name }}</div>
+                <a href="#remove-allergy" data-rel="popup" data-position-to="window" data-inline="true" data-transition="pop"><img src="/static/images/allergies/{{ cabinet.overflow.0.0.allergy_name }}" class="shelf-item0" /></a>
+                  
+                <div class="shelf-label1">{{ cabinet.overflow.0.1.allergy_name }}</div>
+                <a href="#remove-allergy" data-rel="popup" data-position-to="window" data-inline="true" data-transition="pop"><img src="/static/images/allergies/{{ cabinet.overflow.0.1.allergy_name }}" class="shelf-item1" /></a>
+            </div>
+          </div>
+          <div class="ui-grid-solo"><img src="/static/images/shelf.png" class="one-shelf" /></div>
+          {% endif %}
+
+
+          {% if overflow == 1 %}
+          <div class="ui-grid-solo">
+            <div class="shelf-row">
+                <div class="shelf-label0">{{ cabinet.overflow.0.0.allergy_name }}</div>
+                <a href="#remove-allergy" data-rel="popup" data-position-to="window" data-inline="true" data-transition="pop"><img src="/static/images/allergies/{{ cabinet.overflow.0.0.allergy_name }}" class="shelf-item0" /></a>
+                  
+            </div>
+          </div>
+          <div class="ui-grid-solo"><img src="/static/images/shelf.png" class="one-shelf" /></div>
+          {% endif %}
+          
+          
+          {% if extra_shelf == 1 %}
+            <div class="ui-grid-solo"><img src="/static/images/shelf.png" class="one-shelf" /></div>
+          {% else %}{% if extra_shelf == 2 %}
+            <div class="ui-grid-solo"><img src="/static/images/shelf.png" class="one-shelf" /></div>
+            <div class="ui-grid-solo"><img src="/static/images/shelf.png" class="one-shelf" /></div>
+          {% else %}{% if extra_shelf == 3 %}
+            <div class="ui-grid-solo"><img src="/static/images/shelf.png" class="one-shelf" /></div>
+            <div class="ui-grid-solo"><img src="/static/images/shelf.png" class="one-shelf" /></div>
+            <div class="ui-grid-solo"><img src="/static/images/shelf.png" class="one-shelf" /></div>
+          {% else %}{% if extra_shelf == 4 %}
+            <div class="ui-grid-solo"><img src="/static/images/shelf.png" class="one-shelf" /></div>
+            <div class="ui-grid-solo"><img src="/static/images/shelf.png" class="one-shelf" /></div>
+            <div class="ui-grid-solo"><img src="/static/images/shelf.png" class="one-shelf" /></div>
+            <div class="ui-grid-solo"><img src="/static/images/shelf.png" class="one-shelf" /></div>
+          {% endif %}{% endif %}{% endif %}{% endif %}
+
+          <br />
+          <br />
+	    </div>
+
+
+
+	  <!--  start ADD ALLERGY popup -->
+	  <div data-role="popup" id="add-allergy" data-theme="b" class="ui-corner-all">
+		  <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+		  <form method="post" action="#allergies-drug">
+		    <div style="padding:15px 30px;">
+		      <label for="allergy_name"><strong>Dietary Allergy:</strong></label>
+		      <input type="text" name="allergy_name" id="allergy_name" value="" data-theme="b" />
+		      <br />
+		      <button type="submit" data-theme="b">ADD ALLERGY</button>
+		    </div>
+		  </form>
+	  </div> <!-- end ADD ALLERGY popup -->
+
+
+  	<!-- start REMOVE ALLERGY popup -->
+  	<div data-role="popup" id="remove-allergy" data-overlay-theme="a" data-theme="c" style="max-width:400px;" class="ui-corner-all">
+      <a href="#" data-role="button" data-inline="true" data-rel="back" data-icon="delete" data-iconpos="notext" data-theme="a" class="ui-btn-right">Cancel</a> 
+			<div data-role="header" data-theme="a" class="ui-corner-top">
+				<h1>Remove Allergy?</h1>
+			</div>
+			<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+				<h3 class="ui-title">Are you sure you want to remove this allergy?</h3>
+				<p>This action cannot be undone.</p>
+				   
+                <form method="post" action="#allergies-drug" data-inline="true">
+                  <button type="submit" data-theme="b" data-inline="true" data-rel="back" data-transition="flow">REMOVE</button>
+                </form>
+			</div>
+		</div> <!-- remove REMOVE ALLERGY popup -->
+
+
+      <!-- footer -->
+      <div data-role="footer" data-id="samebar" data-position="fixed" data-tap-toggle="false" data-theme="c">
+        <div data-role="navbar" data-grid="b">
+          <ul>
+            <li><a href="#allergies-drug" data-icon="star" class="ui-btn-active">Drugs</a></li>
+            <li><a href="/allergies/diet/" data-icon="arrow-u">Dietary</a></li>
+            <li><a href="/allergies/misc/" data-icon="arrow-u">Misc.</a></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>

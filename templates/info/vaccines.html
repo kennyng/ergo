@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ERGO</title>   
+    <meta charset="utf-8">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />    
+    <link rel="stylesheet" type="text/css" href="http://dev.jtsage.com/cdn/datebox/latest/jqm-datebox.min.css" />
+		
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+    
+    <!-- sidebar stuff -->
+    <link rel="stylesheet" type="text/css" href="/static/css/sidebar.css" />
+    <script type="text/javascript" src="/static/js/sidebar.js"></script>
+  </head>
+  
+  <body>
+    <div data-role="page" id="vaccines">
+        <div data-role="header" data-theme="c" data-position="fixed">
+        	<a href="#popupPanel" data-rel="popup" data-transition="slidedown" data-position-to="window" data-role="button" data-inline="true" data-icon="grid" data-corners="false" data-iconpos="notext">Menu</a>
+            <h1>IMMUNIZATIONS</h1>
+	        <a href="/vaccines/#add-vaccine" data-rel="popup" data-position-to="window" data-role="button" data-icon="add" data-iconpos="notext" data-inline="true">Add</a>
+        </div>
+      
+      	<div data-role="content">
+
+	  <!-- sidebar -->
+	  {% include 'info/sidebar.html' %}
+
+	
+	        <ul data-role="listview" data-filter="true" data-filter-placeholder="Search by Vaccine or Date..." data-filter-theme="d" data-theme="d" data-divider-theme="d">
+				<li data-role="list-divider"> 
+				    <div class="ui-grid-a">
+				        <div class="ui-block-a">DATE GIVEN</div>
+				        <div class="ui-block-b">VACCINE</div>
+				    </div>
+				</li>
+				{% for i in vaccines %}
+				<li data-icon="false"><a href="#remove-vaccine" data-rel="popup" data-position-to="window" data-inline="true" data-transition="pop">
+				    <div class="ui-grid-a">
+				        <div class="ui-block-a">{{ i.vaccine_date }}</div>
+				        <div class="ui-block-b">{{ i.vaccine_name }}</div>
+				    </div>
+				</a></li>
+				{% endfor %}
+			</ul>
+		</div>
+
+
+		<!--  start ADD VACCINE popup -->
+		<div data-role="popup" id="add-vaccine" data-theme="b" class="ui-corner-all">
+			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+			<form method="post" action="#vaccines">
+				<div style="padding:15px 30px;">
+		          <label for="vaccine_name"><strong>Vaccine Name:</strong></label>
+		          <input type="text" name="vaccine_name" id="vaccine_name" value="" data-theme="b" />
+
+		          <label for="vaccine_date"><strong>Date Given:</strong></label>
+		          <input type="date" name="vaccine_date" id="vaccine_date" value="" data-theme="b" />
+		          <br />
+		    	  <button type="submit" data-theme="b">ADD VACCINE</button>
+				</div>
+			</form>
+	  	</div> <!-- end ADD VACCINE popup -->
+
+
+  		<!-- start REMOVE VACCINE popup -->
+  		<div data-role="popup" id="remove-vaccine" data-overlay-theme="a" data-theme="c" style="max-width:400px;" class="ui-corner-all">
+			<div data-role="header" data-theme="a" class="ui-corner-top">
+				<h1>Remove Vaccine?</h1>
+			</div>
+			<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+				<h3 class="ui-title">Are you sure you want to remove this vaccine?</h3>
+				<p>This action cannot be undone.</p>
+				<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>    
+				<a href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow" data-theme="b">Remove</a>  
+			</div>
+		</div> <!-- remove REMOVE VACCINE popup -->
+
+
+	</div>
+
+
+  </body>
+</html>
+  

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ERGO | Register</title>
+    
+    <meta charset="utf-8">
+    
+	<meta name="apple-mobile-web-app-capable" content="yes">
+ 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+    <link rel="stylesheet" href="/static/style.css" type="text/css" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+  </head>
+
+  <body>
+    <div data-role="page" id="register">
+      <div data-role="header">
+        <h1>Register</h1>
+      </div>
+
+      <div data-role="content">
+        {% if form.errors %}
+        <h3 class="errors">Please correct the errors below: {{ form.non_field_errors }}</h3>
+        {% endif %}
+
+        <form method="post" action="">
+	      {% csrf_token %}
+          <p>
+            <label for="id_username">Username:</label>
+            {% if form.username.errors %}
+              <p class="errors">{{ form.username.errors.as_text }}</p>
+            {% endif %}
+            {{ form.username }}
+          </p>
+          <p>
+            <label for="id_email">Email Address:</label>
+            {% if form.email.errors %}
+              <p class="errors">{{ form.email.errors.as_text }}</p>
+            {% endif %}
+            {{ form.email }}
+          </p>
+          <p>
+            <label for="id_password1">Password:</label>
+            {% if form.password1.errors %}
+              <p class="errors">{{ form.password1.errors.as_text }}</p>
+            {% endif %}
+            {{ form.password1 }}
+          </p>
+          <p>
+            <label for="id_password2">Password (again):</label>
+            {% if form.password2.errors %}
+              <p class="errors">{{ form.password2.errors.as_text }}</p>
+            {% endif %}
+            {{ form.password2 }}
+          </p>
+          <p class="submit"><input type="submit" value="Register &rarr;"></p>
+        </form>
+        
+      </div>
+
+  </body>
+</html>
+

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ERGO | Login</title>
+    
+    <meta charset="utf-8">
+    
+	<meta name="apple-mobile-web-app-capable" content="yes">
+ 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+    <link rel="stylesheet" href="/static/style.css" type="text/css" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+  </head>
+
+  <body>
+    <div data-role="page" id="login">
+
+      <div data-role="content">
+        {% if form.errors %}
+        <p class="error">Please correct the errors below:</p>
+        {% endif %}
+
+        <form method="post" action="?next={{ next|default:"/" }}">
+          {% csrf_token %}
+          <label for="id_username">Username:</label>
+          {% if form.username.errors %} 
+          <span class="error">{{ form.username.errors|join:", " }}</span>
+          {% endif %}
+          {{ form.username }}
+          <label for="id_password">Password:</label>
+          {% if form.password.errors %} 
+          <span class="error">{{ form.password.errors|join:", " }}</span>
+          {% endif %}
+          {{ form.password }}
+            
+          <input type="submit" value="Login" />
+        </form>
+        <h4>New to ERGO? <a href="/accounts/register/">Sign Up</a>.</h4>
+      </div>
+
+  </body>
+</html>
+

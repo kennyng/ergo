@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ERGO - Profile</title>
+	<meta charset="utf-8">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+ 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+    
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+    
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+  </head>
+
+  <body>
+  
+    <div data-role="page" id="profile">
+      <div data-role="header" data-theme="c" data-position="fixed">
+        <a href="/" data-role="button" data-icon="grid" data-iconpos="notext"></a>
+        <h2>Update Successful</h2>
+        <a href="{{ return_url }}" data-role="button" data-icon="back" data-iconpos="left">Back</a>
+      </div>
+
+      <div data-role="content">
+        <h3>{{ status_msg }}</h3>
+        <a href="{{ return_url }}" data-role="button" data-icon="back" data-iconpos="left">{{ button_label }}</a>
+      </div>
+        
+ </body>
+</html>      

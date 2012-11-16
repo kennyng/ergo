@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ERGO - Providers</title>
+  	<meta charset="utf-8">
+  	<meta name="apple-mobile-web-app-capable" content="yes">
+   	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+  	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+    
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+    
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/sidebar.css" />
+    <script type="text/javascript" src="/static/js/sidebar.js"></script>
+  </head>
+
+  <body>
+    <div data-role="page" id="provider">
+      <div data-role="header" data-theme="c" data-position="fixed">
+        <a href="#popupPanel" data-rel="popup" data-transition="slidedown" data-position-to="window" data-role="button" data-inline="true" data-icon="grid" data-corners="false" data-iconpos="notext">Menu</a>
+        <h1>PROVIDERS</h1>
+        <a href="/contacts#providers-edit" data-role="button" data-icon="check" data-iconpos="left" data-corners="false">Edit</a>
+      </div>
+
+
+      <div data-role="content">
+
+        <!-- include sidebar -->
+        {% include "info/sidebar.html" %}
+
+        <ul data-role="listview" data-inset="true">
+          <li data-role="list-divider" data-theme="a">INSURANCE PROVIDERS</li>
+          <li>
+            <h3>Provider Name:</h3>
+            <p><strong>{{ provider.insurance_name }}</strong></p>
+          </li>
+          <li>
+            <h3>Group Number:</h3>
+            <p><strong>{{ provider.group_num }}</strong></p>
+          </li>
+          <li>
+            <h3>Policy #:</h3>
+            <p><strong>{{ provider.policy_num  }}</strong></p>
+          </li>
+          <li>
+            <h3>Contact:</h3>
+            <p><strong>{{ provider.insurance_contact }}</strong></p>
+          </li>
+        </ul>  
+
+        <ul data-role="listview" data-inset="true">
+          <li data-role="list-divider" data-theme="a">PRIMARY CARE PROVIDER</li>
+           <li>
+            <h3>Physician Name:</h3>
+            <p><strong>{{ provider.pcp_name }}</strong></p>
+          </li>
+          <li>
+            <h3>Contact:</h3>
+            <p><strong>{{ provider.pcp_contact }}</strong></p>
+          </li>
+          <li>
+            <h3>Clinic/Facility/Hospital:</h3>
+            <p><strong>{{ provider.pcp_location }}</strong></p>
+          </li>
+          <li>
+            <h3>Address:</h3>
+            <p><strong>{{ provider.pcp_address }}</strong></p>
+            <p><strong>{{ provider.pcp_city }}, {{ provider.pcp_state }} {{ provider.pcp_zipcode}}</strong></p>
+          </li>
+        </ul>
+      </div>
+      </div>
+
+
+      <!-- start edit page -->
+      <div data-role="page" id="providers-edit">
+        <div data-role="header" data-theme="c" data-position="fixed">
+          <h1>Edit Providers</h1>
+          <a href="#provider" data-role="button" data-icon="delete" data-iconpos="left" class="ui-btn-right" data-corners="false">Cancel</a>
+        </div>
+
+        <div data-role="content">
+        
+  	    <form method="post" action="#">
+            <ul data-role="listview" data-inset="true">
+              <li data-role="list-divider" data-theme="a">INSURANCE PROVIDER</li>
+              
+              <li>
+                <div data-role="fieldcontain">
+  	            <label for="insurance_name">Insurance Name:</label>
+  	            <input type="text" name="insurance_name" id="insurance_name" value="{{ provider.insurance_name }}" data-mini="true" />
+  		      </div>
+              </li>
+              
+              <li>
+                <div data-role="fieldcontain">
+  	            <label for="group_num">Group #:</label>
+  	            <input type="text" name="group_num" id="group_num" value="{{ provider.group_num }}" data-mini="true" />
+  		      </div>
+              </li>
+              
+              <li>
+                <div data-role="fieldcontain">
+  	            <label for="policy_num">Policy #:</label>
+  	            <input type="text" name="policy_num" id="policy_num" value="{{ provider.policy_num }}" data-mini="true" />
+  		      </div>
+              </li>
+              <li>
+                <div data-role="fieldcontain">
+  	            <label for="insurance_contact">Contact:</label>
+  	            <input type="text" name="insurance_contact" id="insurance_contact" value="{{ provider.insurance_contact }}" data-mini="true" />
+  		      </div>
+              </li>
+            </ul>  
+
+            <ul data-role="listview" data-inset="true">
+              <li data-role="list-divider" data-theme="a">PRIMARY CARE PROVIDER</li>
+              <li>
+  		      <div data-role="fieldcontain">
+  	            <label for="pcp_name">Physician Name:</label>
+  	            <input type="text" name="pcp_name" id="pcp_name" value="{{ provider.pcp_name }}" data-mini="true" />
+  		      </div>
+              </li>
+              <li>
+                <div data-role="fieldcontain">
+  	            <label for="pcp_contact">Contact:</label>
+  	            <input type="text" name="pcp_contact" id="pcp_contact" value="{{ provider.pcp_contact }}" data-mini="true" />
+  		      </div>
+              </li>
+              <li>
+                <div data-role="fieldcontain">
+  	            <label for="pcp_location">Clinic/Facility/Hospital:</label>
+  	            <input type="text" name="pcp_location" id="pcp_location" value="{{ provider.pcp_location }}" data-mini="true" />
+  		      </div>
+              </li>
+              <li>
+                <div data-role="fieldcontain">
+  	            <label for="pcp_address">Address:</label>
+  	            <input type="text" name="pcp_address" id="pcp_address" value="{{ provider.pcp_address }}" data-mini="true" />
+  	           </div>
+  	           <div data-role="fieldcontain">
+  	            <label for="pcp_city">City:</label>
+  	            <input type="text" name="pcp_city" id="pcp_city" value="{{ provider.pcp_city }}" data-mini="true" />
+  	           </div>
+  	           <div data-role="fieldcontain">
+  	            <label for="pcp_state">State:</label>
+  	            <input type="text" name="pcp_state" id="pcp_state" value="{{ provider.pcp_state }}" data-mini="true" />
+  	           </div>
+  	           <div data-role="fieldcontain">
+  	            <label for="pcp_zipcode">Zipcode:</label>
+  	            <input type="text" name="pcp_zipcode" id="pcp_zipcode" value="{{ provider.pcp_zipcode }}" data-mini="true" />
+  	           </div>
+              </li>
+            </ul>  
+
+  		    <div><input type="submit" value="UPDATE" /></div>
+  	    </form>
+        </div>
+
+  </body>
+</html>
+
+
+
