@@ -8,9 +8,6 @@ venv
 *.pot
 local_settings.py
 
-# do not track static dir since duplicate
-static/*
-
 #C extensions
 *.so
 
