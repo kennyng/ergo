@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ERGO - Immunizations</title>   
+    <meta charset="utf-8">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+  </head>
+  
+  <body>
+    <div data-role="page" id="vaccines">
+
+      <!-- sidebar stuff -->
+      <link rel="stylesheet" type="text/css" href="/static/css/sidebar.css" />
+      <script type="text/javascript" src="/static/js/sidebar.js"></script>
+
+      <div data-role="header" data-theme="c" data-position="fixed">
+        <a href="#popupPanel" data-rel="popup" data-transition="slidedown" data-position-to="window" data-role="button" data-inline="true" data-icon="grid" data-corners="false" data-iconpos="notext">Menu</a>
+        <h1>IMMUNIZATIONS</h1>
+	    <a href="/info/shots/add/" data-rel="dialog" data-transition="flip" data-role="button" data-icon="add" data-iconpos="notext" data-inline="true">Add</a>
+      </div>
+      
+      <div data-role="content">
+
+	    <!-- sidebar -->
+	    {% include 'info/sidebar.html' %}
+
+        <!-- TODO: message popup/dialog box for new users/users without any immunization record -->
+        {% if new_user %}
+        <h2 style="text-align:center">No immunization record available. To add vaccines, click the 'Add' button on the top right.</h2>
+        {% endif %}
+
+	    <ul data-role="listview" data-filter="true" data-filter-placeholder="Search by Vaccine or Date..." data-filter-theme="d" data-theme="d" data-divider-theme="d">
+	      <li data-role="list-divider"> 
+		<div class="ui-grid-a">
+		  <div class="ui-block-a">DATE GIVEN</div>
+		  <div class="ui-block-b">VACCINE</div>
+		</div>
+	      </li>
+
+	      {% for i in vaccines %}
+	      <li data-icon="false"><a href="/info/shots/remove/?id={{ i.vaccine_id }}" data-rel="dialog" data-inline="true" data-transition="flip">
+		  <div class="ui-grid-a">
+		    <div class="ui-block-a">{{ i.vaccine_date }}</div>
+		    <div class="ui-block-b">{{ i.vaccine_name }}</div>
+		  </div>
+	      </a></li>
+	      {% endfor %}
+              
+	    </ul>
+      </div>
+    </div>
+
+  </body>
+</html>
+  

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    	<title>ERGO - Contacts</title>
+		<meta charset="utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+ 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+    
+    	<link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+
+    	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    	<script type="text/javascript" src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+ 	</head>
+
+  	<body>
+
+	<!-- start ADD CONTACT page -->
+    <div data-role="page" id="edit-contact">
+    	<div data-role="header" data-theme="c" data-position="fixed">
+            <a href="/" data-role="button" data-icon="grid" data-iconpos="notext"></a>
+                <h2>Edit Contact</h2>
+            <a href="/contacts/" data-role="button" data-icon="delete" data-iconpos="left" data-corners="false">Cancel</a>
+        </div>
+
+        <!-- TODO: insert error message pop up here -->
+        {% if error_msg %}
+        <h3 style="text-align:center">{{ error_msg }}</h3>
+        {% endif %}
+
+        <div data-role="content">
+        	 <form method="post" action="/contacts/edit/update_post/?id={{ contact.contact_id }}">
+	    	 	{% csrf_token %}
+       
+				<ul data-role="listview" data-inset="true">
+					<li data-role="fieldcontain">
+	    	    		<label for="firstname">First Name:</label>
+	        			<input type="text" name="firstname" id="firstname" value="{{ contact.firstname }}" />
+					</li>
+
+					<li data-role="fieldcontain">
+	    	    		<label for="lastname">Last Name:</label>
+	        			<input type="text" name="lastname" id="lastname" value="{{ contact.lastname }}" />
+					</li>
+
+					<li data-role="fieldcontain">
+	    	    		<label for="relationship">Relationship:</label>
+	        			<input type="text" name="relationship" id="relationship" value="{{ contact.relationship }}"  />
+					</li>
+
+					<li data-role="fieldcontain">
+	    	    		<label for="email">E-Mail:</label>
+	        			<input type="email" name="email" id="email" value="{{ contact.email }}"  />
+					</li>
+
+					<li data-role="fieldcontain">
+	    	    		<label for="mobile">Mobile Number:</label>
+	        			<input type="tel" name="mobile" id="mobile" value="{{ contact.mobile }}"  />
+					</li>
+
+                    <li data-role="fieldcontain">
+                      <fieldset data-role="controlgroup" data-type="vertical">
+                        <legend>Mobile Carrier:</legend>
+                        <input type="radio" name="mobile_carrier" id="att" value="1" />
+                        <label for="att">AT&T</label>
+
+                        <input type="radio" name="mobile_carrier" id="verizon" value="2" />
+                        <label for="verizon">Verizon</label>
+
+                        <input type="radio" name="mobile_carrier" id="tmobile" value="3" />
+                        <label for="tmobile">T-Mobile</label>
+
+                        <input type="radio" name="mobile_carrier" id="sprint" value="4" />
+                        <label for="sprint">Sprint</label>
+
+                        <input type="radio" name="mobile_carrier" id="virgin" value="5" />
+                        <label for="virgin">Virgin Mobile</label>
+
+                        <input type="radio" name="mobile_carrier" id="other" value="0" checked="checked" />
+                        <label for="other">Other</label>
+                      </fieldset>
+                    </li>
+
+					<li data-role="fieldcontain">
+	    	    		<label for="facebook">Facebook Profile Name:</label>
+	        			<input type="text" name="facebook" id="facebook" value="{{ contact.facebook }}"  />
+					</li>
+
+					<li data-role="fieldcontain">
+	    	    		<label for="city">City:</label>
+	        			<input type="text" name="city" id="city" value="{{ contact.city }}"  />
+					</li>
+					<li data-role="fieldcontain">
+	    	    		<label for="state">State:</label>
+	        			<input type="text" name="state" id="state" value="{{ contact.state }}"  />
+					</li>
+					<li data-role="fieldcontain">
+	        			<fieldset data-role="controlgroup">
+						<legend>For Emergencies, Alert By:</legend>
+							<input type="checkbox" name="alert_options" id="alert_email" value="alert_email" class="custom" {% if contact.alert_email %} checked="checked" {% endif %} />
+							<label for="alert_email">E-Mail</label>
+	
+							<input type="checkbox" name="alert_options" id="alert_text" value="alert_text" class="custom" {% if contact.alert_text %} checked="checked" {% endif %} />
+							<label for="alert_text">Text Message</label>
+	
+							<input type="checkbox" name="alert_options" id="alert_fb" value="alert_fb" class="custom" {% if contact.alert_fb %} checked="checked" {% endif %} />
+							<label for="alert_fb">Facebook </label>
+			    		</fieldset>
+					</li>
+
+					<li><input type="submit" value="UPDATE CONTACT" /></li>
+				</ul>
+	   	 	</form>
+
+             <form method="post" action="/contacts/edit/remove_post/?id={{ contact.contact_id }}">
+               {% csrf_token %}
+              <input type="submit" value="REMOVE CONTACT" />
+             </form>
+
+        </div>
+   	</div> <!-- end EDIT CONTACT page -->
+
+    </body>
+</html>

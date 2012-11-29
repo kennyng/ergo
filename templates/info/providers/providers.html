@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ERGO - Providers</title>
+  	<meta charset="utf-8">
+  	<meta name="apple-mobile-web-app-capable" content="yes">
+   	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+  	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+    
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+    
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+
+  </head>
+
+  <body>
+    <div data-role="page" id="provider">
+
+      <link rel="stylesheet" type="text/css" href="/static/css/sidebar.css" />
+      <script type="text/javascript" src="/static/js/sidebar.js"></script>
+
+      <div data-role="header" data-theme="c" data-position="fixed">
+        <a href="#popupPanel" data-rel="popup" data-transition="slidedown" data-position-to="window" data-role="button" data-inline="true" data-icon="grid" data-corners="false" data-iconpos="notext">Menu</a>
+        <h1>PROVIDERS</h1>
+        <a href="/info/providers/edit/" data-role="button" data-icon="check" data-iconpos="left" data-corners="false">Edit</a>
+      </div>
+
+      <div data-role="content">
+        
+        <!-- TODO: popup message for new users/users who have not filled providers form -->
+        {% if new_user %}
+        <h2 style="text-align:center">For the best ERGO experience, please complete the PROVIDERS form by clicking the 'Edit' button on the top right.</h2>
+        {% endif %}
+
+        <!-- include sidebar -->
+        {% include "info/sidebar.html" %}
+
+        <ul data-role="listview" data-inset="true">
+          <li data-role="list-divider" data-theme="a">INSURANCE PROVIDERS</li>
+          <li>
+            <h3>Provider Name:</h3>
+            <p><strong>{{ provider.insurance_name }}</strong></p>
+          </li>
+          <li>
+            <h3>Group Number:</h3>
+            <p><strong>{{ provider.group_num }}</strong></p>
+          </li>
+          <li>
+            <h3>Policy #:</h3>
+            <p><strong>{{ provider.policy_num  }}</strong></p>
+          </li>
+          <li>
+            <h3>Contact:</h3>
+            <p><strong>{{ provider.insurance_contact }}</strong></p>
+          </li>
+        </ul>  
+
+        <ul data-role="listview" data-inset="true">
+          <li data-role="list-divider" data-theme="a">PRIMARY CARE PROVIDER</li>
+           <li>
+            <h3>Physician Name:</h3>
+            <p><strong>{{ provider.pcp_name }}</strong></p>
+          </li>
+          <li>
+            <h3>Contact:</h3>
+            <p><strong>{{ provider.pcp_contact }}</strong></p>
+          </li>
+          <li>
+            <h3>Clinic/Facility/Hospital:</h3>
+            <p><strong>{{ provider.pcp_location }}</strong></p>
+          </li>
+          <li>
+            <h3>Address:</h3>
+            <p><strong>{{ provider.pcp_address }}</strong></p>
+            <p><strong>{{ provider.pcp_city }}, {{ provider.pcp_state }} {{ provider.pcp_zipcode}}</strong></p>
+          </li>
+        </ul>
+      </div>
+      </div>
+
+  </body>
+</html>
+
+
+

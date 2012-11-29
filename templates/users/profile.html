@@ -7,10 +7,10 @@
  	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
     
-    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+	<link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
     
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
   </head>
 
   <body>
@@ -19,15 +19,31 @@
       <div data-role="header" data-theme="c" data-position="fixed">
         <a href="/" data-role="button" data-icon="grid" data-iconpos="notext"></a>
         <h2>PROFILE</h2>
-        <a href="/profile#profile-edit" data-role="button" data-icon="check" data-iconpos="left">Edit</a>
+        <a href="/profile/edit/" data-role="button" data-icon="check" data-iconpos="left">Edit</a>
       </div>
 
      <div data-role="content">
 
+	 <!-- status message pop-up for new users who have not created a profile yet --> 
+	 {% if new_user %}
+	 
+	 <h2>TODO: Please update profile by clicking edit button on top right.</h2>
+
+	 {% endif %}
+	 <!-- end status pop-up-->
+     
+     <!-- update successful message pop up 
+     {% if update_success %}
+     
+     <h2>Profile has been successfuly updated.</h2>
+
+     {% endif %}
+      end popup -->
+
          <div style="text-align:center;">
             <img src="http://stanford.edu/~zqkng/cgi-bin/ergo/images/generic_profile_img.png" style="width:150px;height:150px;border:1px solid black;"/>
          </div>
-        
+
          <ul data-role="listview" data-inset="true">
             <li data-role="list-divider" data-theme="a">
                 <h1>ERGO ID: {{ profile.ergo_id }}</h1>
@@ -52,103 +68,6 @@
         </ul> 
         </div> 
       </div> <!-- end profile page -->
-      
-      <!-- start EDIT page -->
-      <div data-role="page" id="profile-edit">
-        <div data-role="header" data-theme="c" data-position="fixed">
-          <h1>Edit Profile</h1>
-          <a href="#profile" data-role="button" data-icon="delete" data-iconpos="left" class="ui-btn-right" data-corners="false">Cancel</a>
-        </div>
-      
-        <div data-role="content">
-        
-                <div style="text-align:center;">
-                    <a href="#upload" data-role="button" data-icon="arrow-r" data-iconpos="right" data-corners="false">
-                        UPLOAD PROFILE PICTURE
-                    </a>
-                </div>
-            
-            
-            <form method="post" action="#">
-            
-            
-                <ul data-role="listview" data-inset="true">
-                    <li data-role="list-divider" data-theme="a"><h1>ERGO ID: {{ profile.ergo_id }}</h1></li>
-                    <li>
-                        <div data-role="fieldcontain">
-	                        <label for="firstname">First Name:</label>
-	                        <input type="text" name="firstname" id="firstname" value="{{ profile.firstname }}" data-mini="true" />
-		                </div>
-                    </li>
-                    <li>
-                        <div data-role="fieldcontain">
-	                        <label for="lastname">Last Name:</label>
-	                        <input type="text" name="firstname" id="lastname" value="{{ profile.lastname }}" data-mini="true" />
-		                </div>
-                    </li>
-                    <li>
-                        <div data-role="fieldcontain">
-	                        <label for="dob">Date of Birth:</label>
-	                        <input type="date" name="dob" id="dob" value="{{ profile.dob }}" data-mini="true" />
-		                </div>
-                    </li>
-                    <li>
-                        <div data-role="fieldcontain">
-                            <fieldset data-role="controlgroup">
-    	                            <legend>Sex:</legend>
-         	                        <input type="radio" name="sex" id="male" value="Male" checked="checked" />
-                                 	<label for="male">Male</label>
-                                 	<input type="radio" name="sex" id="female" value="Female" />
-                                 	<label for="female">Female</label>
-                                 	<input type="radio" name="sex" id="other" value="Other" />
-                                 	<label for="other">Other</label>
-                            </fieldset>
-                        </div>
-                    </li>
-                </ul>
- 
-                <ul data-role="listview" data-inset="true">
-                    <li data-role="list-divider" data-theme="a">CONTACT</li>
-                    <li>
-                        <div data-role="fieldcontain">
-	                        <label for="email">E-Mail:</label>
-	                        <input type="email" name="email" id="email" value="{{ request.user.email }}" data-mini="true" />
-		                </div>
-                    </li>
-                    <li>
-                        <div data-role="fieldcontain">
-	                        <label for="phone">Phone:</label>
-	                        <input type="tel" name="phone" id="phone" value="{{ profile.phone }}" data-mini="true" />
-		                </div>
-                    </li>
-                </ul>
-      
-                <ul data-role="listview" data-inset="true">
-                    <li data-role="list-divider" data-theme="a" role="heading">ADDRESS</li>
-                    <li>
-                        <div data-role="fieldcontain">
-	                        <label for="address">Address:</label>
-	                        <input type="text" name="address" id="address" value="{{ profile.address }}" data-mini="true" />
-		                </div>
-		                <div data-role="fieldcontain">
-	                        <label for="city">City:</label>
-	                        <input type="text" name="city" id="city" value="{{ profile.city }}" data-mini="true" />
-		                </div>
-	    	                <div data-role="fieldcontain">
-	                        <label for="state">State:</label>
-	                        <input type="text" name="state" id="state" value="{{ profile.state }}" data-mini="true" />
-		                </div>
-                        <div data-role="fieldcontain">
-	                        <label for="zipcode">Zipcode:</label>
-	                        <input type="text" name="zipcode" id="zipcode" value="{{ profile.zipcode }}" data-mini="true" />
-		                </div>
-                    </li>
-                </ul>
-        
-                <div><input type="submit" value="UPDATE" /></div>
-            </form>
-        </div>
-      </div>
       
   </body>
 </html>
