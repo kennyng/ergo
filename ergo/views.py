@@ -4,40 +4,17 @@ from django.template import RequestContext
 from django.views.decorators.csrf import csrf_protect
 from django.core.urlresolvers import reverse
 
-from ergo_users.models import UserProfile
-from ergo_contacts.models import Contact
-from ergo_info.models import Provider, Immunization, UserToImmunization, Drug, UserToDrug, Allergy, UserToAllergy
+from ergo_info.models import Drug, UserToDrug, Allergy, UserToAllergy
 
 
 def index(request):
     if request.user.is_authenticated():
         # for authenticated (logged in) users
-        return render_to_response('index/home.html')
+        return render_to_response('index.html')
     else:
         # for anonymous users
         return HttpResponseRedirect('/accounts/login/')
         
-
-def profile_get(request):
-    profile = UserProfile.objects.filter(user=request.user)[0]
-    return render_to_response('users/profile.html', {'profile' : profile}, RequestContext(request))
-
-def contacts_get(request):
-    contacts = Contact.objects.filter(user=request.user)
-    return render_to_response('contacts/contacts.html', {'contacts': contacts}, RequestContext(request))
-
-def provider_get(request):
-    p = Provider.objects.filter(user=request.user)[0]
-    return render_to_response('info/providers.html', {'provider': p}, RequestContext(request))
-
-def vaccines_get(request):
-    records = UserToImmunization.objects.filter(user=request.user)
-    vaccines = []
-    for x in records:
-        shot = {'vaccine_name': x.vaccine.vaccine_name, 'vaccine_date': x.vaccine_date}
-        vaccines.append(shot)
-
-    return render_to_response('info/vaccines.html', {'vaccines': vaccines}, RequestContext(request))
 
 def drugs_otc_get(request):
     records = UserToDrug.objects.filter(user=request.user)
