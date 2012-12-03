@@ -24,21 +24,12 @@
 
      <div data-role="content">
 
-	 <!-- status message pop-up for new users who have not created a profile yet --> 
-	 {% if new_user %}
-	 
-	 <h2>TODO: Please update profile by clicking edit button on top right.</h2>
-
-	 {% endif %}
-	 <!-- end status pop-up-->
-     
-     <!-- update successful message pop up 
-     {% if update_success %}
-     
-     <h2>Profile has been successfuly updated.</h2>
-
-     {% endif %}
-      end popup -->
+        <!-- TODO: status message popup/dialog box for new users-->
+        {% if new_user %}
+        <div style="text-align:center; font-style: italic; color: red;">
+          <h4>For the best ERGO experience, please update your Profile by clicking the 'Edit' button at the top right.</h4>
+        </div>
+        {% endif %}
 
          <div style="text-align:center;">
             <img src="http://stanford.edu/~zqkng/cgi-bin/ergo/images/generic_profile_img.png" style="width:150px;height:150px;border:1px solid black;"/>

@@ -26,11 +26,13 @@
         <div data-role="content">
 
           <!-- TODO: error message popup/dialog box -->
-          {% if error_msg %}
-          <h3 style="text-align:center">{{ error_msg }}</h3>
-          {% endif %}
+        {% if error_msg %}
+        <div style="text-align:center; font-style: italic; color: red;">
+          <h4>{{ error_msg }}</h4>
+        </div>
+        {% endif %}
 
-  	    <form method="post" action="/info/providers/edit/post/">
+  	<form method="post" action="/info/providers/edit/post/">
           {% csrf_token %}
             <ul data-role="listview" data-inset="true">
               <li data-role="list-divider" data-theme="a">INSURANCE PROVIDER</li>

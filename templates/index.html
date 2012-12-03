@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+      <script src="//cdn.optimizely.com/js/148158180.js"></script>
         <title>ERGO</title>       
 	    <meta charset="utf-8">
 	    <meta name="apple-mobile-web-app-capable" content="yes">
@@ -17,9 +18,8 @@
         <div data-role="page" id="home">
     
           <div data-role="header" data-theme="c" data-position="fixed">
-            <a href="#settings" data-role="button" data-icon="gear" data-iconpos="notext"></a>
             <div style="font-size:35px;color:crimson;text-align:center">ERGO</div>
-            <a href="/accounts/logout/" data-role="button" style="font-size:10px;"><span style="font-size:10px;">LOG OUT</span></a>
+            <a href="/accounts/logout/" data-role="button" style="font-size:10px;" class="ui-btn-right"><span style="font-size:10px;">LOG OUT</span></a>
           </div> <!-- end header -->
 
           <div data-role="content" data-id="samebar" data-tap-toggle="false">
@@ -33,7 +33,7 @@
 	        		    </div>
 	        		</button></a></div>
 	        		<div class="ui-block-b">
-	            		<a href="/providers/" style="text-decoration:none;"><button type="submit" data-theme="b">
+	            		<a href="/info/allergies/drug/" style="text-decoration:none;"><button type="submit" data-theme="b">
 	        		    <div style="font-size:12px;">MEDICAL</div>
 	        		    <div style="font-size:12px;">INFORMATION</div>
 	        		    <div>
@@ -58,7 +58,7 @@
             </div>
         </div><!-- end content -->
      
-        <a href="/about/"><div data-role="footer" data-theme="c" data-position="fixed">
+        <a href="#"><div data-role="footer" data-theme="c" data-position="fixed">
             <div style="font-size:11px;text-align:center;">about us | 2012</div>
         </div></a>
      </div>

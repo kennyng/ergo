@@ -34,9 +34,13 @@
         
         <div data-role="collapsible-set" data-theme="b" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" >
 
-          {% if no_contacts %}
-          <h3 style="text-align:center">No Contacts Added. Please click button on top right to add contacts.</h3>
-          {% endif %}
+        <!-- TODO: status message popup/dialog box for new users-->
+        {% if no_contacts %}
+        <div style="text-align:center; font-style: italic; color: red;">
+          <h4>No Contacts Available. To add contacts, click the add button on the top right.</h4>
+        </div>
+        {% endif %}
+
 
 	  {% for i in contacts %}
             <div data-role="collapsible">

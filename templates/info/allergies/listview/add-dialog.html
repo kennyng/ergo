@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ERGO - Immunizations</title>   
+    <title>ERGO - Allergies</title>   
     <meta charset="utf-8">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -13,9 +13,9 @@
   </head>
 
   <body>
-    <div data-role="dialog" id="add-vaccine">
+    <div data-role="dialog" id="listview-add-allergy">
       <div data-role="header" data-theme="d">
-        <h1>Add Vaccine?</h1>
+        <h1>Add Allergy?</h1>
       </div>
 
       <div data-role="content" data-theme="c">
@@ -26,21 +26,19 @@
         </div>
         {% endif %}
 
-	    <form method="post" action="/info/shots/add/post/">
+	    <form method="post" action="/info/allergies/listview/add/post/" >
               {% csrf_token %}
-	      <label for="vaccine"><strong>Vaccine: </strong></label>
-	      <select id="vaccine" name="vaccine_id" data-theme="b">
-                {% for x in vaccines %}
-                  <option value="{{ x.vaccine_id }}">{{ x.vaccine_name }}</option>
+	      <label for="allergy"><strong>Allergy: </strong></label>
+	      <select id="allergy" name="allergy_id" data-theme="b">
+                {% for x in allergies %}
+                  <option value="{{ x.allergy_id }}">{{ x.allergy_name }}</option>
                 {% endfor %}
               </select>
 
-              <label for="vaccine_date"><strong>Date Given:</strong></label>
-	      <input type="date" name="vaccine_date" id="vaccine_date" value="" data-theme="b" />
 	      <br />
-	      <button type="submit" data-theme="b">Add Vaccine</button>
+	      <button type="submit" data-theme="b">Add Allergy</button>
 	    </form>
-            <a href="/info/shots/" data-rel="back" data-role="button" data-theme="c">Cancel</a>
+            <a href="/info/allergies/listview/" data-rel="back" data-role="button" data-theme="c">Cancel</a>
 
       </div>
     </div>

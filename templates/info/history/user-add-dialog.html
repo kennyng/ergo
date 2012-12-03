@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ERGO - Medical History</title>   
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />    		
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+    
+  </head>
+  
+  <body>
+    <div data-role="dialog" id="add-user-history">
+      <div data-role="header" data-theme="d">
+        <h1>Add to Medical History?</h1>
+      </div>
+
+      <div data-role="content" data-theme="c">
+
+        <!-- TODO: error message popup/dialog box -->
+        {% if error_msg %}
+        <div style="text-align:center; font-style: italic; color: crimson;">
+          <p>{{ error_msg }}</p>
+        </div>
+        {% endif %}
+      
+        <form method="post" action="/info/history/user/add/post/">
+          {% csrf_token %}
+          <div data-role="fieldcontain">
+            <fieldset data-role="controlgroup">
+              <legend><strong>Category:</strong></legend>
+              <label for="condition">Medical Condition</label>
+              <input type="radio" name="category" id="condition" value="0" />
+              <label for="accident">Accident</label>
+              <input type="radio" name="category" id="accident" value="1" />
+              <label for="surgery">Surgery</label>
+              <input type="radio" name="category" id="surgery" value="2" />
+              <label for="visit">Medical Visit/Hospitlization</label>
+              <input type="radio" name="category" id="visit" value="3" />
+            </fieldset>
+          </div>
+
+          <div data-role="fieldcontain">
+            <label for="date"><strong>Date: </strong></label>
+            <input type="date" name="date" id="date"/>
+          </div>
+
+          <div data-role="fieldcontain">
+            <label for="description">Description:</label>
+            <input type="text" name="description" id="description" placeholder="140 character maximum." />
+          </div>
+
+          <button type="submit" data-theme="b">Add Entry</button>
+        </form>
+        <a href="/info/history/user/" data-rel="back" data-role="button" data-theme="c">Cancel</a>
+      </div>
+
+    </div>
+  </body>
+</html>
+  

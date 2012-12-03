@@ -13,9 +13,9 @@
   </head>
 
   <body>
-    <div data-role="dialog" id="remove-vaccine">
+    <div data-role="dialog" id="listview-remove-allergy">
       <div data-role="header" data-theme="d">
-        <h1>Remove Vaccine?</h1>
+        <h1>Remove Allergy?</h1>
       </div>
 
       <div data-role="content" data-theme="c">
@@ -27,16 +27,15 @@
         {% endif %}
 
         <div style="text-align:center">
-          <h3>Are you sure you want to remove this vaccine?</h3>
+          <h3>Are you sure you want to remove this allergy?</h3>
           <p>This action cannot be undone.</p>
         </div>
-	    <form method="post" action="/info/shots/remove/post/">
+	    <form method="post" action="/info/allergies/listview/remove/post/" >
               {% csrf_token %}
-              <input type="hidden" name="vaccine_id" value="{{ vaccine_id }}" />
-	      <button type="submit" data-theme="b">Remove Vaccine</button>
+              <input type="hidden" name="allergy_id" value="{{ allergy_id }}" />
+	      <button type="submit" data-theme="b">Remove Allergy</button>
 	    </form>
-        <a href="/info/shots/" data-rel="back" data-role="button" data-theme="c">Cancel</a>
-
+        <a href="/info/allergies/listview/" data-rel="back" data-role="button" data-theme="c">Cancel</a>
       </div>
     </div>
 

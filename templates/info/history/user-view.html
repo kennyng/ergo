@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ERGO - Medical History</title>   
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />    		
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+    
+  </head>
+  
+  <body>
+    <div data-role="page" id="user-history">
+        <div data-role="header" data-theme="c" data-position="fixed">
+            <h1>My History</h1>
+	        <a href="/info/history/user/" data-rel="back" data-role="button" data-icon="back" data-iconpos="left" data-inline="true" class="ui-btn-right">Go Back</a>
+        </div>
+      
+      	<div data-role="content">
+
+          {% if error_msg %}
+          <div style="text-align:center; font-style: italic; color: crimson;">
+            <p>{{ error_msg }}</p>
+          </div>
+          {% endif %}
+	
+          <ul data-role="listview" data-inset="true">
+            <li data-role="list-divider" data-theme="a">CATEGORY:</li>
+            <li>
+              <h2>{{ entry.category }}</h2>
+            </li>
+            <li data-role="list-divider" data-theme="a">YEAR:</li>
+            <li> 
+              <h2>{{ entry.date }}</h2>
+            </li>
+            <li data-role="list-divider" data-theme="a">DESCRIPTION:</li>
+            <li>
+              <h2>{{ entry.description }}</h2>
+            </li>
+          </ul>
+
+        <a href="/info/history/user/edit/?id={{ entry.history_id }}&date={{ entry.date }}&description={{ entry.description }}" data-role="button" data-corders="false" data-theme="d" data-corners="false">EDIT ENTRY</a>
+
+        <form method="post" action="/info/history/user/remove/" >
+          {% csrf_token %}
+          <input type="hidden" name="history_id" value="{{ entry.history_id }}" />
+          <button type="submit" data-theme="d" data-corners="false">REMOVE ENTRY</button>
+        </form>
+
+	</div>
+
+    </div>
+
+  </body>
+</html>
+  

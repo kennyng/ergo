@@ -22,11 +22,12 @@
       
         <div data-role="content">
         
-          <!-- error message pop up -->
+          <!-- TODO: error message popup/dialog box -->
           {% if error_msg %}
-          <h3>{{error_msg }}</h3>
+          <div style="text-align:center; font-style: italic; color: red;">
+            <h4>{{ error_msg }}</h4>
+          </div>
           {% endif %}
-          <!-- end error emssage -->
 
           <div style="text-align:center;">
             <a href="#upload" data-role="button" data-icon="arrow-r" data-iconpos="right" data-corners="false">
@@ -62,7 +63,7 @@
                 <div data-role="fieldcontain">
                   <fieldset data-role="controlgroup">
     	            <legend>Sex:</legend>
-         	        <input type="radio" name="sex" id="male" value="Male" checked="checked" />
+         	    <input type="radio" name="sex" id="male" value="Male" checked="checked" />
                     <label for="male">Male</label>
                     <input type="radio" name="sex" id="female" value="Female" />
                     <label for="female">Female</label>

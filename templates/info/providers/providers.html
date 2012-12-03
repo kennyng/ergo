@@ -17,24 +17,31 @@
   <body>
     <div data-role="page" id="provider">
 
+      <!-- sidebar css and js -->
       <link rel="stylesheet" type="text/css" href="/static/css/sidebar.css" />
       <script type="text/javascript" src="/static/js/sidebar.js"></script>
 
       <div data-role="header" data-theme="c" data-position="fixed">
-        <a href="#popupPanel" data-rel="popup" data-transition="slidedown" data-position-to="window" data-role="button" data-inline="true" data-icon="grid" data-corners="false" data-iconpos="notext">Menu</a>
+        <a href="#sidebarProvider" data-rel="popup" data-transition="slidedown" data-position-to="window" data-role="button" data-inline="true" data-icon="grid" data-corners="false" data-iconpos="notext">Menu</a>
         <h1>PROVIDERS</h1>
         <a href="/info/providers/edit/" data-role="button" data-icon="check" data-iconpos="left" data-corners="false">Edit</a>
       </div>
 
       <div data-role="content">
-        
-        <!-- TODO: popup message for new users/users who have not filled providers form -->
-        {% if new_user %}
-        <h2 style="text-align:center">For the best ERGO experience, please complete the PROVIDERS form by clicking the 'Edit' button on the top right.</h2>
-        {% endif %}
 
-        <!-- include sidebar -->
-        {% include "info/sidebar.html" %}
+        <!-- start Sidebar -->
+        <div data-role="popup" id="sidebarProvider" class="sidebarPopup" data-corners="false" data-theme="none" data-shadow="false" data-tolerance="0,0">
+	  <!-- include sidebar -->
+          {% include "info/sidebar.html" %}        
+        </div>
+        <!-- end Sidebar -->
+
+        <!-- TODO: status message popup/dialog box for new users-->
+        {% if new_user %}
+        <div style="text-align:center; font-style: italic; color: red;">
+          <h4>For the best ERGO experience, please update your Providers by clicking on the 'Edit' button at the top right.</h4>
+        </div>
+        {% endif %}
 
         <ul data-role="listview" data-inset="true">
           <li data-role="list-divider" data-theme="a">INSURANCE PROVIDERS</li>
