@@ -68,6 +68,6 @@ def edit_providers(request):
 
         return HttpResponseRedirect(reverse('ergo_info.views.providers.index'))
     except:
-        return render(request, 'users/providers-edit-form.html', {'error_msg': 'We are unable to update your providers at this time. Please try again.',})
+        return render(request, 'info/providers/providers-edit-form.html', {'error_msg': 'We are unable to update your providers at this time. Please try again.',})
 
 

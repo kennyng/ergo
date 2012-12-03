@@ -1,5 +1,5 @@
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render_to_response
+from django.http import HttpResponseRedirect
+from django.shortcuts import render_to_response, render
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_protect
@@ -9,18 +9,21 @@ from ergo_info.models import Immunization, UserToImmunization
 
 
 def index(request):
-    records = UserToImmunization.objects.filter(user=request.user).order_by('-vaccine_date', '-date_added')
-    vaccines = []
-    for x in records:
-        shot = {'vaccine_id': x.vaccine_id, 'vaccine_name': x.vaccine.vaccine_name, 'vaccine_date': x.vaccine_date}
-        vaccines.append(shot)
+    try:
+        records = UserToImmunization.objects.filter(user=request.user).order_by('-vaccine_date', '-date_added')
+        vaccines = []
+        for x in records:
+            shot = {'vaccine_id': x.vaccine_id, 'vaccine_name': x.vaccine.vaccine_name, 'vaccine_date': x.vaccine_date}
+            vaccines.append(shot)
 
-    new_user = False
-    if len(vaccines) < 1:
-        new_user = True
+        no_vaccines = False
+        if len(vaccines) < 1:
+            no_vaccines = True
         
-    return render_to_response('info/immunizations/vaccines.html', {'vaccines': vaccines, 'new_user': new_user}, RequestContext(request))
-
+        return render_to_response('info/immunizations/vaccines.html', {'vaccines': vaccines, 'no_vaccines': no_vaccines}, RequestContext(request))
+    except:
+        pass
+        
 
 def dialog_add(request):
     try:
@@ -40,7 +43,7 @@ def add_vaccine(request):
         
         return HttpResponseRedirect(reverse('ergo_info.views.immunizations.index'))
     except:
-        return(request, 'info/immunizations/vaccines-add-dialog.html', {'error_msg': 'Error encountered while adding vaccine. Please try again.'})
+        return render(request, 'info/immunizations/vaccines-add-dialog.html', {'error_msg': 'Error encountered while adding vaccine. Please try again.',})
         
     
 def dialog_remove(request):
@@ -56,14 +59,14 @@ def dialog_remove(request):
 @csrf_protect
 def remove_vaccine(request):
     try:
-        vaccine_id = request.GET.get('id')
-        if vaccine_id and request.method == 'POST':
+        vaccine_id = request.POST.get('vaccine_id')
+        if vaccine_id:
             vaccine_id = int(vaccine_id)
             shot = UserToImmunization.objects.filter(user=request.user).filter(vaccine_id=vaccine_id)[0]
             shot.delete()
         
         return HttpResponseRedirect(reverse('ergo_info.views.immunizations.index'))
     except:
-        render(request, 'info/immunizations/vaccines-remove-dialog.html', {'error_msg': 'Error encountered while removing vaccine. Please try again.',})
+        return render(request, 'info/immunizations/vaccines-remove-dialog.html', {'error_msg': 'Error encountered while removing vaccine. Please try again.',})
 
 
