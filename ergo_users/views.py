@@ -45,8 +45,8 @@ def update_profile(request):
         #return render_to_response('test.html', {'post_list': post_list}, RequestContext(request))
 
         if firstname and lastname and dob and sex and email and phone and address and city and state and zipcode:
-            #request.user.email = email
-            #request.user.save()
+            request.user.email = email
+            request.user.save()
             try:
                 profile = UserProfile.objects.filter(user=request.user)[0]
                 profile.firstname = firstname
