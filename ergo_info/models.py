@@ -24,7 +24,7 @@ class Drug(models.Model):
 class UserToDrug(models.Model):
     user = models.ForeignKey(User)
     drug = models.ForeignKey(Drug)
-    data_added = models.DateTimeField(auto_now_add=True)
+    date_added = models.DateTimeField(auto_now_add=True)
     
 class Immunization(models.Model):
     vaccine_id = models.AutoField(primary_key=True)
@@ -38,17 +38,24 @@ class UserToImmunization(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
     
 class History(models.Model):
+    HISTORY_TYPES = (
+        (0, 'Condition'),
+        (1, 'Accident'),
+        (2, 'Surgery'),
+        (3, 'Visit'),
+    )
+    
     history_id = models.AutoField(primary_key=True)
-    history_category = models.CharField(max_length=20)
-    history_date = models.DateField()
-    history_type = models.CharField(max_length=150)
+    date = models.DateField()
+    category = models.IntegerField(max_length=1, choices=HISTORY_TYPES)
+    description = models.CharField(max_length=140)
     date_added = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User)
     
 class FamilyHistory(models.Model):
     family_id = models.AutoField(primary_key=True)
-    family_relationship = models.CharField(max_length=100)
-    family_condition = models.CharField(max_length=200)
+    relationship = models.CharField(max_length=60)
+    condition = models.CharField(max_length=140)
     date_added = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User)
     
