@@ -10,4 +10,8 @@ def index(request):
     else:
         # for anonymous users
         return HttpResponseRedirect('/accounts/login/')
-            
+
+
+def emergency_access(request):
+    return render_to_response('er-access.html', RequestContext(request))
+

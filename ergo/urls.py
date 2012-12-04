@@ -7,6 +7,7 @@ from ergo import settings
 
 urlpatterns = patterns('',
     url(r'^$', 'ergo.views.index', name='index'),
+    url(r'^er/access/$', 'ergo.views.emergency_access'),
     url('^accounts/', include('registration.backends.default.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^profile/', include('ergo_users.urls')),
