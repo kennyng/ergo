@@ -3,27 +3,51 @@ from django.contrib.auth.models import User
 
 
 class Allergy(models.Model):
+    ALLERGY_TYPES = (
+        (0, 'Drug'),
+        (1, 'Misc.'),
+    )
+
     allergy_id = models.AutoField(primary_key=True)
-    allergy_category = models.CharField(max_length=20)
-    allergy_name = models.CharField(max_length=60)
-    allergy_img = models.CharField(max_length=60)
+    category = models.IntegerField(max_length=1, choices=ALLERGY_TYPES)
+    name = models.CharField(max_length=60)
+    image = models.CharField(max_length=60)
     users = models.ManyToManyField(User, through='UserToAllergy')
     
 class UserToAllergy(models.Model):
+    ALLERGY_TYPES = (
+        (0, 'Drug'),
+        (1, 'Misc.'),
+    )
+    
     user = models.ForeignKey(User)
     allergy = models.ForeignKey(Allergy)
+    category = models.IntegerField(max_length=1, choices=ALLERGY_TYPES)
     date_added = models.DateTimeField(auto_now_add=True)
     
 class Drug(models.Model):
+    DRUG_TYPES = (
+        (0, 'Prescription'),
+        (1, 'OTC'),
+        (2, 'Misc.'),
+    )
+
     drug_id = models.AutoField(primary_key=True)
-    drug_category = models.CharField(max_length=20)
-    drug_name = models.CharField(max_length=60)
-    drug_img = models.CharField(max_length=60)
+    category = models.IntegerField(max_length=1, choices=DRUG_TYPES)
+    name = models.CharField(max_length=60)
+    image = models.CharField(max_length=60)
     users = models.ManyToManyField(User, through='UserToDrug')
     
 class UserToDrug(models.Model):
+    DRUG_TYPES = (
+        (0, 'Prescription'),
+        (1, 'OTC'),
+        (2, 'Misc.'),
+    )
+
     user = models.ForeignKey(User)
     drug = models.ForeignKey(Drug)
+    category = models.IntegerField(max_length=1, choices=DRUG_TYPES)
     date_added = models.DateTimeField(auto_now_add=True)
     
 class Immunization(models.Model):

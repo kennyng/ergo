@@ -33,9 +33,17 @@ def edit_providers(request):
         insurance_name = request.POST.get('insurance_name')
         group_num = request.POST.get('group_num')
         policy_num = request.POST.get('policy_num')
-        insurance_contact = request.POST.get('insurance_contact')
+
+        insure_phone = request.POST.get('insurance_contact')
+        insure_phone = insur_phone.replace('-', '').replace('(', '').replace(')', '').replace(' ', '')
+        insurance_contact = insure_phone
+        
         pcp_name = request.POST.get('pcp_name')
-        pcp_contact = request.POST.get('pcp_contact')
+
+        pcp_phone = request.POST.get('pcp_contact')
+        pcp_phone = pcp_phone.replace('-', '').replace('(', '').replace(')', '').replace(' ', '')
+        pcp_contact = pcp_phone
+
         pcp_location = request.POST.get('pcp_location')
         pcp_address = request.POST.get('pcp_address')
         pcp_city = request.POST.get('pcp_city')

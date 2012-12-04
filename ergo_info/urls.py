@@ -32,7 +32,6 @@ urlpatterns = patterns('',
 
     # Allergies
     url(r'^allergies/drug/$', allergies.drug_index),
-    url(r'^allergies/diet/$', allergies.diet_index),
     url(r'^allergies/misc/$', allergies.misc_index),
 
     url(r'^allergies/add/$', allergies.dialog_add),

@@ -48,10 +48,6 @@ def add_vaccine(request):
     
 def dialog_remove(request):
     vaccine_id = request.GET.get('id')
-    if vaccine_id:
-        vaccine_id = int(vaccine_id)
-    else:
-        vaccine_id = 0
     
     return render_to_response('info/immunizations/vaccines-remove-dialog.html', {'vaccine_id': vaccine_id}, RequestContext(request))
 
@@ -61,12 +57,11 @@ def remove_vaccine(request):
     try:
         vaccine_id = request.POST.get('vaccine_id')
         if vaccine_id:
-            vaccine_id = int(vaccine_id)
-            shot = UserToImmunization.objects.filter(user=request.user).filter(vaccine_id=vaccine_id)[0]
+            shot = UserToImmunization.objects.get(user=request.user, vaccine_id=vaccine_id)
             shot.delete()
         
         return HttpResponseRedirect(reverse('ergo_info.views.immunizations.index'))
-    except:
+    except Immunization.DoesNotExist:
         return render(request, 'info/immunizations/vaccines-remove-dialog.html', {'error_msg': 'Error encountered while removing vaccine. Please try again.',})
 
 
