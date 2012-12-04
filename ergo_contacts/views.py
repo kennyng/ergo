@@ -28,6 +28,7 @@ def add_contact(request):
         relationship = request.POST.get('relationship')
         email = request.POST.get('email')
         mobile = request.POST.get('mobile')
+        mobile = mobile.replace('-', '').replace('(', '').replace(')', '').replace(' ', '')
         fb = request.POST.get('facebook')
         city = request.POST.get('city')
         state = request.POST.get('state')
@@ -79,7 +80,11 @@ def update_contact(request):
         contact.lastname = request.POST.get('lastname')
         contact.relationship = request.POST.get('relationship')
         contact.email = request.POST.get('email')
-        contact.mobile = request.POST.get('mobile')
+         
+        phone = request.POST.get('mobile')
+        phone = phone.replace('-', '').replace('(', '').replace(')', '').replace(' ', '')
+        contact.mobile = phone
+        
         contact.facebook = request.POST.get('facebook')
         contact.city = request.POST.get('city')
         contact.state = request.POST.get('state')
