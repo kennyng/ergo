@@ -3,14 +3,13 @@
   <head>
     <title>ERGO | Logout</title>
     
-    <meta charset="utf-8">
-    
-	<meta name="apple-mobile-web-app-capable" content="yes">
- 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <meta charset="utf-8">    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
 
-    <link rel="stylesheet" href="/static/style.css" type="text/css" />
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+    <link rel="stylesheet" href="/static/css/themes/ergo-theme.min.css" />
 
     <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
@@ -18,13 +17,13 @@
 
   <body>
     <div data-role="page" id="logout">
-      <div data-role="header">
-        <h1>Logout Successful!</h1>
-        <a href="/accounts/login/" id="login" class="ui-btn-right">Login</a>
+      <div data-role="header" data-theme="e">
+        <h1>Logout</h1>
+        <a href="/accounts/login/" id="login" data-role="button" class="ui-btn-right" style="color:crimson">LOGIN</a>
       </div>
 
-      <div data-role="content">
-        <h1>You have successfully logged out.</h1>
+      <div data-role="content" data-theme="e" style="text-align:center;">
+        <h2 style="color:crimson;">You have successfully logged out.</h2>
         <p>Thank you for using ERGO.</p> 
         <p>For security reasons, please exit your browser.</p>
       </div>

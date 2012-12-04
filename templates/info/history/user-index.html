@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
 
     <link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />    		
+    <link rel="stylesheet" href="/static/css/themes/ergo-theme.min.css" />
+
     <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
     
@@ -20,10 +22,10 @@
        <link rel="stylesheet" type="text/css" href="/static/css/sidebar.css" />
        <script type="text/javascript" src="/static/js/sidebar.js"></script>
 
-       <div data-role="header" data-theme="c" data-position="fixed">
-        	<a href="#sidebarHistory" data-rel="popup" data-transition="slidedown" data-position-to="window" data-role="button" data-inline="true" data-icon="grid" data-corners="false" data-iconpos="notext">Menu</a>
+       <div data-role="header" data-theme="e" data-position="fixed">
+        	<a href="#sidebarHistory" data-rel="popup" data-transition="slidedown" data-position-to="window" data-role="button" data-inline="true" data-icon="grid" data-iconpos="notext">Menu</a>
             <h1>Medical History</h1>
-	        <a href="/info/history/user/add/" data-rel="dialog" data-transition="flip" data-role="button" data-icon="add" data-iconpos="notext" data-inline="true">Add</a>
+	        <a href="/info/history/user/add/" data-rel="dialog" data-transition="flip" data-role="button" data-icon="add" data-iconpos="left" data-inline="true">ADD</a>
         </div>
       
       	<div data-role="content">
@@ -42,127 +44,138 @@
           </div>
           {% endif %}
 
-          <div data-role="collapsible-set" data-theme="b" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
-            
-          <div data-role="collapsible">
-            <h1>Medical Conditions</h1>
-	    <ul data-role="listview" data-theme="d" data-divider-theme="c">
-              <li data-role="list-divider"> 
-	        <div class="ui-grid-a">
-		  <div class="ui-block-a">DATE</div>
-                  <div class="ui-block-b">DESCRIPTION</div>
-	        </div>
-	      </li>
+          <div data-role="collapsible-set" data-theme="e" data-content-theme="c" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
+            <div data-role="collapsible">
+              <h1>Medical Conditions</h1>
+	      <ul data-role="listview" data-divider-theme="f">
+                <li data-role="list-divider"> 
+	          <div class="ui-grid-a">
+		    <div class="ui-block-a">DATE</div>
+                    <div class="ui-block-b">DESCRIPTION</div>
+	          </div>
+	        </li>
 
-	      {% for con in entries.condition %}
-	      <li data-icon="arrow-r"><a href="/info/history/entry/?id={{ con.history_id }}" data-inline="true" data-transition="slide">
-		  <div class="ui-grid-a" style="font-size:14px;">
-		    <div class="ui-block-a">{{ con.date }} </div>
-                    <div class="ui-block-b">{{ con.description }}</div>
-		  </div>
-	      </a></li>
-	      {% endfor %}
-              <li data-icon="false">
-                <div class="ui-grid-a">
-                  <div class="ui-block-a"></div>
-                  <div class="ui-block-b"></div>
-                </div>
-              </li>
-	    </ul>
+	        {% for con in entries.condition %}
+	        <li data-icon="arrow-r"><a href="/info/history/entry/?id={{ con.history_id }}" data-inline="true" data-transition="slide">
+		    <div class="ui-grid-a" style="font-size:14px;">
+		      <div class="ui-block-a">{{ con.date }} </div>
+                      <div class="ui-block-b">{{ con.description }}</div>
+		    </div>
+	        </a></li>
+	        {% endfor %}
+
+                
+                <li data-icon="false">
+                  <div class="ui-grid-a">
+                    <div class="ui-block-a"></div>
+                    <div class="ui-block-b"></div>
+                  </div>
+                </li>
+
+
+	      </ul>
+            </div>
+          </div>
+
+          <div data-role="collapsible-set" data-theme="e" data-content-theme="c" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
+            <div data-role="collapsible">
+              <h1>Accidents</h1>
+	      <ul data-role="listview" data-divider-theme="f">
+                <li data-role="list-divider"> 
+	          <div class="ui-grid-a">
+		    <div class="ui-block-a">DATE</div>
+                    <div class="ui-block-b">DESCRIPTION</div>
+	          </div>
+	        </li>
+
+	        {% for acc in entries.accident %}
+	        <li data-icon="arrow-r"><a href="/info/history/entry/?id={{ acc.history_id }}" data-inline="true" data-transition="slide">
+		    <div class="ui-grid-a" style="font-size:14px;">
+		      <div class="ui-block-a">{{ acc.date }} </div>
+                      <div class="ui-block-b">{{ acc.description }}</div>
+		    </div>
+	        </a></li>
+	        {% endfor %}
+              
+                <li data-icon="false">
+                  <div class="ui-grid-a">
+                    <div class="ui-block-a"></div>
+                    <div class="ui-block-b"></div>
+                  </div>
+                </li>
+	      
+              </ul>
+            </div>
           </div>
           
+          <div data-role="collapsible-set" data-theme="e" data-content-theme="c" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
+            <div data-role="collapsible">
+              <h1>Surgeries</h1>
+	      <ul data-role="listview" data-divider-theme="f">
+                <li data-role="list-divider"> 
+	          <div class="ui-grid-a">
+		    <div class="ui-block-a">DATE</div>
+                    <div class="ui-block-b">DESCRIPTION</div>
+	          </div>
+	        </li>
 
-          <div data-role="collapsible">
-            <h1>Accidents</h1>
-	    <ul data-role="listview" data-theme="d" data-divider-theme="c">
-              <li data-role="list-divider"> 
-	        <div class="ui-grid-a">
-		  <div class="ui-block-a">DATE</div>
-                  <div class="ui-block-b">DESCRIPTION</div>
-	        </div>
-	      </li>
-
-	      {% for acc in entries.accident %}
-	      <li data-icon="arrow-r"><a href="/info/history/entry/?id={{ acc.history_id }}" data-inline="true" data-transition="slide">
-		  <div class="ui-grid-a" style="font-size:14px;">
-		    <div class="ui-block-a">{{ acc.date }} </div>
-                    <div class="ui-block-b">{{ acc.description }}</div>
-		  </div>
-	      </a></li>
-	      {% endfor %}
-              <li data-icon="false">
-                <div class="ui-grid-a">
-                  <div class="ui-block-a"></div>
-                  <div class="ui-block-b"></div>
-                </div>
-              </li>
-	    </ul>
+	        {% for sur in entries.surgery %}
+	        <li data-icon="arrow-r"><a href="/info/history/entry/?id={{ sur.history_id }}" data-inline="true" data-transition="slide">
+		    <div class="ui-grid-a" style="font-size:14px;">
+		      <div class="ui-block-a">{{ sur.date }} </div>
+                      <div class="ui-block-b">{{ sur.description }}</div>
+		    </div>
+	        </a></li>
+	        {% endfor %}
+             
+                <li data-icon="false">
+                  <div class="ui-grid-a">
+                    <div class="ui-block-a"></div>
+                    <div class="ui-block-b"></div>
+                  </div>
+                </li>
+	     
+              </ul>
+            </div>
           </div>
-          
 
-          <div data-role="collapsible">
-            <h1>Surgeries</h1>
-	    <ul data-role="listview" data-theme="d" data-divider-theme="c">
-              <li data-role="list-divider"> 
-	        <div class="ui-grid-a">
-		  <div class="ui-block-a">DATE</div>
-                  <div class="ui-block-b">DESCRIPTION</div>
-	        </div>
-	      </li>
+          <div data-role="collapsible-set" data-theme="e" data-content-theme="c" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
+            <div data-role="collapsible">
+              <h1>Medical Stays/Visits</h1>
+	      <ul data-role="listview" data-divider-theme="f">
+                <li data-role="list-divider"> 
+	          <div class="ui-grid-a">
+		    <div class="ui-block-a">DATE</div>
+                    <div class="ui-block-b">DESCRIPTION</div>
+	          </div>
+	        </li>
 
-	      {% for sur in entries.surgery %}
-	      <li data-icon="arrow-r"><a href="/info/history/entry/?id={{ sur.history_id }}" data-inline="true" data-transition="slide">
-		  <div class="ui-grid-a" style="font-size:14px;">
-		    <div class="ui-block-a">{{ sur.date }} </div>
-                    <div class="ui-block-b">{{ sur.description }}</div>
-		  </div>
-	      </a></li>
-	      {% endfor %}
-              <li data-icon="false">
-                <div class="ui-grid-a">
-                  <div class="ui-block-a"></div>
-                  <div class="ui-block-b"></div>
-                </div>
-              </li>
-	    </ul>
+	        {% for vis in entries.visit %}
+	        <li data-icon="arrow-r"><a href="/info/history/entry/?id={{ vis.history_id }}" data-inline="true" data-transition="slide">
+		    <div class="ui-grid-a" style="font-size:14px;">
+		      <div class="ui-block-a">{{ vis.date }} </div>
+                      <div class="ui-block-b">{{ vis.description }}</div>
+		    </div>
+	        </a></li>
+	        {% endfor %}
+                
+                <li data-icon="false">
+                  <div class="ui-grid-a">
+                    <div class="ui-block-a"></div>
+                    <div class="ui-block-b"></div>
+                  </div>
+                </li>
+	     
+              </ul>
+            </div>
           </div>
-         
 
-          <div data-role="collapsible">
-            <h1>Medical Stays/Visits</h1>
-	    <ul data-role="listview" data-theme="d" data-divider-theme="c">
-              <li data-role="list-divider"> 
-	        <div class="ui-grid-a">
-		  <div class="ui-block-a">DATE</div>
-                  <div class="ui-block-b">DESCRIPTION</div>
-	        </div>
-	      </li>
-
-	      {% for vis in entries.visit %}
-	      <li data-icon="arrow-r"><a href="/info/history/entry/?id={{ vis.history_id }}" data-inline="true" data-transition="slide">
-		  <div class="ui-grid-a" style="font-size:14px;">
-		    <div class="ui-block-a">{{ vis.date }} </div>
-                    <div class="ui-block-b">{{ vis.description }}</div>
-		  </div>
-	      </a></li>
-	      {% endfor %}
-              <li data-icon="false">
-                <div class="ui-grid-a">
-                  <div class="ui-block-a"></div>
-                  <div class="ui-block-b"></div>
-                </div>
-              </li>
-	    </ul>
-          </div>
-    
-
-          </div>
         <!-- footer -->
-        <div data-role="footer" data-id="historybar" data-position="fixed" data-tap-toggle="false" data-theme="c">
+        <div data-role="footer" data-id="historybar" data-position="fixed" data-tap-toggle="false" data-theme="e">
           <div data-role="navbar" data-grid="a">
             <ul>
               <li><a href="#user-history" data-icon="star" class="ui-btn-active ui-state-persist">My History</a></li>              
-              <li><a href="/info/history/family/" data-icon="arrow-u">Family History</a></li>
+              <li><a href="/info/history/family/" data-icon="arrow-r" data-transition="slide">Family History</a></li>
             </ul>
           </div>
         </div>

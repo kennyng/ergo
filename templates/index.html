@@ -3,12 +3,13 @@
     <head>
       <script src="//cdn.optimizely.com/js/148158180.js"></script>
         <title>ERGO</title>       
-	    <meta charset="utf-8">
-	    <meta name="apple-mobile-web-app-capable" content="yes">
- 	    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-	    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<meta charset="utf-8">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+ 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+        <link rel="stylesheet" href="/static/css/themes/ergo-theme.min.css" />
         <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
     </head>
@@ -17,52 +18,52 @@
         <!-- Home Page -->
         <div data-role="page" id="home">
     
-          <div data-role="header" data-theme="c" data-position="fixed">
+          <div data-role="header" data-theme="e" data-position="fixed">
             <div style="font-size:35px;color:crimson;text-align:center">ERGO</div>
-            <a href="/accounts/logout/" data-role="button" style="font-size:10px;" class="ui-btn-right"><span style="font-size:10px;">LOG OUT</span></a>
+            <a href="/accounts/logout/" data-role="button" class="ui-btn-right"><span style="font-size:10px;">LOG OUT</span></a>
           </div> <!-- end header -->
 
-          <div data-role="content" data-id="samebar" data-tap-toggle="false">
+          <div data-role="content" data-id="homegrid" data-tap-toggle="false">
               <div class="rel-container">
               <fieldset class="ui-grid-a">
-	        		<div class="ui-block-a">
-	            		<a href="/profile/" style="text-decoration:none;"><button type="submit" data-theme="b">
-	        		    PROFILE
-	        		    <div>
-	        		        <img src="/static/images/profile.png" style="height:90px;width:90px;" />
-	        		    </div>
-	        		</button></a></div>
-	        		<div class="ui-block-b">
-	            		<a href="/info/allergies/drug/" style="text-decoration:none;"><button type="submit" data-theme="b">
-	        		    <div style="font-size:12px;">MEDICAL</div>
-	        		    <div style="font-size:12px;">INFORMATION</div>
-	        		    <div>
-	        		        <img src="/static/images/medical.png" style="height:80px;width:80px;" />
-	        		    </div>
-	        		</button></a></div>
-	        		<div class="ui-block-a">
-	            		<a href="/contacts/" style="text-decoration:none;"><button type="submit" data-theme="b">
-	        		    CONTACTS
- 	        		    <div>
-	        		        <img src="/static/images/contacts.png" style="height:90px;width:90px;"/>
-	        		    </div>
-      		    </button></a></div>
-			    <div class="ui-block-b">
-        		        	<a href="#" style="text-decoration:none;"><button type="submit" data-theme="b">
-	        	    	    OFFLINE
-	        		    <div>
-	        		        <img src="/static/images/note.png" style="height:90px;width:90px;"/>
-	        		    </div>	        		    
-	        	    </button></a></div>  
+	        <div class="ui-block-a">
+	          <a href="/profile/" style="text-decoration:none;"><button type="submit" data-theme="f">
+	              PROFILE
+	              <div>
+	        	<img src="/static/images/profile.png" style="height:90px;width:90px;" />
+	              </div>
+	        </button></a></div>
+	        <div class="ui-block-b">
+	          <a href="/info/allergies/drug/" style="text-decoration:none;"><button type="submit" data-theme="f">
+	              <div style="font-size:12px;">MEDICAL</div>
+	              <div style="font-size:12px;">INFORMATION</div>
+	              <div>
+	        	<img src="/static/images/med-info.png" style="height:80px;width:80px;" />
+	              </div>
+	        </button></a></div>
+	        <div class="ui-block-a">
+	          <a href="/contacts/" style="text-decoration:none;"><button type="submit" data-theme="f">
+	              CONTACTS
+ 	              <div>
+	        	<img src="/static/images/contacts.png" style="height:90px;width:90px;"/>
+	              </div>
+      		</button></a></div>
+		<div class="ui-block-b">
+        	  <a href="/profile/offline/" style="text-decoration:none;"><button type="submit" data-theme="f">
+	              OFFLINE
+	              <div>
+	        	<img src="/static/images/note.png" style="height:90px;width:90px;"/>
+	              </div>	        		    
+	        </button></a></div>  
        	      </fieldset>
-            </div>
-        </div><!-- end content -->
+              </div>
+          </div><!-- end content -->
      
-        <a href="#"><div data-role="footer" data-theme="c" data-position="fixed">
+          <a href="#"><div data-role="footer" data-theme="e" data-position="fixed">
             <div style="font-size:11px;text-align:center;">about us | 2012</div>
-        </div></a>
-     </div>
-    
+          </div></a>
+        </div>
+        
   </body>
 </html>
 

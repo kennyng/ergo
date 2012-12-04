@@ -8,20 +8,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
 
     <link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+    <link rel="stylesheet" href="/static/css/themes/ergo-theme.min.css" />
+
     <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
   </head>
 
   <body>
     <div data-role="dialog" id="add-vaccine">
-      <div data-role="header" data-theme="d">
+      <div data-role="header" data-theme="e">
         <h1>Add Vaccine?</h1>
       </div>
 
-      <div data-role="content" data-theme="c">
+      <div data-role="content" data-theme="e">
 
         {% if error_msg %}
-        <div style="text-align:center; font-style: italic; color: red;">
+        <div style="text-align:center; font-style: italic; color: crimson;">
           <p>{{ error_msg }}</p>
         </div>
         {% endif %}
@@ -29,18 +31,18 @@
 	    <form method="post" action="/info/shots/add/post/">
               {% csrf_token %}
 	      <label for="vaccine"><strong>Vaccine: </strong></label>
-	      <select id="vaccine" name="vaccine_id" data-theme="b">
+	      <select id="vaccine" name="vaccine_id" data-theme="e">
                 {% for x in vaccines %}
                   <option value="{{ x.vaccine_id }}">{{ x.vaccine_name }}</option>
                 {% endfor %}
               </select>
 
               <label for="vaccine_date"><strong>Date Given:</strong></label>
-	      <input type="date" name="vaccine_date" id="vaccine_date" value="" data-theme="b" />
+	      <input type="date" name="vaccine_date" id="vaccine_date" value="" data-theme="e" />
 	      <br />
-	      <button type="submit" data-theme="b">Add Vaccine</button>
+	      <button type="submit" data-theme="f">ADD VACCINE</button>
 	    </form>
-            <a href="/info/shots/" data-rel="back" data-role="button" data-theme="c">Cancel</a>
+            <a href="#" data-rel="back" data-role="button" data-theme="e">Cancel</a>
 
       </div>
     </div>

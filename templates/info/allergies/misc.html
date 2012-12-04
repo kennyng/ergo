@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
 
     <link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+    <link rel="stylesheet" href="/static/css/themes/ergo-theme.min.css" />
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
@@ -24,10 +25,10 @@
       <script type="text/javascript" src="/static/js/sidebar.js"></script>
 
       <!-- start header -->
-      <div data-role="header" data-theme="c" data-position="fixed">
-      	<a href="#sidebarMiscAllergy" data-rel="popup" data-transition="slidedown" data-position-to="window" data-role="button" data-inline="true" data-icon="grid" data-corners="false" data-iconpos="notext">Menu</a>
-        <h1>ALLERGIES</h1>
-  	<a href="/info/allergies/add/?cat=misc" data-role="button" data-icon="plus" data-iconpos="notext" class="ui-btn-right" data-rel="dialog" data-inline="true" data-transition="flip">Add</a>
+      <div data-role="header" data-theme="e" data-position="fixed">
+      	<a href="#sidebarMiscAllergy" data-rel="popup" data-transition="slidedown" data-position-to="window" data-role="button" data-inline="true" data-icon="grid" data-iconpos="notext">Menu</a>
+        <h1>Allergies</h1>
+  	<a href="/info/allergies/add/?cat=1" data-role="button" data-icon="plus" data-iconpos="left" class="ui-btn-right" data-rel="dialog" data-inline="true" data-transition="flip">ADD</a>
       </div>
       <!-- end header -->
               
@@ -44,52 +45,57 @@
 
         <!-- TODO: status message pop up for new users -->
         {% if no_allergies %}
-        <div style="text-align:center;font-style:italic;color:red;">
-          <h4>To add an allergy to the cabinet, click on the add button at the top right.</h4>
+        <div style="text-align:center;font-style:italic;color:crimson;">
+          <h4>To add an allergy to the cabinet, click on the 'ADD' button at the top right.</h4>
         </div>
         {% endif %}
+        
+
+        <!-- start processing allergies for bookshelf display -->
 		      
-        {% for shelf in cabinet.fullshelf %}
+        {% for shelf in cabinet.three %}
   	<div class="ui-grid-solo">
           <div class="shelf-row">
             <div class="shelf-label0">{{ shelf.0.allergy_name }}</div>
-            <a href="/info/allergies/remove/?cat=misc&id={{ shelf.0.allergy_id }}" data-rel="dialog" data-inline="true" data-transition="flip"><img src="/static/images/allergies/{{ shelf.0.allergy_img }}" class="shelf-item0" /></a>
+            <a href="/info/allergies/remove/?cat=1&id={{ shelf.0.allergy_id }}" data-rel="dialog" data-inline="true" data-transition="flip"><img src="/static/images/allergies/{{ shelf.0.allergy_img }}" class="shelf-item0" /></a>
                   
             <div class="shelf-label1">{{ shelf.1.allergy_name }}</div>
-            <a href="/info/allergies/remove/?cat=misc&id={{ shelf.1.allergy_id }}" data-rel="dialog" data-inline="true" data-transition="flip"><img src="/static/images/allergies/{{ shelf.1.allergy_img }}" class="shelf-item1" /></a>
+            <a href="/info/allergies/remove/?cat=1&id={{ shelf.1.allergy_id }}" data-rel="dialog" data-inline="true" data-transition="flip"><img src="/static/images/allergies/{{ shelf.1.allergy_img }}" class="shelf-item1" /></a>
 
             <div class="shelf-label2">{{ shelf.2.allergy_name }}</div>
-            <a href="/info/allergies/remove/?cat=misc&id={{ shelf.2.allergy_id }}" data-rel="dialog" data-inline="true" data-transition="flip"><img src="/static/images/allergies/{{ shelf.2.allergy_img }}" class="shelf-item2" /></a>
+            <a href="/info/allergies/remove/?cat=1&id={{ shelf.2.allergy_id }}" data-rel="dialog" data-inline="true" data-transition="flip"><img src="/static/images/allergies/{{ shelf.2.allergy_img }}" class="shelf-item2" /></a>
     
           </div>
         </div>
         <div class="ui-grid-solo"><img src="/static/images/shelf.png" class="one-shelf" /></div>
         {% endfor %}
 
-        {% if overflow == 2 %}
+
+        {% if two_allergy %}
         <div class="ui-grid-solo">
           <div class="shelf-row">
-              <div class="shelf-label0">{{ cabinet.overflow.0.0.allergy_name }}</div>
-              <a href="/info/allergies/remove/?cat=misc&id={{ cabinet.overflow.0.0.allergy_id }}" data-rel="dialog" data-inline="true" data-transition="flip"><img src="/static/images/allergies/{{ cabinet.overflow.0.0.allergy_img }}" class="shelf-item0" /></a>
+              <div class="shelf-label0">{{ cabinet.two.0.allergy_name }}</div>
+              <a href="/info/allergies/remove/?cat=1&id={{ cabinet.two.0.allergy_id }}" data-rel="dialog" data-inline="true" data-transition="flip"><img src="/static/images/allergies/{{ cabinet.two.0.allergy_img }}" class="shelf-item0" /></a>
               
-              <div class="shelf-label1">{{ cabinet.overflow.0.1.allergy_name }}</div>
-              <a href="/info/allergies/remove/?cat=misc&id={{ cabinet.overflow.0.1.allergy_id }}" data-rel="dialog" data-inline="true" data-transition="flip"><img src="/static/images/allergies/{{ cabinet.overflow.0.1.allergy_img }}" class="shelf-item1" /></a>
+              <div class="shelf-label1">{{ cabinet.two.1.allergy_name }}</div>
+              <a href="/info/allergies/remove/?cat=1&id={{ cabinet.two.1.allergy_id }}" data-rel="dialog" data-inline="true" data-transition="flip"><img src="/static/images/allergies/{{ cabinet.two.1.allergy_img }}" class="shelf-item1" /></a>
           </div>
         </div>
         <div class="ui-grid-solo"><img src="/static/images/shelf.png" class="one-shelf" /></div>
         {% endif %}
 
 
-        {% if overflow == 1 %}
+        {% if one_allergy %}
         <div class="ui-grid-solo">
           <div class="shelf-row">
-            <div class="shelf-label0">{{ cabinet.overflow.0.0.allergy_name }}</div>
-            <a href="/info/allergies/remove/?cat=misc&id={{ cabinet.overflow.0.0.allergy_id }}" data-rel="dialog" data-inline="true" data-transition="flip"><img src="/static/images/allergies/{{ cabinet.overflow.0.0.allergy_img }}" class="shelf-item0" /></a>
+            <div class="shelf-label0">{{ cabinet.one.0.allergy_name }}</div>
+            <a href="/info/allergies/remove/?cat=1&id={{ cabinet.one.0.allergy_id }}" data-rel="dialog" data-inline="true" data-transition="flip"><img src="/static/images/allergies/{{ cabinet.one.0.allergy_img }}" class="shelf-item0" /></a>
                   
           </div>
         </div>
         <div class="ui-grid-solo"><img src="/static/images/shelf.png" class="one-shelf" /></div>
         {% endif %}
+
             
         {% if extra_shelf == 1 %}
         <div class="ui-grid-solo"><img src="/static/images/shelf.png" class="one-shelf" /></div>
@@ -111,13 +117,14 @@
         <br />
       </div>
 
+		      
+
       <!-- footer -->
-      <div data-role="footer" data-id="samebar" data-position="fixed" data-tap-toggle="false" data-theme="c">
-        <div data-role="navbar" data-grid="b">
+      <div data-role="footer" data-position="fixed" data-tap-toggle="false" data-theme="e">
+        <div data-role="navbar" data-grid="a">
           <ul>
-            <li><a href="/info/allergies/drug/" data-icon="arrow-u">Drug</a></li>
-            <li><a href="/info/allergies/diet/" data-icon="arrow-u">Dietary</a></li>
-            <li><a href="/info/allergies/misc/" data-icon="star" class="ui-btn-active ui-state-persist">Misc.</a></li>
+            <li><a href="/info/allergies/drug/" data-icon="arrow-l" data-transition="slide" data-direction="reverse">Drug</a></li>
+            <li><a href="#allergies-misc" data-icon="star" class="ui-btn-active ui-state-persist">Misc.</a></li>
           </ul>
         </div>
       </div>

@@ -3,11 +3,13 @@
   <head>
     <title>ERGO - Immunizations</title>   
     <meta charset="utf-8">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
 
     <link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+    <link rel="stylesheet" href="/static/css/themes/ergo-theme.min.css" />
+
     <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
   </head>
@@ -19,10 +21,10 @@
       <link rel="stylesheet" type="text/css" href="/static/css/sidebar.css" />
       <script type="text/javascript" src="/static/js/sidebar.js"></script>
 
-      <div data-role="header" data-theme="c" data-position="fixed">
-        <a href="#sidebarVaccine" data-rel="popup" data-transition="slidedown" data-position-to="window" data-role="button" data-inline="true" data-icon="grid" data-corners="false" data-iconpos="notext">Menu</a>
-        <h1>IMMUNIZATIONS</h1>
-	    <a href="/info/shots/add/" data-rel="dialog" data-transition="flip" data-role="button" data-icon="add" data-iconpos="notext" data-corners="false">Add</a>
+      <div data-role="header" data-theme="e" data-position="fixed">
+        <a href="#sidebarVaccine" data-rel="popup" data-transition="slidedown" data-position-to="window" data-role="button" data-inline="true" data-icon="grid" data-iconpos="notext">Menu</a>
+        <h1>Immunizations</h1>
+	    <a href="/info/shots/add/" data-rel="dialog" data-transition="flip" data-role="button" data-icon="add" data-iconpos="left">ADD</a>
       </div>
       
       <div data-role="content">
@@ -35,7 +37,7 @@
         <!-- end Sidebar -->
 
 
-	    <ul data-role="listview" data-filter="true" data-filter-placeholder="Search by Vaccine or Date..." data-filter-theme="d" data-theme="d" data-divider-theme="d">
+	    <ul data-role="listview" data-filter="true" data-filter-placeholder="Search by Vaccine or Date..." data-filter-theme="d" data-theme="e" data-divider-theme="f">
 	      <li data-role="list-divider"> 
 		<div class="ui-grid-a">
 		  <div class="ui-block-a">DATE GIVEN</div>
@@ -56,7 +58,7 @@
         <!-- TODO: status message popup/dialog box for new users-->
         {% if no_vaccines %}
         <div style="text-align:center; font-style: italic; color: crimson;">
-          <h4>No Immunization Record Available. To add vaccines, click the add button at the top right.</h4>
+          <h4>No Immunization Record Available. To add vaccines, click the 'ADD' button at the top right.</h4>
         </div>
         {% endif %}
 

@@ -8,29 +8,30 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
     
 	<link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
-    
+        <link rel="stylesheet" href="/static/css/themes/ergo-theme.min.css" />        
+
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
   </head>
 
   <body>
     <div data-role="page" id="profile-edit">
-        <div data-role="header" data-theme="c" data-position="fixed">
+        <div data-role="header" data-theme="e" data-position="fixed">
           <h1>Edit Profile</h1>
-          <a href="/profile/" data-role="button" data-icon="delete" data-iconpos="left" class="ui-btn-right" data-corners="false">Cancel</a>
+          <a href="/profile/" data-role="button" data-rel="back" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
         </div>
       
         <div data-role="content">
         
           <!-- TODO: error message popup/dialog box -->
           {% if error_msg %}
-          <div style="text-align:center; font-style: italic; color: red;">
+          <div style="text-align:center; font-style: italic; color: crimson;">
             <h4>{{ error_msg }}</h4>
           </div>
           {% endif %}
 
           <div style="text-align:center;">
-            <a href="#upload" data-role="button" data-icon="arrow-r" data-iconpos="right" data-corners="false">
+            <a href="#upload" data-role="button" data-icon="arrow-r" data-iconpos="right">
               UPLOAD PROFILE PICTURE
             </a>
           </div>
@@ -39,8 +40,8 @@
           <form method="post" action="/profile/edit/post/">
             {% csrf_token %}
             
-            <ul data-role="listview" data-inset="true">
-              <li data-role="list-divider" data-theme="a"><h1>ID</h1></li>
+            <ul data-role="listview" data-inset="true" data-divider-theme="f">
+              <li data-role="list-divider">IDENTIFICATION</li>
               <li>
                 <div data-role="fieldcontain">
 	              <label for="firstname">First Name:</label>
@@ -72,10 +73,40 @@
                   </fieldset>
                 </div>
               </li>
+
+              <li>
+                <div data-role="fieldcontain">
+                  <label for="blood_type">Blood Type:</label>
+                  <select id="blook_type" name="blood_type" size="1" data-theme="e">
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                  </select>
+                </div>
+              </li>
+
+              <li>
+                <div data-role="fieldcontain">
+                  <fieldset data-role="controlgroup">
+                    <legend>Organ Donor: </legend>
+                    <label for="no">No, I am not registered.</label>
+                    <input type="radio" name="organ_donor" id="no" value="0" checked="checked" />
+                    <label for="yes">Yes, I am registered.</label>
+                    <input type="radio" name="organ_donor" id="yes" value="1" />            
+                  </fieldset>
+                </div>
+              </li>
+
             </ul>
+
  
-            <ul data-role="listview" data-inset="true">
-              <li data-role="list-divider" data-theme="a">CONTACT</li>
+            <ul data-role="listview" data-inset="true" data-divider-theme="f">
+              <li data-role="list-divider">CONTACT</li>
               <li>
                 <div data-role="fieldcontain">
 	              <label for="email">E-Mail:</label>
@@ -90,8 +121,8 @@
               </li>
             </ul>
             
-            <ul data-role="listview" data-inset="true">
-              <li data-role="list-divider" data-theme="a" role="heading">ADDRESS</li>
+            <ul data-role="listview" data-inset="true" data-divider-theme="f">
+              <li data-role="list-divider" role="heading">ADDRESS</li>
               <li>
                 <div data-role="fieldcontain">
 	              <label for="address">Address:</label>
@@ -102,9 +133,64 @@
 	              <input type="text" name="city" id="city" value="{{ profile.city }}" data-mini="true" />
 		        </div>
 	    	    <div data-role="fieldcontain">
-	              <label for="state">State:</label>
-	              <input type="text" name="state" id="state" value="{{ profile.state }}" data-mini="true" />
-		        </div>
+	            
+                      	    	<label for="state">State:</label>
+                <select id="state" name="state" size="1" data-theme="e">
+                  <option value="AL">Alabama</option>
+                  <option value="AK">Alaska</option>
+                  <option value="AZ">Arizona</option>
+                  <option value="AR">Arkansas</option>
+                  <option value="CA">California</option>
+                  <option value="CO">Colorado</option>
+                  <option value="CT">Connecticut</option>
+                  <option value="DE">Delaware</option>
+                  <option value="DC">Dist of Columbia</option>
+                  <option value="FL">Florida</option>
+                  <option value="GA">Georgia</option>
+                  <option value="HI">Hawaii</option>
+                  <option value="ID">Idaho</option>
+                  <option value="IL">Illinois</option>
+                  <option value="IN">Indiana</option>
+                  <option value="IA">Iowa</option>
+                  <option value="KS">Kansas</option>
+                  <option value="KY">Kentucky</option>
+                  <option value="LA">Louisiana</option>
+                  <option value="ME">Maine</option>
+                  <option value="MD">Maryland</option>
+                  <option value="MA">Massachusetts</option>
+                  <option value="MI">Michigan</option>
+                  <option value="MN">Minnesota</option>
+                  <option value="MS">Mississippi</option>
+                  <option value="MO">Missouri</option>
+                  <option value="MT">Montana</option>
+                  <option value="NE">Nebraska</option>
+                  <option value="NV">Nevada</option>
+                  <option value="NH">New Hampshire</option>
+                  <option value="NJ">New Jersey</option>
+                  <option value="NM">New Mexico</option>
+                  <option value="NY">New York</option>
+                  <option value="NC">North Carolina</option>
+                  <option value="ND">North Dakota</option>
+                  <option value="OH">Ohio</option>
+                  <option value="OK">Oklahoma</option>
+                  <option value="OR">Oregon</option>
+                  <option value="PA">Pennsylvania</option>
+                  <option value="RI">Rhode Island</option>
+                  <option value="SC">South Carolina</option>
+                  <option value="SD">South Dakota</option>
+                  <option value="TN">Tennessee</option>
+                  <option value="TX">Texas</option>
+                  <option value="UT">Utah</option>
+                  <option value="VT">Vermont</option>
+                  <option value="VA">Virginia</option>
+                  <option value="WA">Washington</option>
+                  <option value="WV">West Virginia</option>
+                  <option value="WI">Wisconsin</option>
+                  <option value="WY">Wyoming</option>
+                </select>
+
+  
+		    </div>
                 <div data-role="fieldcontain">
 	              <label for="zipcode">Zipcode:</label>
 	              <input type="text" name="zipcode" id="zipcode" value="{{ profile.zipcode }}" data-mini="true" />
@@ -112,7 +198,7 @@
               </li>
             </ul>
             
-            <input type="submit" value="UPDATE" />
+            <button type="submit" value="UPDATE" data-theme="f"></button>
           </form>
         </div>
     </div>

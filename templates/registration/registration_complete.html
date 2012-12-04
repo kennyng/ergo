@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ERGO | Register</title>
+    <title>ERGO | Registration</title>
     
-    <meta charset="utf-8">
-    
-	<meta name="apple-mobile-web-app-capable" content="yes">
- 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <meta charset="utf-8">    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
 
-    <link rel="stylesheet" href="/static/style.css" type="text/css" />
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+    <link rel="stylesheet" href="/static/css/themes/ergo-theme.min.css" />
 
     <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
   </head>
 
   <body>
-    <div data-role="page" id="login">
-      <div data-role="header" data-theme="c">
-        <h1>Registration Complete</h1>
-        <a href="/accounts/login/" id="login" class="ui-btn-right">Login</a>
+    <div data-role="page" id="register-complete">
+      <div data-role="header" data-theme="e">
+        <h1>Registration</h1>
+        <a href="/accounts/login/" data-role="button" class="ui-btn-right" style="color:crimson">Login</a>
       </div>
 
-      <div data-role="content">
-        <h1>Please check your email.</h1>
+      <div data-role="content" style="text-align:center">
+        <h2 style="color:crimson">Thank you for registering!</h2>
+        <h3>Please check your email.</h3>
         <p>An activation link has been sent to the email address you supplied, along with instructions for activating your account.</p>
+          <p style="text-decoration:italic">*E-Mail may be in spam folder.</p>
       </div>
     </div>
   </body>

@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
 
     <link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+    <link rel="stylesheet" href="/static/css/themes/ergo-theme.min.css" />
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
@@ -24,10 +25,10 @@
       <script type="text/javascript" src="/static/js/sidebar.js"></script>
 
       <!-- start header -->
-      <div data-role="header" data-theme="c" data-position="fixed">
-      	<a href="#sidebarPrescription" data-rel="popup" data-transition="slidedown" data-position-to="window" data-role="button" data-inline="true" data-icon="grid" data-corners="false" data-iconpos="notext">Menu</a>
-        <h1>DRUGS</h1>
-  	<a href="/info/drugs/add/?cat=prescription" data-role="button" data-icon="plus" data-iconpos="notext" class="ui-btn-right" data-rel="dialog" data-inline="true" data-transition="flip">Add</a>
+      <div data-role="header" data-theme="e" data-position="fixed">
+      	<a href="#sidebarPrescription" data-rel="popup" data-transition="slidedown" data-position-to="window" data-role="button" data-inline="true" data-icon="grid" data-iconpos="notext">Menu</a>
+        <h1>Drugs</h1>
+  	<a href="/info/drugs/add/?cat=0" data-role="button" data-icon="plus" data-iconpos="left" class="ui-btn-right" data-rel="dialog" data-inline="true" data-transition="flip">ADD</a>
       </div>
               
       <!-- start content -->
@@ -42,52 +43,56 @@
 		 
         <!-- TODO: status message pop up for new users -->
         {% if no_drugs %}
-        <div style="text-align:center;font-style:italic;color:red;">
-          <h4>To add a drug to the cabinet, click on the add button at the top right.</h4>
+        <div style="text-align:center;font-style:italic;color:crimson;">
+          <h4>To add a drug to the cabinet, click on the 'ADD' button at the top right.</h4>
         </div>
         {% endif %}
 
-        {% for shelf in cabinet.fullshelf %}
+        <!-- start processing drugs for bookshelf display -->
+        		      
+        {% for shelf in cabinet.three %}
   	<div class="ui-grid-solo">
           <div class="shelf-row">
             <div class="shelf-label0">{{ shelf.0.drug_name }}</div>
-            <a href="/info/drugs/remove/?cat=prescription&id={{ shelf.0.drug_id }}" data-rel="dialog" data-inline="true" data-transition="flip"><img src="/static/images/drugs/{{ shelf.0.drug_img }}" class="shelf-item0" /></a>
+            <a href="/info/drugs/remove/?cat=0&id={{ shelf.0.drug_id }}" data-rel="dialog" data-inline="true" data-transition="flip"><img src="/static/images/drugs/{{ shelf.0.drug_img }}" class="shelf-item0" /></a>
                   
             <div class="shelf-label1">{{ shelf.1.drug_name }}</div>
-            <a href="/info/drugs/remove/?cat=prescription&id={{ shelf.1.drug_id }}" data-rel="dialog" data-inline="true" data-transition="flip"><img src="/static/images/drugs/{{ shelf.1.drug_img }}" class="shelf-item1" /></a>
+            <a href="/info/drugs/remove/?cat=0&id={{ shelf.1.drug_id }}" data-rel="dialog" data-inline="true" data-transition="flip"><img src="/static/images/drugs/{{ shelf.1.drug_img }}" class="shelf-item1" /></a>
 
             <div class="shelf-label2">{{ shelf.2.drug_name }}</div>
-            <a href="/info/drugs/remove/?cat=prescription&id={{ shelf.2.drug_id }}" data-rel="dialog" data-inline="true" data-transition="flip"><img src="/static/images/drugs/{{ shelf.2.drug_img }}" class="shelf-item2" /></a>
+            <a href="/info/drugs/remove/?cat=0&id={{ shelf.2.drug_id }}" data-rel="dialog" data-inline="true" data-transition="flip"><img src="/static/images/drugs/{{ shelf.2.drug_img }}" class="shelf-item2" /></a>
     
           </div>
         </div>
         <div class="ui-grid-solo"><img src="/static/images/shelf.png" class="one-shelf" /></div>
         {% endfor %}
 
-        {% if overflow == 2 %}
+
+        {% if two_drug %}
         <div class="ui-grid-solo">
           <div class="shelf-row">
-              <div class="shelf-label0">{{ cabinet.overflow.0.0.drug_name }}</div>
-              <a href="/info/drugs/remove/?cat=prescription&id={{ cabinet.overflow.0.0.drug_id }}" data-rel="dialog" data-inline="true" data-transition="flip"><img src="/static/images/drugs/{{ cabinet.overflow.0.0.drug_img }}" class="shelf-item0" /></a>
+              <div class="shelf-label0">{{ cabinet.two.0.drug_name }}</div>
+              <a href="/info/drugs/remove/?cat=0&id={{ cabinet.two.0.drug_id }}" data-rel="dialog" data-inline="true" data-transition="flip"><img src="/static/images/drugs/{{ cabinet.two.0.drug_img }}" class="shelf-item0" /></a>
               
-              <div class="shelf-label1">{{ cabinet.overflow.0.1.drug_name }}</div>
-              <a href="/info/drugs/remove/?cat=prescription&id={{ cabinet.overflow.0.1.drug_id }}" data-rel="dialog" data-inline="true" data-transition="flip"><img src="/static/images/drugs/{{ cabinet.overflow.0.1.drug_img }}" class="shelf-item1" /></a>
+              <div class="shelf-label1">{{ cabinet.two.1.drug_name }}</div>
+              <a href="/info/drugs/remove/?cat=0&id={{ cabinet.two.1.drug_id }}" data-rel="dialog" data-inline="true" data-transition="flip"><img src="/static/images/drugs/{{ cabinet.two.1.drug_img }}" class="shelf-item1" /></a>
           </div>
         </div>
         <div class="ui-grid-solo"><img src="/static/images/shelf.png" class="one-shelf" /></div>
         {% endif %}
 
 
-        {% if overflow == 1 %}
+        {% if one_drug %}
         <div class="ui-grid-solo">
           <div class="shelf-row">
-            <div class="shelf-label0">{{ cabinet.overflow.0.0.drug_name }}</div>
-            <a href="/info/drugs/remove/?cat=prescription&id={{ cabinet.overflow.0.0.drug_id }}" data-rel="dialog" data-inline="true" data-transition="flip"><img src="/static/images/drugs/{{ cabinet.overflow.0.0.drug_img }}" class="shelf-item0" /></a>
+            <div class="shelf-label0">{{ cabinet.one.0.drug_name }}</div>
+            <a href="/info/drugs/remove/?cat=0&id={{ cabinet.one.0.drug_id }}" data-rel="dialog" data-inline="true" data-transition="flip"><img src="/static/images/drugs/{{ cabinet.one.0.drug_img }}" class="shelf-item0" /></a>
                   
           </div>
         </div>
         <div class="ui-grid-solo"><img src="/static/images/shelf.png" class="one-shelf" /></div>
         {% endif %}
+
             
         {% if extra_shelf == 1 %}
         <div class="ui-grid-solo"><img src="/static/images/shelf.png" class="one-shelf" /></div>
@@ -109,16 +114,18 @@
         <br />
       </div>
 
-      <!-- footer -->
-      <div data-role="footer" data-id="samebar" data-position="fixed" data-tap-toggle="false" data-theme="c">
-        <div data-role="navbar" data-grid="b">
-          <ul>
-            <li><a href="#drugs-prescription" data-icon="star" class="ui-btn-active ui-state-persist">Prescription</a></li>
-            <li><a href="/info/drugs/otc/" data-icon="arrow-r" data-transition="slide">OTC</a></li>
-            <li><a href="/info/drugs/misc/" data-icon="arrow-r" data-transition="slide">Misc.</a></li>
-          </ul>
+
+
+        <!-- footer -->
+        <div data-role="footer" data-position="fixed" data-tap-toggle="false" data-theme="e">
+          <div data-role="navbar" data-grid="b">
+            <ul>
+              <li><a href="#drugs-prescription" data-icon="star" class="ui-btn-active ui-state-persist">Prescription</a></li>
+              <li><a href="/info/drugs/otc/" data-icon="arrow-r" data-transition="slide">OTC</a></li>
+              <li><a href="/info/drugs/misc/" data-icon="arrow-r" data-transition="slide">Misc.</a></li>
+            </ul>
+          </div>
         </div>
-      </div>
       
     </div>
   </body>

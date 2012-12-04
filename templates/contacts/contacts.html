@@ -8,82 +8,83 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
     
 	<link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+        <link rel="stylesheet" href="/static/css/themes/ergo-theme.min.css" />
 
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
   </head>
 
   <body>
-	<div data-role="page" id="contacts">
+    <div data-role="page" id="contacts">
 
       <!-- style for checkboxes and alert/edit buttons -->
       <link rel="stylesheet" type="text/css" href="/static/css/contacts.css" />
 
-        <div data-role="header" data-theme="c" data-position="fixed">
-            <a href="/" data-role="button" data-icon="grid" data-iconpos="notext"></a>
-                <h2>CONTACTS</h2>
-            <a href="/contacts/add/" data-role="button" data-icon="add" data-iconpos="notext"></a>
+        <div data-role="header" data-theme="e" data-position="fixed">
+            <a href="/" data-role="button" data-icon="home" data-iconpos="notext"></a>
+                <h1>Contacts</h1>
+            <a href="/contacts/add/" data-role="button" data-icon="add" data-iconpos="left">ADD</a>
         </div>    
         
   	<div data-role="content">
-        
-        <div id="alert-btn">
-            <a href="#" data-role="button"><span style="font-size: 40px;">ALERT!</span></a>
+          
+          <div id="alert-btn">
+            <a href="#" data-role="button" data-theme="f"><span style="font-size: 40px;">ALERT!</span></a>
             <br />
-        </div>    
+          </div>    
         
-        <div data-role="collapsible-set" data-theme="b" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" >
+          <div data-role="collapsible-set" data-theme="e" data-content-theme="e" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" >
 
-        <!-- TODO: status message popup/dialog box for new users-->
-        {% if no_contacts %}
-        <div style="text-align:center; font-style: italic; color: red;">
-          <h4>No Contacts Available. To add contacts, click the add button on the top right.</h4>
-        </div>
-        {% endif %}
+            <!-- TODO: status message popup/dialog box for new users-->
+            {% if no_contacts %}
+            <div style="text-align:center; font-style: italic; color: crimson;">
+              <h4>No Contacts Available. To add contacts, click the 'ADD' button on the top right.</h4>
+            </div>
+            {% endif %}
 
 
-	  {% for i in contacts %}
+	    {% for i in contacts %}
             <div data-role="collapsible">
-	            <h1>{{ i.firstname }} {{ i.lastname }}</h1>
-	                <ul data-role="listview" data-theme="d" data-divider-theme="d">
-						<li data-role="list-divider">
-                            <div>Contact Information<a href="/contacts/edit?id={{ i.contact_id }}"><div style="float:right;" class="ui-btn-up-c  ui-btn-corner-false edit-btn">EDIT</div></a></div>
-						</li>
-						<li><h5>Relationship: </h5><h3>{{ i.relationship }}</h3></li>
-						<li><h5>E-Mail: </h5><h3>{{ i.email }}</h3></li>
-						<li><h5>Mobile Number: </h5><h3>{{ i.mobile }}</h3></li>
-						<li><h5>Location: </h5><h3>{{ i.city }}, {{ i.state }}</h3></li>
-						<li><h5>Alert Options: </h5>
-						    <div class="ui-grid-b">
-						        <div class="ui-block-a">
-                                  {% if i.alert_email %}
-						            <span class="check-icon-on">E-Mail</span>
-                                  {% else %}
-                                    <span class="check-icon-off">E-Mail</span>
-                                  {% endif %}
-						        </div>
-						        <div class="ui-block-b">
-                                  {% if i.alert_text %}
-						            <span class="check-icon-on">Text</span>
-                                  {% else %}
-                                    <span class="check-icon-off">Text</span>
-                                  {% endif %}
-						        </div>
-						        <div class="ui-block-c">
-                                  {% if i.alert_fb %}
-						            <span class="check-icon-on">Facebook</span>
-                                  {% else %}
-                                    <span class="check-icon-off">Facebook</span>
-                                  {% endif %}
-						        </div>
-						    </div>
-						</li>
-					</ul>
-	        </div>
+	      <h1>{{ i.firstname }} {{ i.lastname }}</h1>
+	      <ul data-role="listview" data-theme="e" data-divider-theme="d">
+	        <li data-role="list-divider">
+                  <div>Contact Information<a href="/contacts/edit?id={{ i.contact_id }}"><div style="float:right;" class="ui-btn-up-f edit-btn">EDIT</div></a></div>
+	        </li>
+	        <li><h5>Relationship: </h5><h3 class="info-text">{{ i.relationship }}</h3></li>
+	        <li><h5>E-Mail: </h5><h3 class="info-text">{{ i.email }}</h3></li>
+	        <li><h5>Mobile Number: </h5><h3 class="info-text"><a href="tel:{{ i.mobile }}" style="text-decoration:none">{{ i.mobile }}</a></h3></li>
+	        <li><h5>Location: </h5><h3 class="info-text">{{ i.city }}, {{ i.state }}</h3></li>
+	        <li><h5>Alert Options: </h5>
+	          <div class="ui-grid-b">
+		    <div class="ui-block-a">
+                      {% if i.alert_email %}
+		      <span class="check-icon-on info-text">E-Mail</span>
+                      {% else %}
+                      <span class="check-icon-off">E-Mail</span>
+                      {% endif %}
+		    </div>
+		    <div class="ui-block-b">
+                      {% if i.alert_text %}
+		      <span class="check-icon-on info-text">Text</span>
+                      {% else %}
+                      <span class="check-icon-off">Text</span>
+                      {% endif %}
+		    </div>
+		    <div class="ui-block-c">
+                      {% if i.alert_fb %}
+		      <span class="check-icon-on info-text">Facebook</span>
+                      {% else %}
+                      <span class="check-icon-off">Facebook</span>
+                      {% endif %}
+		    </div>
+	          </div>
+	        </li>
+	      </ul>
+	    </div>
 	    {% endfor %}
+          </div>
         </div>
     </div>
-</div>
     
   </body>
 </html>

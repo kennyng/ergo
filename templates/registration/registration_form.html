@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ERGO | Register</title>
+    <title>ERGO | Registration</title>
     
-    <meta charset="utf-8">
-    
-	<meta name="apple-mobile-web-app-capable" content="yes">
- 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <meta charset="utf-8">    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
 
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+    <link rel="stylesheet" href="/static/css/themes/ergo-theme.min.css" />
 
     <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
@@ -17,13 +17,14 @@
 
   <body>
     <div data-role="page" id="register">
-      <div data-role="header">
-        <h1>Register</h1>
+      <div data-role="header" data-theme="e">
+        <h1>Registration</h1>
+        <a href="/accounts/login/" data-rel="back" data-role="button" class="ui-btn-right" style="color:crimson">LOGIN</a>
       </div>
 
-      <div data-role="content">
+      <div data-role="content" data-theme="e">
         {% if form.errors %}
-        <h3 class="errors">Please correct the errors below: {{ form.non_field_errors }}</h3>
+        <h3 class="errors" style="color:crimson">*Please correct the errors below: {{ form.non_field_errors }}</h3>
         {% endif %}
 
         <form method="post" action="">
@@ -56,7 +57,7 @@
             {% endif %}
             {{ form.password2 }}
           </p>
-          <p class="submit"><input type="submit" value="Register &rarr;"></p>
+          <p class="submit"><button type="submit" value="REGISTER &rarr;" data-theme="f"></button></p>
         </form>
         
       </div>
