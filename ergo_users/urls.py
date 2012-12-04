@@ -5,4 +5,5 @@ urlpatterns = patterns('',
     url(r'^$', views.profile_index),
     url(r'^edit/$', views.profile_form),
     url(r'^edit/post/$', views.update_profile),
+    url(r'^offline/$', views.offline),
 )

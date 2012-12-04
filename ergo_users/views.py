@@ -9,9 +9,9 @@ from ergo_users.models import UserProfile
 
 def profile_index(request):
     try:
-        profile = UserProfile.objects.filter(user=request.user)[0]
+        profile = UserProfile.objects.get(user=request.user)
         new_user = False
-    except IndexError:
+    except UserProfile.DoesNotExist:
         profile = UserProfile()
         new_user = True
         
@@ -20,8 +20,8 @@ def profile_index(request):
 
 def profile_form(request):
     try:
-        profile = UserProfile.objects.filter(user=request.user)[0]
-    except IndexError:
+        profile = UserProfile.objects.get(user=request.user)
+    except UserProfile.DoesNotExist:
         profile = UserProfile()
 
     return render_to_response('users/profile-edit-form.html', {'profile': profile}, RequestContext(request))
@@ -34,13 +34,21 @@ def update_profile(request):
         lastname = request.POST.get('lastname')
         dob = request.POST.get('dob')
         sex = request.POST.get('sex')
+        blood_type = request.POST.get('blood_type')
+        organ_donor = False
+        donor = request.POST.get('organ_donor')
+        if donor == '1':
+            organ_donor = True
+        
         email = request.POST.get('email')
         phone = request.POST.get('phone')
+        phone = phone.replace('-', '').replace('(', '').replace(')', '').replace(' ', '')
+        
         address = request.POST.get('address')
         city = request.POST.get('city')
         state = request.POST.get('state')
         zipcode = request.POST.get('zipcode')
-    
+        
         #post_list = [firstname, lastname, dob, sex, email, phone, address, city, state, zipcode]
         #return render_to_response('test.html', {'post_list': post_list}, RequestContext(request))
 
@@ -48,11 +56,13 @@ def update_profile(request):
             request.user.email = email
             request.user.save()
             try:
-                profile = UserProfile.objects.filter(user=request.user)[0]
+                profile = UserProfile.objects.get(user=request.user)
                 profile.firstname = firstname
                 profile.lastname = lastname
                 profile.dob = dob
                 profile.sex = sex
+                profile.blood_type = blood_type
+                profile.organ_donor = organ_donor
                 profile.phone = phone
                 profile.address = address
                 profile.city = city
@@ -60,8 +70,8 @@ def update_profile(request):
                 profile.zipcode = zipcode
                 profile.save()
                 
-            except IndexError:
-                new_profile = UserProfile(firstname=firstname, lastname=lastname, dob=dob, sex=sex, phone=phone, address=address, city=city, state=state, zipcode=zipcode, user=request.user)
+            except UserProfile.DoesNotExist:
+                new_profile = UserProfile(firstname=firstname, lastname=lastname, dob=dob, sex=sex, blood_type=blood_type, organ_donor=organ_donor, phone=phone, address=address, city=city, state=state, zipcode=zipcode, user=request.user)
                 new_profile.save()
                 
             return HttpResponseRedirect(reverse('ergo_users.views.profile_index'))
@@ -71,4 +81,13 @@ def update_profile(request):
     except:
         return render(request, 'users/profile-edit-form.html', {'error_msg': 'We are unable to update your profile at this time. Please try again.',})
 
-   
+
+def offline(request):
+    try:
+        profile = UserProfile.objects.get(user=request.user)
+        new_user = False
+    except UserProfile.DoesNotExist:
+        profile = UserProfile()
+        new_user = True
+        
+    return render_to_response('users/offline.html', {'offline': profile, 'new_user': new_user}, RequestContext(request))
