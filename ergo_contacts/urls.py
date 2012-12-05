@@ -8,4 +8,8 @@ urlpatterns = patterns('',
     url(r'^edit/$', views.contacts_edit_form),
     url(r'^edit/update_post/$', views.update_contact),
     url(r'^edit/remove_post/$', views.remove_contact),
+
+    # send alerts
+    url(r'^alert/$', views.alert_dialog),
+    url(r'^alert/send/$', views.send_alert),
 )

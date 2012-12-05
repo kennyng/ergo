@@ -5,7 +5,15 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
 from ergo_contacts.models import Contact
+from ergo_users.models import UserProfile
+from django.core.mail import send_mass_mail
+import logging
+try:
+    from email_setting import *
+except ImportError:
+    pass
 
+    
 
 def contacts_index(request):
     contacts = Contact.objects.filter(user=request.user)
@@ -124,4 +132,88 @@ def remove_contact(request):
         return HttpResponseRedirect(reverse('ergo_contacts.views.contacts_index'))
     except:
         return render(request, 'contacts/contact-edit-form.html', {'error_msg': 'Error encountered while removing contact. Please try again.',})
+
+
+def alert_dialog(request):
+    return render_to_response('contacts/alert-dialog.html', RequestContext(request))
+
+
+@csrf_protect
+def send_alert(request):
+    try: 
+        contacts = Contact.objects.filter(user=request.user)
+
+        if not contacts:
+            return render_to_response('contacts/alert-status.html', {'status_msg': 'There are no emergency contacts available. Please add your emergency contacts.'}, RequestContext(request))
+        else:
+            try:
+                location = request.POST.get('location', '')
+                user = UserProfile.objects.get(user=request.user)
+                from_email = request.user.email
+                
+                msg_list = _build_message_list(user, contacts, location, from_email)
+
+                if len(msg_list) > 0:
+                    datatuple = tuple(msg_list)
+                    # send alert messages
+                    send_mass_mail(datatuple, fail_silently=False, auth_user=ERGO_ALERT_AUTH_USER, auth_password=ERGO_ALERT_AUTH_PASSWORD)
+                    
+                else:
+                    return render_to_response('contacts/alert-status.html', {'status_msg': 'Emergency contact alert options have not been specified. Please edit your emergency contacts.'}, RequestContext(request))
+
+                # return success status
+                return render_to_response('contacts/alert-status.html', {'status_msg': 'Emergency contacts have been successfully notified.'}, RequestContext(request))
+                    
+            except UserProfile.DoesNotExist:
+                # return missing profile
+                return render_to_response('contacts/alert-status.html', {'status_msg': 'ERROR: Missing user profile.'}, RequestContext(request))
+
+    except:
+        return render_to_response('contacts/alert-status.html', {'status_msg': 'Error encountered while alerting emergency contacts. Please try again.'}, RequestContext(request))
+
+        
+def _build_message_list(user, contacts, location, from_email):
+    subject = 'Medical Emergency Alert Concerning: %s %s' %(user.firstname, user.lastname)
+    msg_list = []
+            
+    for i in contacts:
+        message = 'Dear %s %s, \n\nYour %s, %s %s, has been involved in a medical emergency. \n%s is currently being treated at %s. \n\nThis emergency alert has been brought to you by ERGO <http://ergo.kennyng.org>.\n' %(i.firstname, i.lastname, i.relationship, user.firstname, user.lastname, user.firstname, location)
+
+        print 'MESSAGE: ' + message
+        
+        recipient_list = _get_recipient_list(i)
+        print 'RECIPIENTS: ' + str(recipient_list)
+
+        if len(recipient_list) > 0:
+            msg = (subject, message, from_email, recipient_list)
+
+            print 'TUPLE: ' + str(msg) 
+            
+            msg_list.append(msg)
+
+    return msg_list
+
+
+def _get_recipient_list(contact):
+    _GATEWAYS = {
+        1: '@txt.att.net',
+        2: '@vtext.com',
+        3: '@tmomail.net',
+        4: '@messaging.sprintpcs.com',
+        5: '@vmobl.com',
+    }
     
+    email_addr, text_addr, fb_addr = None, None, None
+    recipient_list = []
+    if contact.alert_email:
+        recipient_list.append(contact.email)
+    if contact.alert_text:
+        gateway = _GATEWAYS.get(contact.mobile_carrier, None)
+        if gateway:
+            text_addr = contact.mobile + gateway
+            recipient_list.append(text_addr)
+    if contact.alert_fb:
+        fb_addr = contact.facebook + '@facebook.com'
+        recipient_list.append(fb_addr)
+
+    return recipient_list
