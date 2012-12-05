@@ -2,6 +2,21 @@ from django.db import models
 from django.contrib.auth.models import User
 from django_extensions.db.fields import UUIDField
 
+import os.path
+
+
+def get_image_path(instance, filename):
+    return os.path.join('users', str(instance.id), filename)
+
+def get_thumbnail_path(instance, filename):
+    return os.path.join('users', str(instance.id), 'thumbnail', filename)
+
+
+class ProfileImage(models.Model):
+    user = models.ForeignKey(User, unique=True)
+    image = models.ImageField(upload_to=get_image_path, blank=True, null=True)
+    thumbnail = models.ImageField(upload_to=get_thumbnail_path, blank=True, null=True)
+
 
 class UserProfile(models.Model):
     profile_id = models.AutoField(primary_key=True)
@@ -17,5 +32,4 @@ class UserProfile(models.Model):
     city = models.CharField(max_length=60)
     state = models.CharField(max_length=2)
     zipcode = models.CharField(max_length=10)
-    profile_img = models.ImageField(upload_to='profile_pics/%Y/%m/%d')
-    user = models.ForeignKey(User)
+    user = models.OneToOneField(User)

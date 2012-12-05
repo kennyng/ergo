@@ -6,4 +6,5 @@ urlpatterns = patterns('',
     url(r'^edit/$', views.profile_form),
     url(r'^edit/post/$', views.update_profile),
     url(r'^offline/$', views.offline),
+    url(r'^upload-image/$', views.upload_profile_image),
 )

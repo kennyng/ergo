@@ -2,15 +2,15 @@
 <html>
   <head>
     <title>ERGO - Profile</title>
-	<meta charset="utf-8">
-	<meta name="apple-mobile-web-app-capable" content="yes">
- 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
     
-	<link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
-        <link rel="stylesheet" href="/static/css/themes/ergo-theme.min.css" />    
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-	<script type="text/javascript" src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+    <link rel="stylesheet" href="/static/css/themes/ergo-theme.min.css" />    
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
   </head>
 
   <body>
@@ -31,9 +31,20 @@
         </div>
         {% endif %}
 
-         <div style="text-align:center;">
-            <img src="/static/images/generic_profile_img.png" style="width:150px;height:150px;border:1px solid black;"/>
-         </div>
+
+        {% if profile_img %}
+        <center>
+          <div style="border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; border: 2px solid #DC143C; width:200px; height:200px; background-color:#383838;">
+          <img src="/media/{{ profile_img.thumbnail }}" />
+          </div>
+        </center>
+        {% else %}
+        <center>
+          <div style="border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; border: 2px solid #DC143C; width:200px; height:200px; background-color:#383838;">
+           <img src="/static/images/generic_profile_img.png" width="200px" height="200px" />
+          </div>
+        </center>
+        {% endif %}
 
          <ul data-role="listview" data-inset="true" data-divider-theme="f">
             <li data-role="list-divider">

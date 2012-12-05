@@ -3,19 +3,26 @@ from django.template import RequestContext
 from django.views.decorators.csrf import csrf_protect
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.core.files.base import ContentFile
+from django.core.files import File
 
-from ergo_users.models import UserProfile
+from PIL import Image
+import os.path
+
+from ergo_users.models import UserProfile, ProfileImage
+from forms import ImageUploadForm
 
 
 def profile_index(request):
     try:
         profile = UserProfile.objects.get(user=request.user)
+        profile_img = ProfileImage.objects.filter(user=request.user)[0]
         new_user = False
     except UserProfile.DoesNotExist:
         profile = UserProfile()
         new_user = True
         
-    return render_to_response('users/profile.html', {'profile': profile, 'new_user': new_user}, RequestContext(request))
+    return render_to_response('users/profile.html', {'profile': profile, 'profile_img': profile_img, 'new_user': new_user}, RequestContext(request))
 
 
 def profile_form(request):
@@ -91,3 +98,53 @@ def offline(request):
         new_user = True
         
     return render_to_response('users/offline.html', {'offline': profile, 'new_user': new_user}, RequestContext(request))
+
+
+@csrf_protect
+def upload_profile_image(request):
+    if request.method == 'POST':
+        form = ImageUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            # Save original image to DB and file system to get real path
+            uploaded_img = request.FILES.get('image')
+            file_content = ContentFile(uploaded_img.read())
+            profile_img, created = ProfileImage.objects.get_or_create(user=request.user)
+            profile_img.image.save(str(profile_img.id) + '.jpg', file_content)
+            profile_img.save()
+
+            # Resize image and save to thumbnail field
+            handle_uploaded_image(profile_img)
+
+            # redirect to image upload form with preview after POST
+            return HttpResponseRedirect(reverse('ergo_users.views.upload_profile_image'))
+    else:
+        form = ImageUploadForm() # empty form
+
+    # Load image preview for upload image page
+    try:
+        profile_img = ProfileImage.objects.get(user=request.user)
+    except ProfileImage.DoesNotExist:
+        profile_img = None
+
+    return render_to_response('users/upload-image.html', {'profile_img': profile_img, 'form': form}, RequestContext(request))
+    
+
+def handle_uploaded_image(profile_img):
+    # Open original image and resize
+    thumb_img = Image.open(profile_img.image.path)
+    thumb_img.thumbnail((200, 200), Image.ANTIALIAS)
+
+    # Make temp filename based on model id
+    img_name = str(profile_img.id)
+    filename = img_name
+
+    # Save thumbnail to temp dir
+    temp_img = open(os.path.join('/tmp', filename), 'w')
+    thumb_img.save(temp_img, 'JPEG')
+
+    # Read temp file back into a File
+    thumb_data = open(os.path.join('/tmp', filename), 'r')
+    thumb_file = File(thumb_data)
+    
+    profile_img.thumbnail.save(img_name + '.jpg', thumb_file)
+
