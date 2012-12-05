@@ -17,11 +17,17 @@ def user_index(request):
 
         entries = {'condition': condition_entries, 'accident': accident_entries, 'surgery': surgery_entries, 'visit': visit_entries}
         
-        no_entries = False
-        if (len(condition_entries) < 1) and (len(accident_entries) < 1) and (len(surgery_entries) < 1) and (len(visit_entries) < 1):
-            no_entries = True
+        no_condition, no_accident, no_surgery, no_visit = False, False, False, False
+        if not condition_entries:
+            no_condition = True
+        if not accident_entries:
+            no_accident = True
+        if not surgery_entries:
+            no_surgery = True
+        if not visit_entries:
+            no_visit = True
         
-        return render_to_response('info/history/user-index.html', {'entries': entries, 'no_entries': no_entries}, RequestContext(request))
+        return render_to_response('info/history/user-index.html', {'entries': entries, 'no_condition': no_condition, 'no_accident': no_accident, 'no_surgery': no_surgery, 'no_visit': no_visit}, RequestContext(request))
     
     except:
         pass
