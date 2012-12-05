@@ -37,12 +37,6 @@
           </div>
           <!-- end sidebar -->
 	
-          <!-- TODO: status message popup/dialog box for new users-->
-          {% if no_entries %}
-          <div style="text-align:center; font-style: italic; color: crimson;">
-            <h4>No Medical History Available. To add an entry, click the add button at the top right.</h4>
-          </div>
-          {% endif %}
 
           <div data-role="collapsible-set" data-theme="e" data-content-theme="c" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
             <div data-role="collapsible">
@@ -64,14 +58,15 @@
 	        </a></li>
 	        {% endfor %}
 
-                
+
+                {% if no_condition %}            
                 <li data-icon="false">
-                  <div class="ui-grid-a">
-                    <div class="ui-block-a"></div>
-                    <div class="ui-block-b"></div>
+                  <div style="text-align:center; font-style: italic; color: crimson;">
+                    No Medical Condition Information Available. 
+                    To add an entry, click the 'ADD' button at the top right.
                   </div>
                 </li>
-
+                {% endif %}
 
 	      </ul>
             </div>
@@ -97,13 +92,15 @@
 	        </a></li>
 	        {% endfor %}
               
+                {% if no_accident %}            
                 <li data-icon="false">
-                  <div class="ui-grid-a">
-                    <div class="ui-block-a"></div>
-                    <div class="ui-block-b"></div>
+                  <div style="text-align:center; font-style: italic; color: crimson;">
+                    No Accident Information Available. 
+                    To add an entry, click the 'ADD' button at the top right.
                   </div>
                 </li>
-	      
+                {% endif %}
+
               </ul>
             </div>
           </div>
@@ -128,12 +125,14 @@
 	        </a></li>
 	        {% endfor %}
              
+                {% if no_surgery %}            
                 <li data-icon="false">
-                  <div class="ui-grid-a">
-                    <div class="ui-block-a"></div>
-                    <div class="ui-block-b"></div>
+                  <div style="text-align:center; font-style: italic; color: crimson;">
+                    No Surgery Information Available. 
+                    To add an entry, click the 'ADD' button at the top right.
                   </div>
                 </li>
+                {% endif %}
 	     
               </ul>
             </div>
@@ -159,13 +158,15 @@
 	        </a></li>
 	        {% endfor %}
                 
+	        {% if no_visit %}            
                 <li data-icon="false">
-                  <div class="ui-grid-a">
-                    <div class="ui-block-a"></div>
-                    <div class="ui-block-b"></div>
+                  <div style="text-align:center; font-style: italic; color: crimson;">
+                    No Medical Stay/Visit Information Available. 
+                    To add an entry, click the 'ADD' button at the top right.
                   </div>
                 </li>
-	     
+                {% endif %}
+
               </ul>
             </div>
           </div>
