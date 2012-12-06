@@ -126,11 +126,11 @@ def remove_contact(request):
     try:
         contact_id = request.GET.get('id')
         if request.method == 'POST':
-            contact = Contact.objects.filter(user=request.user).filter(contact_id=contact_id)[0]
+            contact = Contact.objects.get(user=request.user, contact_id=contact_id)
             contact.delete()
 
         return HttpResponseRedirect(reverse('ergo_contacts.views.contacts_index'))
-    except:
+    except Contact.DoesNotExist:
         return render(request, 'contacts/contact-edit-form.html', {'error_msg': 'Error encountered while removing contact. Please try again.',})
 
 
@@ -156,7 +156,7 @@ def send_alert(request):
                 if len(msg_list) > 0:
                     datatuple = tuple(msg_list)
                     # send alert messages
-                    send_mass_mail(datatuple, fail_silently=False, auth_user=ERGO_ALERT_AUTH_USER, auth_password=ERGO_ALERT_AUTH_PASSWORD)
+                    send_mass_mail(datatuple, fail_silently=True, auth_user=ERGO_ALERT_AUTH_USER, auth_password=ERGO_ALERT_AUTH_PASSWORD)
                     
                 else:
                     return render_to_response('contacts/alert-status.html', {'status_msg': 'Emergency contact alert options have not been specified. Please edit your emergency contacts.'}, RequestContext(request))
@@ -177,17 +177,17 @@ def _build_message_list(user, contacts, location, from_email):
     msg_list = []
             
     for i in contacts:
-        message = 'Dear %s %s, \n\nYour %s, %s %s, has been involved in a medical emergency. \n%s is currently being treated at %s. \n\nThis emergency alert has been brought to you by ERGO <http://ergo.kennyng.org>.\n' %(i.firstname, i.lastname, i.relationship, user.firstname, user.lastname, user.firstname, location)
+        message = "Dear %s %s, \n\n%s %s, has been involved in a medical emergency. \n%s is currently being treated at %s. \n\nAs %s's %s, you are listed as one of %s's emergency contacts. This medical emergency alert has been brought to you by ERGO <http://ergo.kennyng.org>.\n" %(i.firstname, i.lastname, user.firstname, user.lastname, user.firstname, location, user.firstname, i.relationship.lower(), user.firstname)
 
-        print 'MESSAGE: ' + message
+        #print 'MESSAGE: ' + message
         
         recipient_list = _get_recipient_list(i)
-        print 'RECIPIENTS: ' + str(recipient_list)
+        #print 'RECIPIENTS: ' + str(recipient_list)
 
         if len(recipient_list) > 0:
             msg = (subject, message, from_email, recipient_list)
 
-            print 'TUPLE: ' + str(msg) 
+            #print 'TUPLE: ' + str(msg) 
             
             msg_list.append(msg)
 

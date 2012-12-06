@@ -157,6 +157,9 @@ LOGGING = {
     }
 }
 
+# session expiration
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window (can be any value)
 EMAIL_USE_TLS = True
 EMAIL_HOST = ''

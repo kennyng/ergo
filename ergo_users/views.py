@@ -20,6 +20,7 @@ def profile_index(request):
         new_user = False
     except UserProfile.DoesNotExist:
         profile = UserProfile()
+        profile_img = None
         new_user = True
         
     return render_to_response('users/profile.html', {'profile': profile, 'profile_img': profile_img, 'new_user': new_user}, RequestContext(request))

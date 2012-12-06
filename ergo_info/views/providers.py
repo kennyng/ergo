@@ -9,9 +9,9 @@ from ergo_info.models import Provider
 
 def index(request):
     try:
-        provider = Provider.objects.filter(user=request.user)[0]
+        provider = Provider.objects.get(user=request.user)
         new_user = False
-    except IndexError:
+    except Provider.DoesNotExist:
         provider = Provider()
         new_user = True
         
@@ -20,8 +20,8 @@ def index(request):
 
 def edit_form(request):
     try:
-        provider = Provider.objects.filter(user=request.user)[0]
-    except IndexError:
+        provider = Provider.objects.get(user=request.user)
+    except Provider.DoesNotExist:
         provider = Provider()
 
     return render_to_response('info/providers/providers-edit-form.html', {'provider': provider}, RequestContext(request))
@@ -35,7 +35,7 @@ def edit_providers(request):
         policy_num = request.POST.get('policy_num')
 
         insure_phone = request.POST.get('insurance_contact')
-        insure_phone = insur_phone.replace('-', '').replace('(', '').replace(')', '').replace(' ', '')
+        insure_phone = insure_phone.replace('-', '').replace('(', '').replace(')', '').replace(' ', '')
         insurance_contact = insure_phone
         
         pcp_name = request.POST.get('pcp_name')
@@ -55,7 +55,7 @@ def edit_providers(request):
         #return render_to_response('test.html', {'post_list': post_list}, RequestContext(request))
 
         try:
-            provider = Provider.objects.filter(user=request.user)[0]
+            provider = Provider.objects.get(user=request.user)
 
             provider.insurance_name = insurance_name
             provider.group_num = group_num
@@ -70,7 +70,7 @@ def edit_providers(request):
             provider.pcp_zipcode = pcp_zipcode
 
             provider.save()
-        except IndexError:
+        except Provider.DoesNotExist:
             new_provider = Provider(insurance_name=insurance_name, group_num=group_num, policy_num=policy_num, insurance_contact=insurance_contact, pcp_name=pcp_name, pcp_contact=pcp_contact, pcp_location=pcp_location, pcp_address=pcp_address, pcp_city=pcp_city, pcp_state=pcp_state, pcp_zipcode=pcp_zipcode, user=request.user)
             new_provider.save()
 
