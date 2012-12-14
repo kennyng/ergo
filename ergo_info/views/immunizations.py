@@ -27,7 +27,7 @@ def index(request):
 
 def dialog_add(request):
     try:
-        vaccines = Immunization.objects.all()
+        vaccines = Immunization.objects.all().order_by('vaccine_name')
         return render_to_response('info/immunizations/vaccines-add-dialog.html', {'vaccines': vaccines}, RequestContext(request))
     except:
         pass
