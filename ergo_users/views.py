@@ -16,12 +16,15 @@ from forms import ImageUploadForm
 def profile_index(request):
     try:
         profile = UserProfile.objects.get(user=request.user)
-        profile_img = ProfileImage.objects.filter(user=request.user)[0]
         new_user = False
     except UserProfile.DoesNotExist:
         profile = UserProfile()
-        profile_img = None
         new_user = True
+
+    try:
+        profile_img = ProfileImage.objects.get(user=request.user)
+    except ProfileImage.DoesNotExist:
+        profile_img = None
         
     return render_to_response('users/profile.html', {'profile': profile, 'profile_img': profile_img, 'new_user': new_user}, RequestContext(request))
 
