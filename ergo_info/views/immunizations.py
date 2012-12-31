@@ -38,8 +38,9 @@ def add_vaccine(request):
     try:
         vaccine_id = request.POST.get('vaccine_id')
         vaccine_date = request.POST.get('vaccine_date')
-        new_record = UserToImmunization(user_id=request.user.id, vaccine_id=vaccine_id, vaccine_date=vaccine_date)
-        new_record.save()
+        record, created = UserToImmunization.objects.get_or_create(user_id=request.user.id, vaccine_id=vaccine_id)
+        if created:
+            record.save()
         
         return HttpResponseRedirect(reverse('ergo_info.views.immunizations.index'))
     except:

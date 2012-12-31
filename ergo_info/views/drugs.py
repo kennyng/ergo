@@ -98,8 +98,10 @@ def add_drug(request):
     try:
         drug_category = request.POST.get('drug_category')
         drug_id = request.POST.get('drug_id')
-        new_drug = UserToDrug(user_id=request.user.id, drug_id=drug_id, category=drug_category)
-        new_drug.save()
+        
+        drug, created = UserToDrug.objects.get_or_create(user_id=request.user.id, drug_id=drug_id, category=drug_category)
+        if created:
+            drug.save()
 
         return HttpResponseRedirect(reverse(_VIEWS[drug_category]))
     except:

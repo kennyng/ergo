@@ -92,8 +92,9 @@ def add_allergy(request):
     try:
         allergy_category = request.POST.get('allergy_category')
         allergy_id = request.POST.get('allergy_id')
-        new_allergy = UserToAllergy(user_id=request.user.id, allergy_id=allergy_id, category=allergy_category)
-        new_allergy.save()
+        allergy, created = UserToAllergy.objects.get_or_create(user_id=request.user.id, allergy_id=allergy_id, category=allergy_category)
+        if created:
+            allergy.save()
 
         return HttpResponseRedirect(reverse(_VIEWS[allergy_category]))
     except:
