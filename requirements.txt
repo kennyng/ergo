@@ -1,7 +1,5 @@
---allow-external
---allow-unverified PIL
 Django==1.4.2
-PIL==1.1.7
+Pillow==2.7.0
 psycopg2==2.5.3
 dj-database-url==0.3.0
 dj-static==0.0.6
