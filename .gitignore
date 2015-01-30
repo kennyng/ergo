@@ -32,6 +32,6 @@ staticfiles
 .*
 !.gitignore
 
-# Sensitive info
+# Sensitive and local info
 local_settings.py
-email_setting.py
+alert_credentials.py

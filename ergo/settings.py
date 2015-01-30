@@ -11,8 +11,8 @@ ADMINS = (('Kenny Ng', 'zqkng@stanford.edu'),)
 MANAGERS = ADMINS
 
 # SECURITY WARNNG: keep the secret key used in production secret!
-DEFAULT_SECRET_KEY = ''
-SECRET_KEY = os.environ.get('SECERT_KEY', DEFAULT_SECRET_KEY)
+DEFAULT_SECRET_KEY = '7!b7_=crh69qx@@8y@d(&amp;%nrxhkh6%-ud3q8km5=t3mqvdx-0j'
+SECRET_KEY = os.environ.get('SECRET_KEY', DEFAULT_SECRET_KEY)
 
 # SECRUITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -65,14 +65,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
-#DATABASES['default'] = dj_database_url.config()
+DATABASES = { 'default': dj_database_url.config() }
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO','https')
@@ -115,7 +108,7 @@ EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
 LOGIN_REDIRECT_URL = '/'
 
-# Override sensitive settings information
+# Override local and sensitive settings information
 try:
     from local_settings import *
 except ImportError:

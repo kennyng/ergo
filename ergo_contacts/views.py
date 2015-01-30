@@ -9,11 +9,10 @@ from ergo_users.models import UserProfile
 from django.core.mail import send_mass_mail
 import logging
 try:
-    from email_setting import *
+    from ergo.alert_credentials import *
 except ImportError:
     pass
 
-    
 
 def contacts_index(request):
     contacts = Contact.objects.filter(user=request.user)
@@ -23,7 +22,7 @@ def contacts_index(request):
         no_contacts = True
     return render_to_response('contacts/contacts.html', {'contacts': contacts, 'no_contacts': no_contacts}, RequestContext(request))
 
-    
+
 def contacts_add_form(request):
     return render_to_response('contacts/contact-add-form.html', RequestContext(request))
 
