@@ -15,9 +15,9 @@ DEFAULT_SECRET_KEY = '7!b7_=crh69qx@@8y@d(&amp;%nrxhkh6%-ud3q8km5=t3mqvdx-0j'
 SECRET_KEY = os.environ.get('SECRET_KEY', DEFAULT_SECRET_KEY)
 
 # SECRUITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-TEMPLATE_DEBUG = DEBUG
+TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = []
 
