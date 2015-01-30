@@ -1,3 +1,5 @@
+--allow-external
+--allow-unverified PIL
 Django==1.4.2
 PIL==1.1.7
 psycopg2==2.5.3
