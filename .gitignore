@@ -1,40 +1,37 @@
-*.py[co]
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
 
-# virtualenv artifacts
-venv
-
-# Django stuff
-*.log
-*.pot
-local_settings.py
-email_setting.py
-media/*
-
-#C extensions
-*.so
-
-# Packages
-*.egg
-*.egg-info
-dist
-build
-eggs
-parts
-bin
-var
-sdist
-develop-eggs
+# Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
 .installed.cfg
+*.egg
 
 # Installer logs
 pip-log.txt
 
-# Unit test / coverage reports
-.coverage
-.tox
+# Django stuff
+*.log
+venv
+staticfiles
+*.sqlite3
 
-#Translations
-*.mo
+# Hidden files / directories
+.*
+!.gitignore
 
-#Mr Developer
-.mr.developer.cfg
+# Sensitive info
+local_settings.py
+email_setting.py
