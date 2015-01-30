@@ -38,7 +38,7 @@ def add_vaccine(request):
     try:
         vaccine_id = request.POST.get('vaccine_id')
         vaccine_date = request.POST.get('vaccine_date')
-        record, created = UserToImmunization.objects.get_or_create(user_id=request.user.id, vaccine_id=vaccine_id)
+        record, created = UserToImmunization.objects.get_or_create(user_id=request.user.id, vaccine_id=vaccine_id, vaccine_date=vaccine_date)
         if created:
             record.save()
         

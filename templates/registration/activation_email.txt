@@ -1,6 +1,6 @@
 {% load humanize %}
 Thank you for signing up for an ERGO account. To start using ERGO and have peace of mind no matter what emergencies may arise, please activate your account by either clicking the link below or copying and pasting the link into your web browser's address bar:
 
-http://ec2-23-22-32-65.compute-1.amazonaws.com:8000/accounts/activate/{{ activation_key }}/
+http://ec2-23-22-32-65.compute-1.amazonaws.com/accounts/activate/{{ activation_key }}/
 
 If you did not request this, you do not need to do anything. Don't worry, you will not receive any more emails from us, and the account will expire automatically in {{ expiration_days|apnumber }} days.
