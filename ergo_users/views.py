@@ -25,7 +25,7 @@ def profile_index(request):
         profile_img = ProfileImage.objects.get(user=request.user)
     except ProfileImage.DoesNotExist:
         profile_img = None
-        
+
     return render_to_response('users/profile.html', {'profile': profile, 'profile_img': profile_img, 'new_user': new_user}, RequestContext(request))
 
 
@@ -36,8 +36,8 @@ def profile_form(request):
         profile = UserProfile()
 
     return render_to_response('users/profile-edit-form.html', {'profile': profile}, RequestContext(request))
-    
-    
+
+
 @csrf_protect
 def update_profile(request):
     try:
@@ -50,16 +50,16 @@ def update_profile(request):
         donor = request.POST.get('organ_donor')
         if donor == '1':
             organ_donor = True
-        
+
         email = request.POST.get('email')
         phone = request.POST.get('phone')
         phone = phone.replace('-', '').replace('(', '').replace(')', '').replace(' ', '')
-        
+
         address = request.POST.get('address')
         city = request.POST.get('city')
         state = request.POST.get('state')
         zipcode = request.POST.get('zipcode')
-        
+
         #post_list = [firstname, lastname, dob, sex, email, phone, address, city, state, zipcode]
         #return render_to_response('test.html', {'post_list': post_list}, RequestContext(request))
 
@@ -80,7 +80,7 @@ def update_profile(request):
                 profile.state = state
                 profile.zipcode = zipcode
                 profile.save()
-                
+
             except UserProfile.DoesNotExist:
                 new_profile = UserProfile(firstname=firstname, lastname=lastname, dob=dob, sex=sex, blood_type=blood_type, organ_donor=organ_donor, phone=phone, address=address, city=city, state=state, zipcode=zipcode, user=request.user)
                 new_profile.save()
@@ -100,7 +100,7 @@ def offline(request):
     except UserProfile.DoesNotExist:
         profile = UserProfile()
         new_user = True
-        
+
     return render_to_response('users/offline.html', {'offline': profile, 'new_user': new_user}, RequestContext(request))
 
 
@@ -131,7 +131,7 @@ def upload_profile_image(request):
         profile_img = None
 
     return render_to_response('users/upload-image.html', {'profile_img': profile_img, 'form': form}, RequestContext(request))
-    
+
 
 def handle_uploaded_image(profile_img):
     # Open original image and resize
@@ -149,6 +149,6 @@ def handle_uploaded_image(profile_img):
     # Read temp file back into a File
     thumb_data = open(os.path.join('/tmp', filename), 'r')
     thumb_file = File(thumb_data)
-    
+
     profile_img.thumbnail.save(img_name + '.jpg', thumb_file)
 

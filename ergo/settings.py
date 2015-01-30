@@ -5,7 +5,7 @@ import os
 import dj_database_url
 
 
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 ADMINS = (('Kenny Ng', 'zqkng@stanford.edu'),)
 MANAGERS = ADMINS
@@ -17,7 +17,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', DEFAULT_SECRET_KEY)
 # SECRUITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -79,7 +79,13 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
 )
-TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'templates'),)
+PROJECT_DIR = os.path.dirname(BASE_DIR)
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'templates'),
+    os.path.join(PROJECT_DIR, 'ergo_info/templates'),
+    os.path.join(PROJECT_DIR, 'ergo_users/templates'),
+    os.path.join(PROJECT_DIR, 'ergo_contacts/templates'),
+)
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 MEDIA_ROOT = 'media'
