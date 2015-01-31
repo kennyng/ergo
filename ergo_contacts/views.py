@@ -155,7 +155,9 @@ def send_alert(request):
                 if len(msg_list) > 0:
                     datatuple = tuple(msg_list)
                     # send alert messages
-                    send_mass_mail(datatuple, fail_silently=True, auth_user=ERGO_ALERT_AUTH_USER, auth_password=ERGO_ALERT_AUTH_PASSWORD)
+                    send_mass_mail(datatuple, fail_silently=True,
+                                    auth_user=os.environ.get('ERGO_ALERT_AUTH_USER', ERGO_ALERT_AUTH_USER),
+                                    auth_password=os.environ.get('ERGO_ALERT_AUTH_PASSWORD', ERGO_ALERT_AUTH_PASSWORD))
                     
                 else:
                     return render_to_response('contacts/alert-status.html', {'status_msg': 'Emergency contact alert options have not been specified. Please edit your emergency contacts.'}, RequestContext(request))
