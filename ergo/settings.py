@@ -128,7 +128,7 @@ except ImportError:
 
 # Use S3 in production
 if not DEBUG:
-    AWS_S3_BUCKET_NAME = 'heroku-ergo-assets'
+    AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
     AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
     AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
     # Make collectstatic upload only changed files instead of all files
@@ -136,6 +136,6 @@ if not DEBUG:
 
     DEFAULT_FILE_STORAGE = 'ergo.s3util.MediaRootS3BotoStorage'
     STATICFILES_STORAGE = 'ergo.s3util.StaticRootS3BotoStorage'
-    MEDIA_URL = 'https://{}.s3.amazonaws.com/media/'.format(AWS_S3_BUCKET_NAME)
-    STATIC_URL = 'https://{}.s3.amazonaws.com/static/'.format(AWS_S3_BUCKET_NAME)
-    ADMIN_MEDIA_PREFIX = 'https://{}.s3.amazonaws.com/static/admin/'.format(AWS_S3_BUCKET_NAME)
+    MEDIA_URL = 'https://{}.s3.amazonaws.com/media/'.format(AWS_STORAGE_BUCKET_NAME)
+    STATIC_URL = 'https://{}.s3.amazonaws.com/static/'.format(AWS_STORAGE_BUCKET_NAME)
+    ADMIN_MEDIA_PREFIX = 'https://{}.s3.amazonaws.com/static/admin/'.format(AWS_STORAGE_BUCKET_NAME)
