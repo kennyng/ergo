@@ -87,14 +87,19 @@ TEMPLATE_DIRS = (
     os.path.join(PROJECT_DIR, 'ergo_contacts/templates'),
 )
 
-# Absolute filesystem path to the directory that will hold user-uploaded files.
-MEDIA_ROOT = 'media'
+
+# Absolute path to directory that will hold user-uploaded files.
+# Used only in development (no S3).
+MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
 MEDIA_URL = '/media/'
 
-# Static asset configuration
-STATIC_ROOT = 'staticfiles'
+# Absolute path to directory that will hold static files.
+# Used only in development (no S3).
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
+# Static asset configuration
+STATICFILES_DIRS = (os.path.join(PROJECT_DIR, 'staticfiles'),)
 
 # List of finder classes that know how to find static files in various locations.
 STATICFILES_FINDERS = (
@@ -120,12 +125,13 @@ try:
 except ImportError:
     pass
 
-
-#Storage on S3 settings are stored as os.environs to keep settings.py clean
-if not DEBUG:
-    AWS_S3_BUCKET_NAME = os.environ.get('AWS_S3_BUCKET_NAME', '')
-    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '')
-    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '')
-    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-    S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_S3_BUCKET_NAME
-    STATIC_URL = S3_URL
+# Use S3 in production
+#if not DEBUG:
+#    AWS_S3_BUCKET_NAME = os.environ.get('AWS_S3_BUCKET_NAME', '')
+#    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '')
+#    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '')
+#
+#    DEFAULT_FILE_STORAGE = 'ergo.s3util.MediaRootS3BotoStorage'
+#    STATICFILES_STORAGE = 'ergo.s3util.StaticRootS3BotoStorage'
+#    MEDIA_URL = 'https://{}.s3.amazonaws.com/media/'.format(AWS_S3_BUCKET_NAME)
+#    STATIC_URL = 'https://{}.s3.amazonaws.com/static/'.format(AWS_S3_BUCKET_NAME)
