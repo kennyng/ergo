@@ -24,8 +24,8 @@ pip-log.txt
 
 # Django stuff
 *.log
-staticfiles
-media
+static/
+media/
 *.sqlite3
 
 # Hidden files / directories
