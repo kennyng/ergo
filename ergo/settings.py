@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'ergo_info',
     'ergo_users',
     'ergo_contacts',
+    'storages',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -126,12 +127,13 @@ except ImportError:
     pass
 
 # Use S3 in production
-#if not DEBUG:
-#    AWS_S3_BUCKET_NAME = os.environ.get('AWS_S3_BUCKET_NAME', '')
-#    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '')
-#    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '')
-#
-#    DEFAULT_FILE_STORAGE = 'ergo.s3util.MediaRootS3BotoStorage'
-#    STATICFILES_STORAGE = 'ergo.s3util.StaticRootS3BotoStorage'
-#    MEDIA_URL = 'https://{}.s3.amazonaws.com/media/'.format(AWS_S3_BUCKET_NAME)
-#    STATIC_URL = 'https://{}.s3.amazonaws.com/static/'.format(AWS_S3_BUCKET_NAME)
+if not DEBUG:
+    AWS_S3_BUCKET_NAME = os.environ.get('AWS_S3_BUCKET_NAME', '')
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '')
+
+    DEFAULT_FILE_STORAGE = 'ergo.s3util.MediaRootS3BotoStorage'
+    STATICFILES_STORAGE = 'ergo.s3util.StaticRootS3BotoStorage'
+    MEDIA_URL = 'https://{}.s3.amazonaws.com/media/'.format(AWS_S3_BUCKET_NAME)
+    STATIC_URL = 'https://{}.s3.amazonaws.com/static/'.format(AWS_S3_BUCKET_NAME)
+    ADMIN_MEDIA_PREFIX = 'https://{}.s3.amazonaws.com/static/admin/'.format(AWS_S3_BUCKET_NAME)
