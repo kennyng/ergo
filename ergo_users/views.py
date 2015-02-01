@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.core.files.base import ContentFile
 from django.core.files import File
+from django.core.files.storage import default_storage as storage
 
 from PIL import Image
 import os.path
@@ -135,7 +136,8 @@ def upload_profile_image(request):
 
 def handle_uploaded_image(profile_img):
     # Open original image and resize
-    thumb_img = Image.open(profile_img.image.path)
+    # thumb_img = Image.open(profile_img.image.path)
+    thumb_img = Image.open(storage.open(profile_img.image.name))
     thumb_img.thumbnail((200, 200), Image.ANTIALIAS)
 
     # Make temp filename based on model id

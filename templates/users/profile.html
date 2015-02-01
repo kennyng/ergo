@@ -23,13 +23,13 @@
       {% if profile_img %}
       <center>
         <div style="border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; border: 2px solid #DC143C; width:200px; height:200px; background-color:#383838;">
-        <img src="/media/{{ profile_img.thumbnail }}" />
+          <img src="{{ MEDIA_URL }}{{ profile_img.thumbnail }}" />
         </div>
       </center>
       {% else %}
       <center>
         <div style="border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; border: 2px solid #DC143C; width:200px; height:200px; background-color:#383838;">
-         <img src="/static/images/generic_profile_img.png" width="200px" height="200px" />
+          <img src="{{ STATIC_URL }}images/generic_profile_img.png" width="200px" height="200px" />
         </div>
       </center>
       {% endif %}

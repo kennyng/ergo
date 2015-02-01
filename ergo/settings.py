@@ -114,22 +114,23 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
 EMAIL_PORT = 587
 LOGIN_REDIRECT_URL = '/'
 
+# AWS S3 Configurations
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', '')
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '')
+# Make collectstatic upload only changed files instead of all files
+AWS_PRELOAD_METADATA = True
+
+
 # Override local and sensitive settings information
 try:
     from local_settings import *
 except ImportError:
     pass
 
-# Use S3 in production
-if not DEBUG:
-    AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
-    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
-    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-    # Make collectstatic upload only changed files instead of all files
-    AWS_PRELOAD_METADATA = True
-
-    DEFAULT_FILE_STORAGE = 'ergo.s3util.MediaRootS3BotoStorage'
-    STATICFILES_STORAGE = 'ergo.s3util.StaticRootS3BotoStorage'
-    MEDIA_URL = 'https://{}.s3.amazonaws.com/media/'.format(AWS_STORAGE_BUCKET_NAME)
-    STATIC_URL = 'https://{}.s3.amazonaws.com/static/'.format(AWS_STORAGE_BUCKET_NAME)
-    ADMIN_MEDIA_PREFIX = 'https://{}.s3.amazonaws.com/static/admin/'.format(AWS_STORAGE_BUCKET_NAME)
+# Configure storage locations after getting S3 bucket and key
+DEFAULT_FILE_STORAGE = 'ergo.s3util.MediaRootS3BotoStorage'
+STATICFILES_STORAGE = 'ergo.s3util.StaticRootS3BotoStorage'
+MEDIA_URL = 'https://{}.s3.amazonaws.com/media/'.format(AWS_STORAGE_BUCKET_NAME)
+STATIC_URL = 'https://{}.s3.amazonaws.com/static/'.format(AWS_STORAGE_BUCKET_NAME)
+ADMIN_MEDIA_PREFIX = 'https://{}.s3.amazonaws.com/static/admin/'.format(AWS_STORAGE_BUCKET_NAME)
