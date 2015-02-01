@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}ERGO | Providers{% endblock %}
+
+{% block content %}
+<div data-role="page" id="provider">
+  
+  <!-- sidebar css and js -->
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/sidebar.css" />
+  <script type="text/javascript" src="{{ STATIC_URL }}js/sidebar.js"></script>
+
+  <div data-role="header" data-theme="e" data-position="fixed">
+    <a href="#sidebarProvider" data-rel="popup" data-transition="slidedown" data-position-to="window" data-role="button" data-inline="true" data-icon="grid" data-corners="false" data-iconpos="notext">Menu</a>
+    <h1>Providers</h1>
+    <a href="/info/providers/edit/" data-role="button" data-icon="check" data-iconpos="left">EDIT</a>
+  </div>
+
+  <div data-role="content">
+
+    <!-- start Sidebar -->
+    <div data-role="popup" id="sidebarProvider" class="sidebarPopup" data-corners="false" data-theme="none" data-shadow="false" data-tolerance="0,0">
+<!-- include sidebar -->
+      {% include "info/sidebar.html" %}        
+    </div>
+    <!-- end Sidebar -->
+
+    <!-- TODO: status message popup/dialog box for new users-->
+    {% if new_user %}
+    <div style="text-align:center; font-style: italic; color: crimson;">
+      <h4>For the best ERGO experience, please update your Providers by clicking on the 'EDIT' button at the top right.</h4>
+    </div>
+    {% endif %}
+
+    <ul data-role="listview" data-inset="true" data-theme="e" data-divider-theme="f">
+      <li data-role="list-divider">INSURANCE PROVIDER</li>
+      <li>
+        <h3>Provider Name:</h3>
+        <p><strong>{{ provider.insurance_name }}</strong></p>
+      </li>
+      <li>
+        <h3>Group Number:</h3>
+        <p><strong>{{ provider.group_num }}</strong></p>
+      </li>
+      <li>
+        <h3>Policy #:</h3>
+        <p><strong>{{ provider.policy_num  }}</strong></p>
+      </li>
+      <li>
+        <h3>Contact:</h3>
+        <p><strong><a href="tel:{{ provider.insurance_contact }}" style="text-decoration:none">{{ provider.insurance_contact }}</a></strong></p>
+      </li>
+    </ul>  
+
+    <ul data-role="listview" data-inset="true" data-theme="e" data-divider-theme="f">
+      <li data-role="list-divider">PRIMARY CARE PROVIDER</li>
+       <li>
+        <h3>Physician Name:</h3>
+        <p><strong>{{ provider.pcp_name }}</strong></p>
+      </li>
+      <li>
+        <h3>Contact:</h3>
+        <p><strong><a href="tel:{{ provider.pcp_contact }}" style="text-decoration:none">{{ provider.pcp_contact }}</a></strong></p>
+      </li>
+      <li>
+        <h3>Clinic/Facility/Hospital:</h3>
+        <p><strong>{{ provider.pcp_location }}</strong></p>
+      </li>
+      <li>
+        <h3>Address:</h3>
+        <p><strong>{{ provider.pcp_address }}</strong></p>
+        <p><strong>{{ provider.pcp_city }}, {{ provider.pcp_state }} {{ provider.pcp_zipcode}}</strong></p>
+      </li>
+    </ul>
+  </div>
+</div>
+{% endblock %}

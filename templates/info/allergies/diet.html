@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}ERGO | Allergies{% endblock %}
+
+{% block content %}
+<div data-role="page" id="allergies-diet">
+  
+  <!-- Load CSS for shelf everytime -->
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/shelf-style.css" />
+  <!-- sidebar css and js -->
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/sidebar.css" />
+  <script type="text/javascript" src="{{ STATIC_URL }}js/sidebar.js"></script>
+
+  <!-- start header -->
+  <div data-role="header" data-theme="e" data-position="fixed">
+    <a href="#sidebarDiet" data-rel="popup" data-transition="slidedown" data-position-to="window" data-role="button" data-inline="true" data-icon="grid" data-iconpos="notext">Menu</a>
+    <h1>Allergies</h1>
+<a href="/info/allergies/add/?cat=diet" data-role="button" data-icon="plus" data-iconpos="left" class="ui-btn-right" data-rel="dialog" data-inline="true" data-transition="flip">ADD</a>
+  </div>
+  <!-- end header -->
+
+  <!-- start Sidebar -->
+  <div data-role="popup" id="sidebarDiet" class="sidebarPopup" data-corners="false" data-theme="none" data-shadow="false" data-tolerance="0,0">
+<!-- include sidebar -->
+    {% include "info/sidebar.html" %}        
+  </div>
+  <!-- end Sidebar -->
+
+  <!-- start content -->
+  <div data-role="content" class="shelf">
+
+    <!-- TODO: status message pop up for new users -->
+    {% if no_allergies %}
+    <div style="text-align:center;font-style:italic;color:crimson;">
+      <h4>To add an allergy to the cabinet, click on the 'ADD' button at the top right.</h4>
+    </div>
+    {% endif %}
+      
+    {% for shelf in cabinet.fullshelf %}
+<div class="ui-grid-solo">
+      <div class="shelf-row">
+        <div class="shelf-label0">{{ shelf.0.allergy_name }}</div>
+        <a href="/info/allergies/remove/?cat=diet&id={{ shelf.0.allergy_id }}" data-rel="dialog" data-inline="true" data-transition="flip"><img src="{{ STATIC_URL }}images/allergies/{{ shelf.0.allergy_img }}" class="shelf-item0" /></a>
+              
+        <div class="shelf-label1">{{ shelf.1.allergy_name }}</div>
+        <a href="/info/allergies/remove/?cat=diet&id={{ shelf.1.allergy_id }}" data-rel="dialog" data-inline="true" data-transition="flip"><img src="{{ STATIC_URL }}images/allergies/{{ shelf.1.allergy_img }}" class="shelf-item1" /></a>
+
+        <div class="shelf-label2">{{ shelf.2.allergy_name }}</div>
+        <a href="/info/allergies/remove/?cat=diet&id={{ shelf.2.allergy_id }}" data-rel="dialog" data-inline="true" data-transition="flip"><img src="{{ STATIC_URL }}images/allergies/{{ shelf.2.allergy_img }}" class="shelf-item2" /></a>
+
+      </div>
+    </div>
+    <div class="ui-grid-solo"><img src="{{ STATIC_URL }}images/shelf.png" class="one-shelf" /></div>
+    {% endfor %}
+
+    {% if overflow == 2 %}
+    <div class="ui-grid-solo">
+      <div class="shelf-row">
+          <div class="shelf-label0">{{ cabinet.overflow.0.0.allergy_name }}</div>
+          <a href="/info/allergies/remove/?cat=diet&id={{ cabinet.overflow.0.0.allergy_id }}" data-rel="dialog" data-inline="true" data-transition="flip"><img src="{{ STATIC_URL }}images/allergies/{{ cabinet.overflow.0.0.allergy_img }}" class="shelf-item0" /></a>
+          
+          <div class="shelf-label1">{{ cabinet.overflow.0.1.allergy_name }}</div>
+          <a href="/info/allergies/remove/?cat=diet&id={{ cabinet.overflow.0.1.allergy_id }}" data-rel="dialog" data-inline="true" data-transition="flip"><img src="{{ STATIC_URL }}images/allergies/{{ cabinet.overflow.0.1.allergy_img }}" class="shelf-item1" /></a>
+      </div>
+    </div>
+    <div class="ui-grid-solo"><img src="{{ STATIC_URL }}images/shelf.png" class="one-shelf" /></div>
+    {% endif %}
+
+
+    {% if overflow == 1 %}
+    <div class="ui-grid-solo">
+      <div class="shelf-row">
+        <div class="shelf-label0">{{ cabinet.overflow.0.0.allergy_name }}</div>
+        <a href="/info/allergies/remove/?cat=diet&id={{ cabinet.overflow.0.0.allergy_id }}" data-rel="dialog" data-inline="true" data-transition="flip"><img src="{{ STATIC_URL }}images/allergies/{{ cabinet.overflow.0.0.allergy_img }}" class="shelf-item0" /></a>
+              
+      </div>
+    </div>
+    <div class="ui-grid-solo"><img src="{{ STATIC_URL }}images/shelf.png" class="one-shelf" /></div>
+    {% endif %}
+        
+    {% if extra_shelf == 1 %}
+    <div class="ui-grid-solo"><img src="{{ STATIC_URL }}images/shelf.png" class="one-shelf" /></div>
+    {% else %}{% if extra_shelf == 2 %}
+    <div class="ui-grid-solo"><img src="{{ STATIC_URL }}images/shelf.png" class="one-shelf" /></div>
+    <div class="ui-grid-solo"><img src="{{ STATIC_URL }}images/shelf.png" class="one-shelf" /></div>
+    {% else %}{% if extra_shelf == 3 %}
+    <div class="ui-grid-solo"><img src="{{ STATIC_URL }}images/shelf.png" class="one-shelf" /></div>
+    <div class="ui-grid-solo"><img src="{{ STATIC_URL }}images/shelf.png" class="one-shelf" /></div>
+    <div class="ui-grid-solo"><img src="{{ STATIC_URL }}images/shelf.png" class="one-shelf" /></div>
+    {% else %}{% if extra_shelf == 4 %}
+    <div class="ui-grid-solo"><img src="{{ STATIC_URL }}images/shelf.png" class="one-shelf" /></div>
+    <div class="ui-grid-solo"><img src="{{ STATIC_URL }}images/shelf.png" class="one-shelf" /></div>
+    <div class="ui-grid-solo"><img src="{{ STATIC_URL }}images/shelf.png" class="one-shelf" /></div>
+    <div class="ui-grid-solo"><img src="{{ STATIC_URL }}images/shelf.png" class="one-shelf" /></div>
+    {% endif %}{% endif %}{% endif %}{% endif %}
+
+    <br />
+    <br />
+  </div>
+
+  <!-- footer -->
+  <div data-role="footer" data-id="samebar" data-position="fixed" data-tap-toggle="false" data-theme="e">
+    <div data-role="navbar" data-grid="b">
+      <ul>
+        <li><a href="/info/allergies/drug/" data-icon="arrow-l" data-transition="slide" data-direction="reverse">Drug</a></li>
+        <li><a href="#allergies-diet" data-icon="star" class="ui-btn-active ui-state-persist">Dietary</a></li>
+        <li><a href="/info/allergies/misc/" data-icon="arrow-l" data-transition="slide">Misc.</a></li>
+      </ul>
+    </div>
+  </div>
+  
+</div>
+{% endblock %}

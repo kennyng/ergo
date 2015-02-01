@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}ERGO | Activation{% endblock %}
+
+{% block content %}
+<div data-role="page" id="register-complete">
+  <div data-role="header" data-theme="e">
+    <h1>Registration</h1>
+    <a href="/accounts/login/" data-role="button" class="ui-btn-right" style="color:crimson">Login</a>
+  </div>
+
+  <div data-role="content" style="text-align:center">
+    <h2 style="color:crimson">Thank you for registering!</h2>
+    <h3>Please check your email.</h3>
+    <p>An activation link has been sent to the email address you supplied, along with instructions for activating your account.</p>
+      <p style="font-style:italic">*E-Mail may be in spam folder.</p>
+  </div>
+</div>
+{% endblock %}
+  
+

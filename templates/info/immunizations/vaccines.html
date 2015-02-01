@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}ERGO | Immunizations{% endblock %}
+
+{% block content %}
+<div data-role="page" id="vaccines">
+
+  <!-- sidebar css and js -->
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/sidebar.css" />
+  <script type="text/javascript" src="{{ STATIC_URL }}js/sidebar.js"></script>
+
+  <div data-role="header" data-theme="e" data-position="fixed">
+    <a href="#sidebarVaccine" data-rel="popup" data-transition="slidedown" data-position-to="window" data-role="button" data-inline="true" data-icon="grid" data-iconpos="notext">Menu</a>
+    <h1>Immunizations</h1>
+  <a href="/info/shots/add/" data-rel="dialog" data-transition="flip" data-role="button" data-icon="add" data-iconpos="left">ADD</a>
+  </div>
+  
+  <div data-role="content">
+
+    <!-- start Sidebar -->
+    <div data-role="popup" id="sidebarVaccine" class="sidebarPopup" data-corners="false" data-theme="none" data-shadow="false" data-tolerance="0,0">
+<!-- include sidebar -->
+      {% include "info/sidebar.html" %}        
+    </div>
+    <!-- end Sidebar -->
+
+
+    <ul data-role="listview" data-filter="true" data-filter-placeholder="Search by Vaccine or Date..." data-filter-theme="d" data-theme="e" data-divider-theme="f">
+      <li data-role="list-divider"> 
+    <div class="ui-grid-a">
+    <div class="ui-block-a">DATE GIVEN</div>
+    <div class="ui-block-b">VACCINE</div>
+  </div>
+      </li>
+
+      {% for i in vaccines %}
+      <li data-icon="delete"><a href="/info/shots/remove/?id={{ i.vaccine_id }}" data-rel="dialog" data-inline="true" data-transition="flip">
+        <div class="ui-grid-a">
+          <div class="ui-block-a">{{ i.vaccine_date }}</div>
+          <div class="ui-block-b">{{ i.vaccine_name }}</div>
+        </div>
+      </a></li>
+      {% endfor %}              
+    </ul>
+
+    <!-- TODO: status message popup/dialog box for new users-->
+    {% if no_vaccines %}
+    <div style="text-align:center; font-style: italic; color: crimson;">
+      <h4>No Immunization Record Available. To add vaccines, click the 'ADD' button at the top right.</h4>
+    </div>
+    {% endif %}
+
+  </div>
+</div>
+{% endblock %}

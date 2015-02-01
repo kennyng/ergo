@@ -1,0 +1,18 @@
+{% extends "base.html" %}   
+
+{% block title %}ERGO | Logout{% endblock %}
+
+{% block content %}
+<div data-role="page" id="logout">
+  <div data-role="header" data-theme="e">
+    <h1>Logout</h1>
+    <a href="/accounts/login/" id="login" data-role="button" class="ui-btn-right" style="color:crimson">LOGIN</a>
+  </div>
+
+  <div data-role="content" data-theme="e" style="text-align:center;">
+    <h2 style="color:crimson;">You have successfully logged out.</h2>
+    <p>Thank you for using ERGO.</p> 
+    <p>For security reasons, please exit your browser.</p>
+  </div>
+</div>
+{% endblock %}

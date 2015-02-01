@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}ERGO | Allergies{% endblock %}
+
+{% block content %}
+<div data-role="dialog" id="listview-add-allergy">
+  <div data-role="header" data-theme="e">
+    <h1>Add Allergy?</h1>
+  </div>
+
+  <div data-role="content" data-theme="e">
+
+    {% if error_msg %}
+    <div style="text-align:center; font-style: italic; color: crimson;">
+      <p>{{ error_msg }}</p>
+    </div>
+    {% endif %}
+
+  <form method="post" action="/info/allergies/listview/add/post/" >
+          {% csrf_token %}
+    <label for="allergy"><strong>Allergy: </strong></label>
+    <select id="allergy" name="allergy_id" data-theme="e">
+            {% for x in allergies %}
+              <option value="{{ x.allergy_id }}">{{ x.allergy_name }}</option>
+            {% endfor %}
+          </select>
+
+    <br />
+    <button type="submit" data-theme="f" value="ADD ALLERGY"></button>
+  </form>
+        <a href="/info/allergies/listview/" data-rel="back" data-role="button" data-theme="e">CANCEL</a>
+
+  </div>
+</div>
+{% endblock %} 

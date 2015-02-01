@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}ERGO | Immunizations{% endblock %}
+
+{% block content %}
+<div data-role="dialog" id="remove-vaccine">
+  <div data-role="header" data-theme="e">
+    <h1>Remove Vaccine?</h1>
+  </div>
+
+  <div data-role="content" data-theme="e">
+
+    {% if error_msg %}
+    <div style="text-align:center; font-style: italic; color: crimson;">
+      <p>{{ error_msg }}</p>
+    </div>
+    {% endif %}
+
+    <div style="text-align:center">
+      <h3>Are you sure you want to remove this vaccine?</h3>
+      <p>This action cannot be undone.</p>
+    </div>
+  <form method="post" action="/info/shots/remove/post/">
+          {% csrf_token %}
+          <input type="hidden" name="vaccine_id" value="{{ vaccine_id }}" />
+    <button type="submit" data-theme="f">REMOVE VACCINE</button>
+  </form>
+    <a href="#" data-rel="back" data-role="button" data-theme="e">Cancel</a>
+
+  </div>
+</div>
+{% endblock %}

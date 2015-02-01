@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}ERGO | Profile{% endblock %}
+
+{% block content %}
+  <div data-role="page" id="upload-image">
+    
+    <div data-role="header" data-theme="e" data-position="fixed">
+      <h1>Upload Image</h1>
+      <a href="/profile/edit/" data-role="button" data-rel="back" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Cancel</a>
+    </div>
+    
+    <div data-role="content">
+
+      {% if profile_img %}
+      <center>
+        <h4 style="color:crimson">Current Profile Image: </h4>
+        <div style="border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; border: 2px solid #DC143C; width:200px; height:200px; background-color:#383838;">
+        <img src="/media/{{ profile_img.thumbnail }}" />
+        </div>
+      </center>
+      {% else %}
+      <center>
+        <h4 style="color:crimson">Current Profile Image: </h4>
+        <div style="border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; border: 2px solid #DC143C; width:200px; height:200px; background-color:#383838;">
+         <img src="/static/images/generic_profile_img.png" width="200px" height="200px;" />
+        </div>
+      </center>
+      {% endif %}
+
+      <form method="post" action="/profile/upload-image/" enctype="multipart/form-data" data-ajax="false">
+        {% csrf_token %}
+
+        
+        <ul data-role="listview" data-inset="true" data-divider-theme="f">
+          <li data-role="list-divider">
+            <h1>Choose an image to upload:</h1>
+          </li>
+          <li>
+            <p style="color:crimson;font-style:italic;">{{ form.non_field_errors }}</p>
+
+            <p style="color:crimson;font-style:italic;">*Maximum image upload size: 2MB</p>
+          </li>
+          <li>
+            {{ form.image }}
+
+            <div style="color:crimson;font-style:italic;font-size:14px;">
+              {{ form.image.errors }}
+            </div>
+          </li>
+        </ul>
+
+        <button type="submit" value="UPLOAD" data-theme="f" ></button>
+      </form>
+
+      <a href="/profile/edit/" data-role="button" data-theme="e">DONE</a>
+
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}ERGO | Profile{% endblock %}
+
+{% block content %}
+  <div data-role="page" id="profile">
+    <div data-role="header" data-theme="e" data-position="fixed">
+      <a href="/" data-role="button" data-icon="home" data-iconpos="notext"></a>
+      <h1>Profile</h1>
+      <a href="/profile/edit/" data-role="button" data-icon="check" data-iconpos="left">EDIT</a>
+    </div>
+
+   <div data-role="content">
+
+      <!-- TODO: status message popup/dialog box for new users-->
+      {% if new_user %}
+      <div style="text-align:center; font-style: italic; color: crimson;">
+        <h4>For the best ERGO experience, please update your Profile by clicking the 'EDIT' button at the top right.</h4>
+      </div>
+      {% endif %}
+
+
+      {% if profile_img %}
+      <center>
+        <div style="border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; border: 2px solid #DC143C; width:200px; height:200px; background-color:#383838;">
+        <img src="/media/{{ profile_img.thumbnail }}" />
+        </div>
+      </center>
+      {% else %}
+      <center>
+        <div style="border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; border: 2px solid #DC143C; width:200px; height:200px; background-color:#383838;">
+         <img src="/static/images/generic_profile_img.png" width="200px" height="200px" />
+        </div>
+      </center>
+      {% endif %}
+
+       <ul data-role="listview" data-inset="true" data-divider-theme="f">
+          <li data-role="list-divider">
+              <h1>ERGO ID:</h1>
+              <p><strong>{{ profile.ergo_id }}</strong></p>
+          </li>
+          <li><h3>NAME: {{ profile.firstname }} {{ profile.lastname }}</h3></li>
+          <li><h3>BIRTHDATE: {{ profile.dob }}</h3></li>
+          <li><h3>SEX: {{ profile.sex }} </h3></li>
+          <li><h3>BLOOD TYPE: {{ profile.blood_type }} </h3></li>
+          <li><h3>ORGAN DONOR: {% if profile.organ_donor %}Yes{% else %}No{% endif %}</h3></li>
+      </ul>
+
+      <ul data-role="listview" data-inset="true" data-divider-theme="f">
+          <li data-role="list-divider">CONTACT</li>
+          <li><h3>EMAIL: {{ user.email }}</h3></li>
+          <li><h3>PHONE: <a href="tel:{{ profile.phone }}" style="text-decoration:none">{{ profile.phone }}</a></h3></li>
+      </ul>   
+    
+      <ul data-role="listview" data-inset="true" data-divider-theme="f">
+          <li data-role="list-divider">ADDRESS</li>
+          <li>
+              <h3>{{ profile.address }}</h3>
+              <h3>{{ profile.city }}, {{ profile.state }} {{ profile.zipcode }}</h3>
+          </li>
+      </ul> 
+      </div> 
+    </div> <!-- end profile page -->
+{% endblock %}
+
+

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}ERGO | Alert{% endblock %}
+
+{% block content %}
+<div data-role="dialog" id="alert-dialog">
+  <div data-role="header" data-theme="e">
+    <h1>ALERT!</h1>
+  </div>
+
+  <div data-role="content" data-theme="e">
+
+    <div style="text-align:center">
+      <h3>Are you sure you want to alert your emergency contacts?</h3>
+    </div>
+  <form method="post" action="/contacts/alert/send/">
+          {% csrf_token %}
+          <label for="location"><strong>ER Location: </strong></label>
+          <input type="text" id="location" name="location" />
+          <br />
+
+    <button type="submit" data-theme="f">ALERT CONTACTS</button>
+  </form>
+        <a href="#" data-rel="back" data-role="button" data-theme="e">Cancel</a>
+
+  </div>
+</div>
+{% endblock %}

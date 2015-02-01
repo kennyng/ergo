@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}ERGO | Activation{% endblock %}
+
+{% block content %}
+<div data-role="page" id="activate-complete">
+  <div data-role="header" data-theme="e">
+    <h1>Activation</h1>
+    <a href="/accounts/login/" data-role="button" class="ui-btn-right" style="color:crimson">LOGIN</a>
+  </div>
+
+  <div data-role="content" style="text-align:center">
+    <h2 style="color:crimson">Your account has been successfully activated!</h2>
+    <p>Please <a href="/accounts/login/">log in</a> to start using ERGO.</p>
+  </div>
+</div>
+{% endblock %}

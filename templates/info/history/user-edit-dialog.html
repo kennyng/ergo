@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}ERGO | Medical History{% endblock %}
+
+{% block content %}
+<div data-role="dialog" id="edit-user-history">
+  <div data-role="header" data-theme="e">
+    <h1>Edit History</h1>
+  </div>
+
+  <div data-role="content" data-theme="e">
+  
+    <!-- TODO: error message popup/dialog box -->
+    {% if error_msg %}
+    <div style="text-align:center; font-style: italic; color: crimson;">
+      <p>{{ error_msg }}</p>
+    </div>
+    {% endif %}
+
+    <form method="post" action="/info/history/user/edit/post/">
+      {% csrf_token %}
+      <input type="hidden" name="history_id" value="{{ entry.history_id }}" />
+      <div data-role="fieldcontain">
+        <fieldset data-role="controlgroup">
+          <legend>Category:</legend>
+          <label for="condition">Medical Condition</label>
+          <input type="radio" name="category" id="condition" value="0" />
+          <label for="accident">Accident</label>
+          <input type="radio" name="category" id="accident" value="1" />
+          <label for="surgery">Surgery</label>
+          <input type="radio" name="category" id="surgery" value="2" />
+          <label for="visit">Medical Visit/Hospitlization</label>
+          <input type="radio" name="category" id="visit" value="3" />
+        </fieldset>
+      </div>
+
+      <div data-role="fieldcontain">
+        <label for="date">Date:</label>
+        <input type="date" name="date" id="date" value="{{ entry.date }}" />
+      </div>
+
+      <div data-role="fieldcontain">
+        <label for="description">Description:</label>
+        <input type="text" name="description" id="description" value="{{ entry.description }}"/>
+      </div>
+
+      <button type="submit" data-theme="f">UPDATE ENTRY</button>
+    </form>
+    <a href="#" data-rel="back" data-role="button" data-theme="e">CANCEL</a>
+  </div>
+
+</div>
+{% endblock %} 
+ 

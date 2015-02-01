@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+      
+{% block title %}ERGO | Emergency Access{% endblock %}
+
+{% block content %}
+    <div data-role="page" id="er-access">
+
+      <div data-role="header" data-theme="e" data-position="fixed">
+        <div style="font-size:35px;color:crimson;text-align:center;">ERGO</div>
+        <a href="/accounts/login/" data-role="button" data-icon="back" data-iconpos="left" data-inline="true" class="ui-btn-right">Go Back</a>
+      </div> <!-- end header -->
+
+      <div data-role="content" data-theme="e">
+        <form action="#" >
+          <ul data-role="listview" data-inset="true" data-theme="e" data-divider-theme="f">
+            <li data-role="list-divider">HEALTHCARE PROVIDER ACCESS</li>
+
+            <li>
+              <div data-role="fieldcontain">
+                <label for="health_facility"><strong>Hospital/Clinic/Medical Organization: </strong></label>
+                <input type="text" name="health_facility" id="health_facility" list="org-list" autocomplete="on">
+                <datalist id="org-list">
+                  <option>Stanford Hospital & Clinics</option>
+                  <option>Memorial Hermann</option>
+                  <option>Methodist Hospital</option>
+                  <option>UCSF Medical Center</option>
+                  <option>Kaiser Permanente</option>
+                  <option>Mayo Clinic</option>
+                  <option>Mount Sinai Medical Center</option>
+                  <option>American Medical Response</option>
+                  <option>Acadian Ambulance Service</option>
+                  <option>Stanford Life Flight</option>
+                </datalist>
+              </div>
+            </li>
+
+            <li>
+              <div data-role="fieldcontain">
+                <label for="user_id"><strong>User ID: </strong></label>
+                <input type="text" name="user_id" id="user_id" />
+              </div>
+            </li>
+
+            <li>
+              <div data-role="fieldcontain">
+                <label for="access_code"><strong>Access Code: </strong></label>
+                <input type="password" name="access_code" id="access_code" />
+              </div>
+            </li>
+          </ul>
+
+          <ul data-role="listview" data-inset="true" data-theme="e" data-divider-theme="f">
+            <li data-role="list-divider">PATIENT ERGO ID</li>
+
+            <li>
+              <div data-role="fieldcontain">
+                <label for="ergo_id"><strong>ERGO ID: </strong></label>
+                <input type="text" name="ergo_id" id="ergo_id" />
+              </div>
+            </li>
+          </ul>
+
+          <button type="submit" data-theme="f" value="VERIFY &rarr;"></button>
+        </form>
+       
+      </div>
+
+    </div>
+{% endblock %}

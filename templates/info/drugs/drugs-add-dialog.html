@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}ERGO | Drugs{% endblock %}
+
+{% block content %}
+<div data-role="dialog" id="add-drug">
+  <div data-role="header" data-theme="e">
+    <h1>Add Drug?</h1>
+  </div>
+
+  <div data-role="content" data-theme="e">
+
+    {% if error_msg %}
+    <div style="text-align:center; font-style: italic; font-color: crimson;">
+      <p>{{ error_msg }}</p>
+    </div>
+    {% endif %}
+
+    <form method="post" action="/info/drugs/add/post/" >
+      {% csrf_token %}
+      <input type="hidden" name="drug_category" value="{{ drug_category }}" />
+      
+      <label for="drug"><strong>Drug: </strong></label>
+      <select id="drug" name="drug_id" data-theme="e">
+        {% for x in drugs %}
+          <option value="{{ x.drug_id }}">{{ x.name }}</option>
+        {% endfor %}
+      </select>
+      
+      <br />
+      <button type="submit" data-theme="f" value="ADD DRUG"></button>
+    </form>
+
+    <a href="#" data-role="button" data-rel="back" data-theme="e">CANCEL</a>
+
+  </div>
+</div>
+{% endblock %}

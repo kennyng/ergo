@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}ERGO | Medical History{% endblock %}
+
+{% block content %}
+<div data-role="page" id="add-family-history">
+  <div data-role="header" data-theme="e">
+    <div style="text-align:center"><p>Add to <br /> Family Medical History?</p></div>
+  </div>
+
+  <div data-role="content" data-theme="e">
+
+    {% if error_msg %}
+    <div style="text-align:center; font-style: italic; color: crimson;">
+      <p>{{ error_msg }}</p>
+    </div>
+    {% endif %}
+
+    <form method="post" action="/info/history/family/add/post/">
+      {% csrf_token %}
+      <label for="relationship"><strong>Relationship: </strong></label>
+      <input type="text" name="relationship" id="relationship" list="family-list" autocomplete="on">
+      <datalist id="family-list">
+        <option>Father</option>
+        <option>Mother</option>
+        <option>Grandfather</option>
+        <option>Grandmother</option>
+        <option>Uncle</option>
+        <option>Aunt</option>
+        <option>Brother</option>
+        <option>Sister</option>
+      </datalist>
+
+      <label for="condition"><strong>Condition: </strong></label>
+      <input type="text" name="condition" id="condition" list="cond-list" autocomplete="on">
+      <datalist id="cond-list">
+        <option>High Cholesterol</option>
+        <option>Lung Cancer</option>
+        <option>Osteoporosis</option>
+        <option>Heart Disease</option>
+        <option>Cystic Fibrosis</option>
+        <option>Sickle Cell Anemia</option>
+        <option>Celiac Disease</option>
+      </datalist>
+
+      <button type="submit" value="ADD ENTRY" data-theme="f"></button>
+    </form>
+    <a href="#" data-rel="back" data-role="button" data-theme="e">CANCEL</a>
+
+  </div>    
+</div>
+{% endblock %} 

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}ERGO | Drugs{% endblock %}
+
+{% block content %}
+<div data-role="dialog" id="remove-drug">
+  <div data-role="header" data-theme="e">
+    <h1>Remove Drug?</h1>
+  </div>
+
+  <div data-role="content" data-theme="e">
+
+    {% if error_msg %}
+    <div style="text-align:center; font-style: italic; font-color: crimson;">
+      <p>{{ error_msg }}</p>
+    </div>
+    {% endif %}
+
+    <div style="text-align:center">
+      <h3>Are you sure you want to remove this drug?</h3>
+      <p>This action cannot be undone.</p>
+    </div>
+
+    <form method="post" action="/info/drugs/remove/post/" >
+      {% csrf_token %}
+      <input type="hidden" name="drug_category" value="{{ drug_category }}" />
+      <input type="hidden" name="drug_id" value="{{ drug_id }}" />
+
+      <button type="submit" data-theme="f" value="REMOVE DRUG"></button>
+    </form>
+
+    <a href="#" data-role="button" data-rel="back" data-theme="e">CANCEL</a>
+
+  </div>
+</div>
+{% endblock %}

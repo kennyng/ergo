@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}ERGO | Medical History{% endblock %}
+
+{% block content %}
+<div data-role="page" id="user-history">
+  <div data-role="header" data-theme="e" data-position="fixed">
+    <h1>My History</h1>
+    <a href="/info/history/user/" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" data-inline="true" class="ui-btn-right">Cancel</a>
+  </div>
+
+  <div data-role="content">
+
+    {% if error_msg %}
+    <div style="text-align:center; font-style: italic; color: crimson;">
+      <p>{{ error_msg }}</p>
+    </div>
+    {% endif %}
+
+    <ul data-role="listview" data-inset="true" data-theme="e" data-divider-theme="f">
+      <li data-role="list-divider">CATEGORY:</li>
+      <li>
+        <h2>{{ entry.category }}</h2>
+      </li>
+      <li data-role="list-divider">YEAR:</li>
+      <li> 
+        <h2>{{ entry.date }}</h2>
+      </li>
+      <li data-role="list-divider">DESCRIPTION:</li>
+      <li>
+        <h2>{{ entry.description }}</h2>
+      </li>
+    </ul>
+
+    <a href="/info/history/user/edit/?id={{ entry.history_id }}&date={{ entry.date }}&description={{ entry.description }}" data-role="button" data-corders="false" data-theme="f">EDIT ENTRY</a>
+
+    <form method="post" action="/info/history/user/remove/" >
+      {% csrf_token %}
+      <input type="hidden" name="history_id" value="{{ entry.history_id }}" />
+      <button type="submit" data-theme="e" >REMOVE ENTRY</button>
+    </form>
+
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+
+{% block title %}ERGO | Providers{% endblock %}
+
+{% block content %}
+<!-- start EDIT page -->
+<div data-role="page" id="providers-edit">
+  <div data-role="header" data-theme="e" data-position="fixed">
+      <h1><div>Edit Providers</div></h1>
+    <a href="/info/providers/" data-role="button" data-rel="back" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Cancel</a>
+  </div>
+
+  <div data-role="content">
+
+    <!-- TODO: error message popup/dialog box -->
+  {% if error_msg %}
+  <div style="text-align:center; font-style: italic; color: crimson;">
+    <h4>{{ error_msg }}</h4>
+  </div>
+  {% endif %}
+
+<form method="post" action="/info/providers/edit/post/">
+    {% csrf_token %}
+      <ul data-role="listview" data-inset="true" data-theme="e" data-divider-theme="f">
+        <li data-role="list-divider">INSURANCE PROVIDER</li>
+        
+        <li>
+          <div data-role="fieldcontain">
+          <label for="insurance_name">Insurance Name:</label>
+          <input type="text" name="insurance_name" id="insurance_name" value="{{ provider.insurance_name }}" data-mini="true" />
+      </div>
+        </li>
+        
+        <li>
+          <div data-role="fieldcontain">
+          <label for="group_num">Group #:</label>
+          <input type="text" name="group_num" id="group_num" value="{{ provider.group_num }}" data-mini="true" />
+      </div>
+        </li>
+        
+        <li>
+          <div data-role="fieldcontain">
+          <label for="policy_num">Policy #:</label>
+          <input type="text" name="policy_num" id="policy_num" value="{{ provider.policy_num }}" data-mini="true" />
+      </div>
+        </li>
+        <li>
+          <div data-role="fieldcontain">
+          <label for="insurance_contact">Contact:</label>
+          <input type="text" name="insurance_contact" id="insurance_contact" value="{{ provider.insurance_contact }}" data-mini="true" />
+      </div>
+        </li>
+      </ul>  
+
+      <ul data-role="listview" data-inset="true" data-theme="e" data-divider-theme="f">
+        <li data-role="list-divider">PRIMARY CARE PROVIDER</li>
+        <li>
+      <div data-role="fieldcontain">
+          <label for="pcp_name">Physician Name:</label>
+          <input type="text" name="pcp_name" id="pcp_name" value="{{ provider.pcp_name }}" data-mini="true" />
+      </div>
+        </li>
+        <li>
+          <div data-role="fieldcontain">
+          <label for="pcp_contact">Contact:</label>
+          <input type="text" name="pcp_contact" id="pcp_contact" value="{{ provider.pcp_contact }}" data-mini="true" />
+      </div>
+        </li>
+        <li>
+          <div data-role="fieldcontain">
+          <label for="pcp_location">Clinic/Facility/Hospital:</label>
+          <input type="text" name="pcp_location" id="pcp_location" value="{{ provider.pcp_location }}" data-mini="true" />
+      </div>
+        </li>
+        <li>
+          <div data-role="fieldcontain">
+          <label for="pcp_address">Address:</label>
+          <input type="text" name="pcp_address" id="pcp_address" value="{{ provider.pcp_address }}" data-mini="true" />
+         </div>
+         <div data-role="fieldcontain">
+          <label for="pcp_city">City:</label>
+          <input type="text" name="pcp_city" id="pcp_city" value="{{ provider.pcp_city }}" data-mini="true" />
+         </div>
+         <div data-role="fieldcontain">
+              <label for="pcp_state">State:</label>
+          <select id="pcp_state" name="pcp_state" size="1" data-theme="e">
+            <option value="AL">Alabama</option>
+            <option value="AK">Alaska</option>
+            <option value="AZ">Arizona</option>
+            <option value="AR">Arkansas</option>
+            <option value="CA">California</option>
+            <option value="CO">Colorado</option>
+            <option value="CT">Connecticut</option>
+            <option value="DE">Delaware</option>
+            <option value="DC">Dist of Columbia</option>
+            <option value="FL">Florida</option>
+            <option value="GA">Georgia</option>
+            <option value="HI">Hawaii</option>
+            <option value="ID">Idaho</option>
+            <option value="IL">Illinois</option>
+            <option value="IN">Indiana</option>
+            <option value="IA">Iowa</option>
+            <option value="KS">Kansas</option>
+            <option value="KY">Kentucky</option>
+            <option value="LA">Louisiana</option>
+            <option value="ME">Maine</option>
+            <option value="MD">Maryland</option>
+            <option value="MA">Massachusetts</option>
+            <option value="MI">Michigan</option>
+            <option value="MN">Minnesota</option>
+            <option value="MS">Mississippi</option>
+            <option value="MO">Missouri</option>
+            <option value="MT">Montana</option>
+            <option value="NE">Nebraska</option>
+            <option value="NV">Nevada</option>
+            <option value="NH">New Hampshire</option>
+            <option value="NJ">New Jersey</option>
+            <option value="NM">New Mexico</option>
+            <option value="NY">New York</option>
+            <option value="NC">North Carolina</option>
+            <option value="ND">North Dakota</option>
+            <option value="OH">Ohio</option>
+            <option value="OK">Oklahoma</option>
+            <option value="OR">Oregon</option>
+            <option value="PA">Pennsylvania</option>
+            <option value="RI">Rhode Island</option>
+            <option value="SC">South Carolina</option>
+            <option value="SD">South Dakota</option>
+            <option value="TN">Tennessee</option>
+            <option value="TX">Texas</option>
+            <option value="UT">Utah</option>
+            <option value="VT">Vermont</option>
+            <option value="VA">Virginia</option>
+            <option value="WA">Washington</option>
+            <option value="WV">West Virginia</option>
+            <option value="WI">Wisconsin</option>
+            <option value="WY">Wyoming</option>
+          </select>
+
+         </div>
+         <div data-role="fieldcontain">
+          <label for="pcp_zipcode">Zipcode:</label>
+          <input type="text" name="pcp_zipcode" id="pcp_zipcode" value="{{ provider.pcp_zipcode }}" data-mini="true" />
+         </div>
+        </li>
+      </ul>  
+
+  <div><button type="submit" value="UPDATE" data-theme="f" /></button></div>
+  </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}ERGO | Medical History{% endblock %}
+
+{% block content %}
+<div data-role="page" id="remove-family-history">
+  <div data-role="header" data-theme="e">
+    <div style="text-align:center">
+    <p>Remove from <br /> Family Medical History?</p>
+    </div>
+  </div>
+
+  <div data-role="content" data-theme="e">
+
+    {% if error_msg %}
+    <div style="text-align:center; font-style: italic; color: crimson;">
+      <p>{{ error_msg }}</p>
+    </div>
+    {% endif %}
+
+    <div style="text-align:center">
+      <h3>Are you sure you want to remove this entry?</h3>
+      <p>This action cannot be undone.</p>
+    </div>
+
+    <form method="post" action="/info/history/family/remove/post/">
+      {% csrf_token %}
+      <input type="hidden" name="family_id" value="{{ family_id }}" />
+      <button type="submit" value="REMOVE ENTRY" data-theme="f"></button>
+    </form>
+    <a href="#" data-rel="back" data-role="button" data-theme="e">CANCEL</a>
+  </div>    
+</div>
+{% endblock %}

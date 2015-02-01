@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}ERGO | Alert{% endblock %}
+
+{% block content %}
+<div data-role="dialog" id="alert-dialog" data-dismissable="false">
+  <div data-role="header" data-theme="e">
+    <h1>ALERT! Status</h1>
+  </div>
+
+  <div data-role="content" data-theme="e">
+
+    {% if status_msg %}
+    <div style="text-align:center">
+      <h3 style="text-color: crimson">{{ status_msg }}</h3>
+    </div>
+    {% else %}
+    <div style="text-align:center">
+      <h3 style="text-color: crimson">An error has occurred. Please try again.</h3>
+    </div>
+    {% endif %}
+
+    <a href="/contacts/" data-role="button" data-theme="e">OK</a>
+
+  </div>
+</div>
+{% endblock %}
