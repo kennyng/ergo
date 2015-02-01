@@ -81,13 +81,7 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.Loader',
 )
 PROJECT_DIR = os.path.dirname(BASE_DIR)
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'templates'),
-    os.path.join(PROJECT_DIR, 'ergo_info/templates'),
-    os.path.join(PROJECT_DIR, 'ergo_users/templates'),
-    os.path.join(PROJECT_DIR, 'ergo_contacts/templates'),
-)
-
+TEMPLATE_DIRS = (os.path.join(PROJECT_DIR, 'templates'),)
 
 # Absolute path to directory that will hold user-uploaded files.
 # Used only in development (no S3).
